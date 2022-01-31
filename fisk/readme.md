@@ -5,24 +5,24 @@ An ergonomic 54-key hand wired split keyboard running QMK on the Elite-C microco
 ![image info](./images/fisk1.png)
 
 ## Features
-- split, Elite-C microcontroller, 54-keys, column stagger, ring finger and pinky splay, slightly tented case (2° toward user and 3° outward), support for one rotary endoder per half, one 128x32 OLED per half, hot-pluggable RJ10 connection between halfs and a transport case
+- 54-keys, split, Elite-C microcontroller, column stagger, ring finger (5°) and pinky (12°) splay, slightly tented case (2° toward user and 3° outward), support for one rotary encoder per half, one 128x32 OLED per half, hot-pluggable RJ10 connection between halfs and a transport case
 ## Acknowledgements
 This keyboard draws inspiration from many sources and would not have been possible without the works of others.
 Some that deserve to be mentioned above all else are:
-- the famous Kyria by Thomas Baart, [[https://splitkb.com][splitkb.com]]
+- the famous Kyria by Thomas Baart, [splitkb.com](https://splitkb.com)
 
     The aggressive column stagger, the thumb cluster and the general shape are heavily influenced by the Kyria. The use and placement of a rotary encoder also comes from the various Kyria layouts floating around. Even the two extra index finger keys draw inspiration from here, as there was enough space in my 3D mock-up due to the different MCU placement and I just love dedicated keys for brackets.
-    Would I not have gone down the route of designing my very own keyboard, the Kyria would have been one of the most tempting options of all the split keyboards I came across in my research.
+    Would I not have gone down the route of designing a keyboard from scratch, the Kyria would have been one of the most tempting options of all the split keyboards I have come across in my research.
     
-- the Architeuthis dux by @tapioki
+- the [Architeuthis dux](https://github.com/tapioki/cephalopoda/tree/main/Architeuthis%20dux) by @tapioki
 
     Going one step beyond a mere column stagger and adding column splay immedietely made sense to me and seemed like the next logical step. The even more extreme pinky stagger was a welcome encouragement in the design process of the physical layout (apparently my pinkies are rather short) and the column splay turned out to feel very natural.
     
-- [[https://www.thingiverse.com/thing:4768218][the Lotus58 case design]] by Matt James.
+- the [Lotus58 case design](https://www.thingiverse.com/thing:4768218) by Matt James.
 
-- QMK wizardry by (in alphabetical order): [[https://github.com/andrewjrae][@andrewjrae]], [[https://github.com/drashna][@drashna]], [[https://github.com/GauthamYerroju][@GauthamYerroju]],[[https://github.com/JReneHS][@JReneHS]], [[https://github.com/rafaelromao][@rafaelromao]]
+- QMK wizardry by (in alphabetical order): [@andrewjrae](https://github.com/andrewjrae), [@drashna](https://github.com/drashna), [@GauthamYerroju](https://github.com/GauthamYerroju), [@JReneHS](https://github.com/JReneHS), [@rafaelromao](https://github.com/rafaelromao)
 
-Keyboard Maintainer: [[https://github.com/vvhg1][@vvhg1]]
+Keyboard Maintainer: [@vvhg1](https://github.com/vvhg1)
 
 ## Keymap
 ![image info](./images/keymap.png)
@@ -37,18 +37,18 @@ I made a few changes:
 When activated, the leader key changes layers back to the default layer if it is not the highest layer.
 I made a few changes to how the leader sequence is displayed on the oled. If the sequence gets too long, it starts scrolling with every new key press, only displaying the last n (of course this value can easily be changed) keys.
 I also fiddled around with the logic in general to adapt it to my use case.
-Probably the biggest aspect  is more a different approach of implementation/usage. For me the biggest limitation of the leader key was that the action was not easily repeatable, so I added open ended sequences. When a leader sequence is finished, the action is executed, as one would expect, but the leader sequence then keeps listening instead of terminating, so if the last key in the sequence is tapped again, the action is being repeated. This is done so long as no other key is pressed. If an other key gets pressed, the sequence is terminated and the key is processed as normally. For actions like next/previous or up/down actions, I let both corresponding keys through, e.g. if w were up and s down, pressing s after w would not disable the leader function and instead perform the down action.
+Probably the biggest aspect  is more a different approach of implementation/usage. For me the biggest limitation of the leader key was that the action was not easily repeatable, so I added open ended sequences. When a leader sequence is finished, the action is executed, as one would expect, but the leader sequence then keeps listening instead of terminating, so if the last key in the sequence is tapped again, the action is being repeated. This is done so long as no other key is pressed. If an other key gets pressed, the sequence is terminated and the key is processed as normally. For actions like next/previous or up/down actions, I let both corresponding keys through, e.g. if `w` were up and `s` down, pressing `s` after `w` would not disable the leader function but instead perform the down action.
 
 ### Custom Layer logic
 This also works with NO_ACTION_TAPPING defined.
-Layers toggle on tap and momentarily activate when held. Memory of previously active layer, returning to it, rather than to the base layer. <!--as an option?)-->
+Layers toggle on tap and momentarily activate when held. Memory of previously active layer, returning to it, rather than to the base layer. <!--as an option?)-->The hold has a timer, so a longer hold is automatically recognised as a momentary hold and not as a tap. This behaviour is somewhat similar to the custom one shot modifiers.
 
 ### Custom one shot modifiers
 Light weight modifiers that work when NO_ACTION_TAPPING and NO_ACTION_ONESHOT are defined. They behave like normal modefiers when held, but when tapped they modify only the next key. The one shot function is disarmed when tapped again, or when tapped and then held behave like normal modifiers.
-One shot is not disabled by: space, del, backspace and modifiers. That means that e.g. ctl + shift + "A" do not have to be chorded but can be hit in sequence.
+One shot is not disabled by: space, del, backspace and modifiers. That means that e.g. `CTL` + `SHIFT` + `A` do not have to be chorded but can be hit in sequence.
 
 ### End Of Sentence
-This makes the transition between sentences a little smoother. Instead of typing `.`-`SPACE`-`SHIFT`- typing -`..`- has the same effect. The idea is not mine, and it seems, I can't find the source. The implementation however is my work.
+This makes the transition between sentences a little smoother. Instead of typing `.`-`SPACE`-`SHIFT`- typing -`..`- has the same effect, the next character will be shifted. The idea is not mine, and it seems, I can't find the source. The implementation however is my work.
 ### Case Modes
 Case modes are slightly adapted to account for NO_ACTION_TAPPING and NO_ACTION_ONESHOT and for my use case.
 #### Caps Word
@@ -91,32 +91,28 @@ NUMWORD is a similar concept by Joshua T. [[https://github.com/replicaJunction][
 **Note:** The implementation of NUMWORD requires that the keyboard's layer definitions be accessible in a header file. In this case, the layer definitions are in enumlayers.h, so I make them accessible by adding `#include enumlayers.h` in casemodes.c.
 
 ### Power Brackets
-These are bracket pairs of different types, single and quote pairs. They either produce an empty pair and place the cursor inside the brackets on a simple key press like `(I)`, `{I}`, `[I]`, or when modified with ALT they `(wrap) {the} [last] "word"`. Due to the ALT modifier, ESC is sent to neutralise the dead ALT keypress on the US Intl. layout.
+These are bracket pairs of different types, single and quote pairs. On a simple key press an empty pair with the cursor placed inside the brackets like `(I)`, `{I}`, `[I]` is produced. This does not conflict with the way Vscode handles empty brackets.   
+When modified with ALT they `(wrap)` `{the}` `[previous]` `"word"` without having to select the word first.  
+Power brackets can be disabled by calling `power_brackets_enable(false);` and enabled by calling `power_brackets_enable(true);`. I mapped this to `Leader` , `'` to enable and `Leader` , `SHIFT`+`'` to disable.
+
+**Note:** I mapped left brackets to `Leader`, `corresponding bracket key` and right brackets when modified with `SHIFT`.
+
+**Note:** Due to the ALT modifier, ESC is sent to neutralise the dead ALT keypress on the US Intl. layout.
 ### Other
-I made the Grave key, which is a dead key in the US Intl. layout, active again as I don't need the dead key behaviour of it and I find it annoying. To revert to the standard behaviour, simply comment out this part in keymap.c:  
-         
-         case KC_GRAVE:  
-            if (record->event.pressed) {  
-                if (get_mods() & MOD_MASK_SHIFT) {
-                    SEND_STRING(SS_LSFT(SS_TAP(X_GRAVE) SS_TAP(X_SPC)));
-                } else {
-                    SEND_STRING(SS_TAP(X_GRAVE) SS_TAP(X_SPC));
-                }
-            }
-            return false;
+I made the Grave key, which is a dead key in the US Intl. layout, active again as I don't need the dead key behaviour of it and I find it annoying. To revert to the standard behaviour, simply comment out the `case KC_GRAVE:` switch case in keymap.c.
 
 ## OLEDs
-I added some pretty graphics to make the info easily recognisable as this build only has a 128x32 display.
+I added some graphics to make the info easily recognisable as this build only has a 128x32 display.
 
 
-![image info](./images/oled_layers.png)  
 
-![image info](./images/oled_mods.png)
 
-The modifier key design originally comes from [[https://github.com/JReneHS][@JReneHS]], source: [https://github.com/JReneHS/crkb_conf](https://github.com/JReneHS/crkb_conf). I just enlarged the icons from 2 characters high to 3 characters while keeping the aspect ratio. As I find the COMMAND icon a lot prettier than the boring CONTROL icon, I decided to use it despit running Windows. I also took some inspiration for my layer indicator from him. If mirroring is on, instead of cramming yet another icon into my very limited OLED real estate, the whole screen is inverted.
+The modifier key design originally comes from [[https://github.com/JReneHS][@JReneHS]], source: [https://github.com/JReneHS/crkb_conf](https://github.com/JReneHS/crkb_conf). I enlarged the icons from 2 characters high to 3 characters while keeping the aspect ratio and added a Leader key icon. As I find the COMMAND icon a lot prettier than the boring CONTROL icon, I decided to use it despit running Windows. I also took some inspiration for my layer indicator from him.   
+If mirroring is on, instead of cramming yet another icon into my very limited OLED real estate, the whole screen is inverted.
 
 ### OLED info
-Left-side OLED displays dynamic data:
+#### Left-side OLED displays dynamic data:   
+![image info](./images/oled_layers.png)  
 - Base Layer
     - Colemak-dh
     - Qwerty
@@ -124,20 +120,29 @@ Left-side OLED displays dynamic data:
 - Current Layer
     - Colemak-dh
     - Qwerty
+    - Navigation
     - Numbers
-    - NAvigation
     - Functions
     - Aux
+- Mirroring inverts screen
     
-- Case Modes
+- Case Modes (not shown in image)
     - C for CASEMODE
     - S for _snake_case_
     - N for Numw0rd
     - X for _CAPS_AND_SNAKE_CASE
     
-Right-side OLED displays dynamic data:
+#### Right-side OLED displays dynamic data:  
+![image info](./images/oled_mods.png)
 - Current modifier status
-- Current mode of rotary encoder
+- Current rotary encoder mode
+    - Word navigation
+    - Lef/right
+    - Up/down
+    - Paging
+    - Vscode: focus editor left/right
+    - Vscode: select tab left/right
+        
 - Leader key sequence
 
 ### Cheap trick OLED
@@ -156,17 +161,27 @@ Press the encoder to cycle between:
 - Page Up / Page Down
 - Vscode Next / Previous Editor
 - Vscode Next / Previous Tab
+When holding `SHIFT` while cycling, modes are cycled counter-clockwise.
 
 
 
 ## Make
+### Setting Handedness
+In order to compile the correct font for each side, `#define IS_LEFT` in `config.h` for the left side and comment it out for the right side.
+The firmware uses [handedness by EEPROM](https://docs.qmk.fm/#/feature_split_keyboard?id=handedness-by-eeprom) as default and it must be *configured once* on each side. 
 Make example for this keyboard (after setting up your build environment):
 
-    make fisk:vvhg
 
-Example of flashing this keyboard:
+For Elite-C or compatible controllers using `DFU` bootloader, make sure the line `BOOTLOADER = atmel-dfu` is in the `rules.mk` file and use the following make commands:
 
-    make fisk:vvhg:flash
+    make fisk:vvhg1:dfu-split-left
+    make fisk:vvhg1:dfu-split-right
+For Pro micros, delete the line `BOOTLOADER = atmel-dfu` from the `rules.mk` file. The make commands are:
+
+    make fisk:vvhg1:avrdude-split-left
+    make fisk:vvhg1:avrdude-split-right
+
+[QMK Toolbox](http://qmk.fm/toolbox) can also be used to set EEPROM handedness. Place the controller in bootloader mode and select menu option Tools -> EEPROM -> Set Left/Right Hand
 
 See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
 
