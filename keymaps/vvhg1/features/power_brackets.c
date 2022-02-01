@@ -62,7 +62,8 @@ bool process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
             if (record->event.pressed) {
                 if (is_power_brackets_off){
                 if (get_mods() & MOD_MASK_ALT) {
-                    SEND_STRING(SS_LSFT(SS_TAP(X_0)));
+                    del_mods(MOD_MASK_ALT);
+                    SEND_STRING(SS_TAP(X_ESC) SS_LSFT(SS_TAP(X_0)));
                     } else {
                     SEND_STRING(SS_LSFT(SS_TAP(X_9)));
                     }
@@ -86,7 +87,8 @@ bool process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
             if (record->event.pressed) {
                 if (is_power_brackets_off){
                 if (get_mods() & MOD_MASK_ALT) {
-                    SEND_STRING(SS_TAP(X_RBRC));
+                    del_mods(MOD_MASK_ALT);
+                    SEND_STRING(SS_TAP(X_ESC) SS_TAP(X_RBRC));
                     } else {
                     SEND_STRING(SS_TAP(X_LBRC));
                     }
@@ -107,15 +109,16 @@ bool process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
             }
             break;
         case Cr_Br:
+            if (record->event.pressed) {
                 if (is_power_brackets_off){
                 if (get_mods() & MOD_MASK_ALT) {
-                    SEND_STRING(SS_LSFT(SS_TAP(X_RBRC)));
+                    del_mods(MOD_MASK_ALT);
+                    SEND_STRING(SS_TAP(X_ESC) SS_LSFT(SS_TAP(X_RBRC)));
                     } else {
                     SEND_STRING(SS_LSFT(SS_TAP(X_LBRC)));
                     }
                     return false;
                 }
-            if (record->event.pressed) {
                     if((get_mods() & MOD_MASK_ALT) || (get_mods() & MOD_MASK_ALT)){
                     del_mods(MOD_MASK_ALT);
                     SEND_STRING(SS_TAP(X_ESC) SS_LCTL(SS_TAP(X_LEFT)) SS_LSFT(SS_TAP(X_LBRC)) SS_LCTL(SS_TAP(X_RGHT)) SS_LSFT(SS_TAP(X_RBRC)));
@@ -131,18 +134,25 @@ bool process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
             }
             break;
         case Op_Br:
-            if (record->event.pressed) {
+            if (record->event.pressed)
+            {
                 if (is_power_brackets_off){
-                    SEND_STRING(SS_LSFT(SS_TAP(X_9)));
+                    if (get_mods() & MOD_MASK_SHIFT){
+                        tap_code(KC_1);
+                    }
+                    else{
+                        SEND_STRING(SS_LSFT(SS_TAP(X_9)));
+                    }
                     return false;
                 }
-                    if((get_mods() & MOD_MASK_ALT) || (get_mods() & MOD_MASK_ALT)){
+                if ((get_mods() & MOD_MASK_ALT) || (get_mods() & MOD_MASK_ALT)){
                     del_mods(MOD_MASK_ALT);
                     SEND_STRING(SS_TAP(X_ESC) SS_LCTL(SS_TAP(X_LEFT)) SS_LSFT(SS_TAP(X_9)) SS_LCTL(SS_TAP(X_RGHT)) SS_LSFT(SS_TAP(X_0)));
                 }
-                else if (get_mods() & MOD_MASK_SHIFT) {
+                else if (get_mods() & MOD_MASK_SHIFT){
                     tap_code(KC_1);
-                } else {
+                }
+                else{
                     tap_code16(S(KC_9));
                     tap_code16(S(KC_0));
                     tap_code(KC_LEFT);
@@ -150,9 +160,8 @@ bool process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
                 return false;
             }
             break;
-            default:
+        default:
             break;
-    }
-    return true;
+        }
+        return true;
 }
-

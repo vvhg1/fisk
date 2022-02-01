@@ -117,6 +117,7 @@ bool process_leader(uint16_t keycode, const keyrecord_t *record) {
                 case Op_Br:
                 case Sq_Br:
                 case Cr_Br:
+                case QuotWrap:
                     break;
                 case LEADER_ESC_KEY:
                     // early exit if the esc key was hit
