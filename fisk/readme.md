@@ -2,27 +2,13 @@
 
 An ergonomic 54-key hand wired split keyboard running QMK on the Elite-C microcontroller, living inside its 3D-printed case.
 
-![image info](./images/fisk1.png)
+![image info](./images/fisk2.png)
 
 ## Features
 - 54-keys, split, Elite-C microcontroller, column stagger, ring finger (5°) and pinky (12°) splay, slightly tented case (2° toward user and 3° outward), support for one rotary encoder per half, one 128x32 OLED per half, hot-pluggable RJ10 connection between halfs and a transport case
-## Acknowledgements
-This keyboard draws inspiration from many sources and would not have been possible without the works of others.
-Some that deserve to be mentioned above all else are:
-- the famous Kyria by Thomas Baart, [splitkb.com](https://splitkb.com)
 
-    The aggressive column stagger, the thumb cluster and the general shape are heavily influenced by the Kyria. The use and placement of a rotary encoder also comes from the various Kyria layouts floating around. Even the two extra index finger keys draw inspiration from here, as there was enough space in my 3D mock-up due to the different MCU placement and I just love dedicated keys for brackets.
-    Would I not have gone down the route of designing a keyboard from scratch, the Kyria would have been one of the most tempting options of all the split keyboards I have come across in my research.
-    
-- the [Architeuthis dux](https://github.com/tapioki/cephalopoda/tree/main/Architeuthis%20dux) by @tapioki
-
-    Going one step beyond a mere column stagger and adding column splay immedietely made sense to me and seemed like the next logical step. The even more extreme pinky stagger was a welcome encouragement in the design process of the physical layout (apparently my pinkies are rather short) and the column splay turned out to feel very natural.
-    
-- the [Lotus58 case design](https://www.thingiverse.com/thing:4768218) by Matt James.
-
-- QMK wizardry by (in alphabetical order): [@andrewjrae](https://github.com/andrewjrae), [@drashna](https://github.com/drashna), [@GauthamYerroju](https://github.com/GauthamYerroju), [@JReneHS](https://github.com/JReneHS), [@rafaelromao](https://github.com/rafaelromao)
-
-Keyboard Maintainer: [@vvhg1](https://github.com/vvhg1)
+Keyboard Maintainer: [@vvhg1](https://github.com/vvhg1)   
+Build instructions and 3D files are at (coming soon)
 
 ## Keymap
 ![image info](./images/keymap.png)
@@ -30,18 +16,76 @@ This is my personal keymap, main features include: one rotary encoder, Colemak-d
 
 **Note:** This keymap assumes a US International ANSI layout and a Windows OS. This is due to my need for some international characters like £, Ä, Ö, Ü, ß. I have not tested it on other OS and shortcuts are the Win ones, but it should not be overly complicated to adapt.
 
-### Leader Key
-Custom leader key implementation, original author is [[https://github.com/andrewjrae][@andrewjrae]].
-I made a few changes:
-    - for one I changed the leader key to toggle, so it can be used to escape the leader sequence.
-When activated, the leader key changes layers back to the default layer if it is not the highest layer.
-I made a few changes to how the leader sequence is displayed on the oled. If the sequence gets too long, it starts scrolling with every new key press, only displaying the last n (of course this value can easily be changed) keys.
-I also fiddled around with the logic in general to adapt it to my use case.
-Probably the biggest aspect  is more a different approach of implementation/usage. For me the biggest limitation of the leader key was that the action was not easily repeatable, so I added open ended sequences. When a leader sequence is finished, the action is executed, as one would expect, but the leader sequence then keeps listening instead of terminating, so if the last key in the sequence is tapped again, the action is being repeated. This is done so long as no other key is pressed. If an other key gets pressed, the sequence is terminated and the key is processed as normally. For actions like next/previous or up/down actions, I let both corresponding keys through, e.g. if `w` were up and `s` down, pressing `s` after `w` would not disable the leader function but instead perform the down action.
+### Leader Key with repeatable sequence groups
+Custom leader key implementation, original author is [@andrewjrae](https://github.com/andrewjrae).  
+I made a few changes:   
+- for one I changed the leader key to toggle, so it can be used to escape the leader sequence.   
+- When activated, the leader key changes layers back to the default layer if it is not the highest layer.
+- I made a few changes to how the leader sequence is displayed on the oled. If the sequence gets too long, it starts scrolling with every new key press, only displaying the last n (of course this value can easily be changed) keys.
+- Probably the biggest aspect  is more a different approach of implementation/usage. For me the biggest limitation of the leader key was that the action was not easily repeatable, so I added open ended sequences. When a leader sequence is finished, the action is executed, as one would expect, but a repeatable leader sequence then keeps listening instead of terminating, so if the last key in the sequence is tapped again, the action is being repeated. This is done so long as no other key is pressed. If an other key gets pressed, the sequence is terminated and the key is processed as normally. For actions like next/previous or up/down actions, I let both corresponding keys through, e.g. if `w` were up and `s` down, pressing `s` after `w` would not disable the leader function but instead perform the down action.
+- I also fiddled around with the logic in general to adapt it to my use case.
+#### Leader Key Sequences
+##### General stuff
+|        | WS | Start Menu   |            |
+| ------ | -- | ------------ | ---------- |
+| Leader | WM | Context Menu |            |
+|        | WQ | Close Tab    | Repeatable |
+##### Vscode stuff
+|        | VN      | Nxt Editor Tab         | Repeatable |
+| ------ | ------- | ---------------------- | ---------- |
+|        | VI      | Prv Editor Tab         | Repeatable |
+|        | VU      | Move Line Up           | Repeatable |
+|        | VE      | Move Line Dn           | Repeatable |
+|        | VMN     | Move Editor Left       | Repeatable |
+|        | VMI     | Move Editor Right      | Repeatable |
+|        | VFN     | Focus Left             | Repeatable |
+| Leader | VFI     | Focus Right            | Repeatable |
+|        | VCU     | Copy Line Up           | Repeatable |
+|        | VCE     | Copy Line Dn           | Repeatable |
+|        | VP      | Format selection       | Repeatable |
+|        | VAP     | Format all             |            |
+|        | VO      | Select all occurrences |            |
+|        | VZ      | Zen Mode toggle        |            |
+|        | V enter | Command Palette        |            |
+##### CaseModes
+|        | C | Caps Word      |
+| ------ | - | -------------- |
+| Leader | S | Snake Case     |
+|        | X | Caps and Snake |
+|        | N | Num Word       |
+##### Brackets
+|        | {}           | {                  | Repeatable |
+| ------ | ------------ | ------------------ | ---------- |
+|        | SHIFT + {}   | }                  | Repeatable |
+|        | \[\]         | \[                 | Repeatable |
+| Leader | SHIFT + \[\] | \]                 | Repeatable |
+|        | ()           | (                  | Repeatable |
+|        | SHIFT + ()   | )                  | Repeatable |
+|        |  '           | Power brackets on  |            |
+|        | SHIFT + '    | Power brackets off |            |
+##### Encoder Mode
+|        | EH | Horizontal scroll    |
+| ------ | -- | -------------------- |
+|        | EV | Vertical scroll      |
+| Leader | EE | Nxt/Prv Editor group |
+|        | ET | Nxt/Prv Tab          |
+|        | EP | Paging               |
+|        | EW | Word selection       |
+##### Umlaut stuff (probably not so interesting for most people)
+|        | UA | Ä       |
+| ------ | -- | ------- |
+| Leader | UO | Ö       |
+|        | UU | Ü       |
+|        | US | Eszet ß |
+
+##### Reset	
+| Leader | QRK |  Reset Keyboard for flashing |
+|--------|-----|------------------------------|
+
 
 ### Custom Layer logic
 This also works with NO_ACTION_TAPPING defined.
-Layers toggle on tap and momentarily activate when held. Memory of previously active layer, returning to it, rather than to the base layer. <!--as an option?)-->The hold has a timer, so a longer hold is automatically recognised as a momentary hold and not as a tap. This behaviour is somewhat similar to the custom one shot modifiers.
+Layers toggle on tap and momentarily activate when held. Memory of previously active layer, returning to it, rather than to the base layer. The hold has a timer, so a longer hold is automatically recognised as a momentary hold and not as a tap. This behaviour is somewhat similar to the custom one shot modifiers.
 
 ### Custom one shot modifiers
 Light weight modifiers that work when NO_ACTION_TAPPING and NO_ACTION_ONESHOT are defined. They behave like normal modefiers when held, but when tapped they modify only the next key. The one shot function is disarmed when tapped again, or when tapped and then held behave like normal modifiers.
@@ -50,13 +94,13 @@ One shot is not disabled by: space, del, backspace and modifiers. That means tha
 ### End Of Sentence
 This makes the transition between sentences a little smoother. Instead of typing `.`-`SPACE`-`SHIFT`- typing -`..`- has the same effect, the next character will be shifted. The idea is not mine, and it seems, I can't find the source. The implementation however is my work.
 ### Case Modes
-Case modes are slightly adapted to account for NO_ACTION_TAPPING and NO_ACTION_ONESHOT and for my use case.
+Case modes are slightly adapted to account for NO_ACTION_TAPPING, NO_ACTION_ONESHOT and for my use case.
+Description is largely the original by [@andrewjrae](https://github.com/andrewjrae).
 #### Caps Word
-Description is largely the original by [[https://github.com/andrewjrae][@andrewjrae]].
-Caps word is a feature [[https://github.com/andrewjrae][@andrewjrae]] came up with a while back that essentially acts as a caps lock key but only for the duration of a "word".
+Caps word is a feature [@andrewjrae](https://github.com/andrewjrae) came up with a while back that essentially acts as a caps lock key but only for the duration of a "word".
 This makes macros like =CAPS_WORD= really easy to type, it feels a lot like using one shot shift, and it pairs very nicely with it.
 What defines a "word" is sort of up for debate, he started out with a simple check to see if he had hit space or ESC but found that there were other things he wanted to exit on, like punctuation.
-So now it detects whether `space`, `backspace`, `-`, `_`, or an alphanumeric is hit, if so we stay in caps word state, if not, it gets disabled. he also checks for mod chording with these keys and if you are chording, it will also disable caps word (e.g. on `Ctrl+S`).
+So now it detects whether `space`, `backspace`, `-`, `_`, or an alphanumeric is hit, if so we stay in caps word state, if not, it gets disabled. He also checks for mod chording with these keys and if you are chording, it will also disable caps word (e.g. on `Ctrl+S`).
 
 The actual behavior of when to disable caps word can be tweaked using `terminate_case_mode()`.
 
@@ -67,9 +111,9 @@ The actual behavior of when to disable caps word can be tweaked using `terminate
 To use this feature `enable_caps_word()` or `toggle_caps_word()` can be called from a macro, combo, tap dance, or whatever else you can think of.
 
 #### X Case
-X-Case is an idea from [[https://github.com/baffalop][@baffalop]], it takes the idea of caps word but applies it to different kinds of programming cases.
+X-Case is an idea from [@baffalop](https://github.com/baffalop), it takes the idea of caps word but applies it to different kinds of programming cases.
 So for example say you want to type `my_snake_case_variable`, rather than pressing `_` every time (which is almost certainly behind a layer), you can hit a "snake_case" macro that turns all your spaces into underscores, it can then be exited using whatever you define as the end of a word in `terminate_case_mode()`.
-[[https://github.com/baffalop][@baffalop]] also suggested using a double tap space as an exit condition, which is also implemented here.
+[@baffalop](https://github.com/baffalop) also suggested using a double tap space as an exit condition, which is also implemented here.
 
 Now this is just a snake case macro, what if you want kebab-case? Well x-case can be applied here, but now instead of replacing space with an `_` it replaces it with a `-` instead.
 The idea of x-case is to make it easy to achieve these kinds of case modes. For example to enable snake_case mode, you just need to call `enable_xcase_with(KC_UNDS)` and for kebab it's simply `enable_xcase_with(KC_MINS)`.
@@ -86,7 +130,7 @@ To enable this you need to specify what keys will enter default mode, this confi
 
 #### Num Word
 
-NUMWORD is a similar concept by Joshua T. [[https://github.com/replicaJunction][@replicaJunction]]. I added NUMWORD to my Case Modes, which also means, that I changed the means of activation, as all Case Modes are activated by leader key sequences. This can be combined with X-Case. To use this feature `enable_num_word()` or `toggle_num_word()` can be called from a macro, combo, tap dance, or whatever else you can think of.
+NUMWORD is a similar concept by Joshua T. aka [@replicaJunction](https://github.com/replicaJunction). I added NUMWORD to my Case Modes, which also means, that I changed the means of activation, as all Case Modes are activated by leader key sequences. This can be combined with X-Case. To use this feature `enable_num_word()` or `toggle_num_word()` can be called from a macro, combo, tap dance, or whatever else you can think of.
 
 **Note:** The implementation of NUMWORD requires that the keyboard's layer definitions be accessible in a header file. In this case, the layer definitions are in enumlayers.h, so I make them accessible by adding `#include enumlayers.h` in casemodes.c.
 
@@ -105,9 +149,7 @@ I made the Grave key, which is a dead key in the US Intl. layout, active again a
 I added some graphics to make the info easily recognisable as this build only has a 128x32 display.
 
 
-
-
-The modifier key design originally comes from [[https://github.com/JReneHS][@JReneHS]], source: [https://github.com/JReneHS/crkb_conf](https://github.com/JReneHS/crkb_conf). I enlarged the icons from 2 characters high to 3 characters while keeping the aspect ratio and added a Leader key icon. As I find the COMMAND icon a lot prettier than the boring CONTROL icon, I decided to use it despit running Windows. I also took some inspiration for my layer indicator from him.   
+The modifier key design originally comes from [@JReneHS](https://github.com/JReneHS), source: [https://github.com/JReneHS/crkb_conf](https://github.com/JReneHS/crkb_conf). I enlarged the icons from 2 characters high to 3 characters while keeping the aspect ratio and added a Leader key icon. As I find the COMMAND icon a lot prettier than the boring CONTROL icon, I decided to use it despit running Windows. I also took some inspiration for my layer indicator from him.   
 If mirroring is on, instead of cramming yet another icon into my very limited OLED real estate, the whole screen is inverted.
 
 ### OLED info
@@ -163,6 +205,23 @@ Press the encoder to cycle between:
 - Vscode Next / Previous Tab
 When holding `SHIFT` while cycling, modes are cycled counter-clockwise.
 
+## Acknowledgements
+This keyboard draws inspiration from many sources and would not have been possible without the works of others.
+Some that deserve to be mentioned above all else are:
+- the famous Kyria by Thomas Baart, [splitkb.com](https://splitkb.com)
+
+    The aggressive column stagger, the thumb cluster and the general shape are heavily influenced by the Kyria. The use and placement of a rotary encoder also comes from the various Kyria layouts floating around. Even the two extra index finger keys draw inspiration from here, as there was enough space in my 3D mock-up due to the different MCU placement and I just love dedicated keys for brackets.
+    Would I not have gone down the route of designing a keyboard from scratch, the Kyria would have been one of the most tempting options of all the split keyboards I have come across in my research.
+    
+- the [Architeuthis dux](https://github.com/tapioki/cephalopoda/tree/main/Architeuthis%20dux) by [@tapioki](https://github.com/tapioki)
+
+    Going one step beyond a mere column stagger and adding column splay immedietely made sense to me and seemed like the next logical step. The even more extreme pinky stagger was a welcome encouragement in the design process of the physical layout (apparently my pinkies are rather short) and the column splay turned out to feel very natural.
+    
+- the [Lotus58 case design](https://www.thingiverse.com/thing:4768218) by Matt James.
+
+- QMK wizardry by (in alphabetical order): [@andrewjrae](https://github.com/andrewjrae), [@drashna](https://github.com/drashna), [@GauthamYerroju](https://github.com/GauthamYerroju), [@JReneHS](https://github.com/JReneHS), [@rafaelromao](https://github.com/rafaelromao)   
+   
+**Note:** In case I have forgotten to mention someone or a reference to an author's work, please let me know and I will happily correct it.
 
 
 ## Make

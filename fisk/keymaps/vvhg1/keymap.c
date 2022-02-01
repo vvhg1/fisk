@@ -268,9 +268,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 swap_hands = true;
                 no_swap    = false;
+                one_shot_timer = timer_read();
+
             } else {
                 swap_hands = false;
-                if (!no_swap) {
+                if (!no_swap && (timer_elapsed(one_shot_timer) < 500)) {
                     tap_code(KC_SPC);
                 }
             }
