@@ -20,7 +20,6 @@
 
 #ifdef CUSTOM_LEADER_ENABLE
 #define LEADER_DISPLAY_STR
-#define CUSTOM_LEADER_TO_DL //if defined, leader key activates base layer
 #endif
 
 #ifdef CASEMODES_ENABLE

@@ -137,6 +137,9 @@ void release_custom_one_shot(uint16_t keycode, const keyrecord_t *record) {
             case ML_ctl:
             case ML_sft:
             case MR_sft:
+#ifdef SWAP_HANDS_ENABLE
+            case Mir_spc:
+#endif
                 break;
 
             default:

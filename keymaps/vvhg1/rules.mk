@@ -6,7 +6,7 @@ ENCODER_ENABLE = yes       # ENables the use of one or more encoders
 
 CASEMODES_ENABLE = yes       # ENables case modes
 CUSTOM_LEADER_ENABLE = yes       # ENables custom leader function
-CUSTOM_LEADER_TO_DL = yes       # ENables custom leader function
+CUSTOM_LEADER_TO_DL = yes       # makes leader key activate default layer
 CUSTOM_ONE_SHOT_ENABLE = yes  # ENables custom one shot modifiers function
 CUSTOM_WORD_LINE_SELECTION_ENABLE = yes  # ENables custom one shot modifiers function
 POWER_BRACKETS_ENABLE = yes #enables empty or wrapping quote and bracket pairs

@@ -26,6 +26,7 @@
 
 void *leader_start_func(uint16_t keycode) {
     switch (keycode) {
+#ifdef POWER_BRACKETS_ENABLE
         case QuotWrap:
             if (get_mods() & MOD_MASK_SHIFT) { //switch power brackets off with shift + '
                 power_brackets_enable(false);
@@ -33,6 +34,7 @@ void *leader_start_func(uint16_t keycode) {
                 power_brackets_enable(true); //switch power brackets on with '
             }
             break;
+#endif
         case Sq_Br:
             if (get_mods() & MOD_MASK_SHIFT) { //single brackets
             tap_code(KC_RBRC);
@@ -60,12 +62,17 @@ void *leader_start_func(uint16_t keycode) {
             return windows_stuff;  // here W is the start for Win related actions
         case KC_V:
             return vscode_stuff;  // here V is the start for VSCode related actions
+#ifdef ENCODER_ENABLE
         case KC_E:
             return encoder_stuff;  // here E is the start for Encoder related actions
+#endif
+#ifdef DYNAMIC_MACRO_ENABLE
         case KC_M:
-            return macro_stuff;  // here E is the start for Macro related actions
+            return macro_stuff;  // here m is the start for Macro related actions
+#endif
         case KC_U:
             return umlaut_stuff;  // here U is the start for Umlaut related actions
+#ifdef CASEMODES_ENABLE
         case KC_C:
         toggle_caps_word();
             break;
@@ -79,48 +86,61 @@ void *leader_start_func(uint16_t keycode) {
         case KC_N:
             toggle_num_word();
             break;
+#endif
         case KC_LSHIFT:
         case KC_RSHIFT:
         case ML_sft:
         case MR_sft:
             return leader_start_func;
-
         default:
             return NULL;
     }
     return NULL;
 }
 
-void *bracket_repeat(uint16_t keycode) { //maybe needs shifting?
-    switch (keycode) {
-        case Sq_Br:
-            if (get_mods() & MOD_MASK_SHIFT) { //single brackets
+void *bracket_repeat(uint16_t keycode)
+{
+    switch (keycode)
+    {
+    case Sq_Br:
+        if (get_mods() & MOD_MASK_SHIFT)
+        { //single brackets
             tap_code(KC_RBRC);
-            } else {
+        }
+        else
+        {
             tap_code(KC_LBRC);
-            }
-            return bracket_repeat;
-        case Cr_Br:
-            if (get_mods() & MOD_MASK_SHIFT) { //single brackets
+        }
+        return bracket_repeat;
+    case Cr_Br:
+        if (get_mods() & MOD_MASK_SHIFT)
+        { //single brackets
             tap_code16((LSFT(KC_RBRC)));
-            } else {
+        }
+        else
+        {
             tap_code16((LSFT(KC_LBRC)));
-            }
-            return bracket_repeat;
-        case Op_Br:
-            if (get_mods() & MOD_MASK_SHIFT) { //single brackets
+        }
+        return bracket_repeat;
+    case Op_Br:
+        if (get_mods() & MOD_MASK_SHIFT)
+        { //single brackets
             tap_code16(S(KC_0));
-            } else {
+        }
+        else
+        {
             tap_code16(S(KC_9));
-            }
-           return bracket_repeat;
+        }
+        return bracket_repeat;
+    default:
+        return NULL;
+    }
+    return NULL;
 }
-void *umlaut_stuff(uint16_t keycode) { //maybe needs shifting?
+void *umlaut_stuff(uint16_t keycode) {
     switch (keycode) {
         case KC_S:
             tap_code16((RALT(KC_S)));  // here S ß
-                                // SEND_STRING(SS_LCTL(SS_LSFT(SS_TAP(X_RIGHT))));
-
             break;
         case KC_A:
             tap_code16((RALT(KC_Q)));  // here A Ä
@@ -142,6 +162,7 @@ void *umlaut_stuff(uint16_t keycode) { //maybe needs shifting?
     }
     return NULL;
 }
+#ifdef DYNAMIC_MACRO_ENABLE
 void *macro_stuff(uint16_t keycode) {
     switch (keycode) {
         case KC_R:
@@ -157,6 +178,7 @@ void *macro_stuff(uint16_t keycode) {
             return NULL;
     }
 }
+#endif
 void *reset_keyboard1(uint16_t keycode) {
     switch (keycode) {
         case KC_R:
@@ -314,6 +336,7 @@ switch (keycode) {
             return NULL;
     }
 }
+#ifdef ENCODER_ENABLE
 void *encoder_stuff(uint16_t keycode) {  // e+  h horizontal scroll / v vertical scroll / e editor / t tab / p paging
     switch (keycode) {
         case KC_H:
@@ -339,3 +362,4 @@ void *encoder_stuff(uint16_t keycode) {  // e+  h horizontal scroll / v vertical
     }
     return NULL;
 }
+#endif

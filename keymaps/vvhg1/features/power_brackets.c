@@ -70,7 +70,6 @@ bool process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
                 }
                     if((get_mods() & MOD_MASK_ALT) || (get_mods() & MOD_MASK_ALT)){
                     del_mods(MOD_MASK_ALT);
-                    release_custom_one_shot(KC_N, record);
                     SEND_STRING(SS_TAP(X_ESC) SS_LCTL(SS_TAP(X_LEFT)) SS_LSFT(SS_TAP(X_9)) SS_LCTL(SS_TAP(X_RGHT)) SS_LSFT(SS_TAP(X_0)));
                 }
                 else if (get_mods() & MOD_MASK_SHIFT) {
@@ -95,7 +94,6 @@ bool process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
                 }
                     if((get_mods() & MOD_MASK_ALT) || (get_mods() & MOD_MASK_ALT)){
                     del_mods(MOD_MASK_ALT);
-                    release_custom_one_shot(KC_N, record);
                     SEND_STRING(SS_TAP(X_ESC) SS_LCTL(SS_TAP(X_LEFT)) SS_TAP(X_LBRC) SS_LCTL(SS_TAP(X_RGHT)) SS_TAP(X_RBRC));
                 }
                 else if (get_mods() & MOD_MASK_SHIFT) {
@@ -120,7 +118,6 @@ bool process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
             if (record->event.pressed) {
                     if((get_mods() & MOD_MASK_ALT) || (get_mods() & MOD_MASK_ALT)){
                     del_mods(MOD_MASK_ALT);
-                    release_custom_one_shot(KC_N, record);
                     SEND_STRING(SS_TAP(X_ESC) SS_LCTL(SS_TAP(X_LEFT)) SS_LSFT(SS_TAP(X_LBRC)) SS_LCTL(SS_TAP(X_RGHT)) SS_LSFT(SS_TAP(X_RBRC)));
                 } else if (get_mods() & MOD_MASK_SHIFT) {
                     del_mods(MOD_MASK_SHIFT);
@@ -141,7 +138,6 @@ bool process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
                 }
                     if((get_mods() & MOD_MASK_ALT) || (get_mods() & MOD_MASK_ALT)){
                     del_mods(MOD_MASK_ALT);
-                    release_custom_one_shot(KC_N, record);
                     SEND_STRING(SS_TAP(X_ESC) SS_LCTL(SS_TAP(X_LEFT)) SS_LSFT(SS_TAP(X_9)) SS_LCTL(SS_TAP(X_RGHT)) SS_LSFT(SS_TAP(X_0)));
                 }
                 else if (get_mods() & MOD_MASK_SHIFT) {
