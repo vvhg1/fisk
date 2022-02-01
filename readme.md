@@ -1,4 +1,4 @@
-# <span style="font-family:Magneto; font-size:1.5em;">fisk</span>
+![image info](./images/title.png)
 
 An ergonomic 54-key hand wired split keyboard running QMK on the Elite-C microcontroller, living inside its 3D-printed case.
 
@@ -92,7 +92,7 @@ Light weight modifiers that work when NO_ACTION_TAPPING and NO_ACTION_ONESHOT ar
 One shot is not disabled by: space, del, backspace and modifiers. That means that e.g. `CTL` + `SHIFT` + `A` do not have to be chorded but can be hit in sequence.
 
 ### End Of Sentence
-This makes the transition between sentences a little smoother. Instead of typing `.`-`SPACE`-`SHIFT`- typing -`..`- has the same effect, the next character will be shifted. The idea is not mine, and it seems, I can't find the source. The implementation however is my work.
+This makes the transition between sentences a little smoother. Instead of typing `.`-`SPACE`-`SHIFT`- typing -`..`- has the same effect, the next character will be shifted. The idea is not mine, I think I first saw it in [@precondition](https://github.com/precondition)'s [Dactyl manuform keymap](https://github.com/precondition/dactyl-manuform-keymap). The implementation however is my work and will work without making use of One Shot Shifts.
 ### Case Modes
 Case modes are slightly adapted to account for NO_ACTION_TAPPING, NO_ACTION_ONESHOT and for my use case.
 Description is largely the original by [@andrewjrae](https://github.com/andrewjrae).
