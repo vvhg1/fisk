@@ -20,7 +20,7 @@
 
 #ifdef CUSTOM_LEADER_ENABLE
 #define LEADER_DISPLAY_STR
-// #define CUSTOM_LEADER_TO_DL //if defined, leader key activates base layer
+#define CUSTOM_LEADER_TO_DL //if defined, leader key activates base layer
 #endif
 
 #ifdef CASEMODES_ENABLE
@@ -46,7 +46,7 @@
 #endif
 
 #ifndef IS_LEFT
-#define OLED_FONT_H "keyboards/fisk/fonts/glcdfont_fisk_right2.c"
+#define OLED_FONT_H "keyboards/fisk/fonts/glcdfont_fisk_right.c"
 #else
 #define OLED_FONT_H "keyboards/fisk/fonts/glcdfont_fisk_left.c"
 #endif

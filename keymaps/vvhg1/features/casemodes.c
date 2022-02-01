@@ -34,7 +34,8 @@
  *       configurable default separator and overrideable function to determine
  *       if the default should be used.
  *
- *  - @vvhg1 included adaption of NumWord by Joshua T.
+ *  - @vvhg1 
+ *      - included adaption of NumWord by Joshua T.
  *      - added toggle for xcase
  *      - works with custom one shot mods
  *      - changed code a little, working more with switch statements

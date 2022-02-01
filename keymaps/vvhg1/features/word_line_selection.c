@@ -20,10 +20,6 @@
  */
 #include "word_line_selection.h"
 #include "keycodes.h"
-// #ifdef CUSTOM_ONE_SHOT_ENABLE
-// #include "features/word_line_selection.h"
-// #endif
-
 
 bool process_word_line_selection(uint16_t keycode, const keyrecord_t *record) {
         if (record->event.pressed) {

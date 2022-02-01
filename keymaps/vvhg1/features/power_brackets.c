@@ -15,7 +15,7 @@
  */
 
 /*
- * This is a little tool, that makes transition to new sentence a little smoother. When typing two dots, the second dot will be deleted and the next character will be shifted.
+ * These are bracket pairs of different types, single- and double-quote pairs.
  *
  */
 #include "power_brackets.h"

@@ -63,7 +63,6 @@ enum custom_keycodes {
     FLP_MIN,
     QuotWrap,
     LEADER,
-    // Ins_Cursor,
     ML_sft,
     MR_sft,
     ML_alt,

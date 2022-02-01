@@ -278,12 +278,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return true;
 #endif
-            //    // ------------------------------------------------------------------------insert cursor at current mouse position (vscode)----------------------------------------------------------------
-            //     case Ins_Cursor:
-            //     if (record->event.pressed) {
-            //         tap_code16(LALT(KC_BTN1));
-            //         return true;
-            //         }
             // ------------------------------------------------------------------------custom layer logic ----------------------------------------------------------------
         case mo_FUNX:
             if (record->event.pressed) {
