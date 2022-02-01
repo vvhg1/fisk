@@ -8,7 +8,7 @@ An ergonomic 54-key hand wired split keyboard running QMK on the Elite-C microco
 - 54-keys, split, Elite-C microcontroller, column stagger, ring finger (5°) and pinky (12°) splay, slightly tented case (2° toward user and 3° outward), support for one rotary encoder per half, one 128x32 OLED per half, hot-pluggable RJ10 connection between halfs and a transport case
 
 Keyboard Maintainer: [@vvhg1](https://github.com/vvhg1)   
-Build instructions and 3D files are at (coming soon)
+Build guide and 3D files are at (coming soon)
 
 ## Keymap
 ![image info](./images/keymap.png)
@@ -223,8 +223,12 @@ Some that deserve to be mentioned above all else are:
    
 **Note:** In case I have forgotten to mention someone or a reference to an author's work, please let me know and I will happily correct it.
 
+## Installation
 
+Clone the [QMK firmware](https://github.com/qmk/qmk_firmware) and place this repo in `qmk_firmware/keyboards/handwired/fisk`.
+Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
 ## Make
+
 ### Setting Handedness
 In order to compile the correct font for each side, `#define IS_LEFT` in `config.h` for the left side and comment it out for the right side.
 The firmware uses [handedness by EEPROM](https://docs.qmk.fm/#/feature_split_keyboard?id=handedness-by-eeprom) as default and it must be *configured once* on each side. 
@@ -242,6 +246,5 @@ For Pro micros, delete the line `BOOTLOADER = atmel-dfu` from the `rules.mk` fil
 
 [QMK Toolbox](http://qmk.fm/toolbox) can also be used to set EEPROM handedness. Place the controller in bootloader mode and select menu option Tools -> EEPROM -> Set Left/Right Hand
 
-See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
+See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. 
 
-A build guide for the fisk can be found at...
