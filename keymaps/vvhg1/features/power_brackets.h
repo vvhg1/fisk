@@ -19,12 +19,4 @@
 
 #include QMK_KEYBOARD_H
 
- uint16_t lastkeypressed;
- uint16_t thiskeypressed;
-
- int8_t dot_counter;
-
- bool is_power_brackets_off;
-
-bool process_power_brackets(uint16_t keycode, const keyrecord_t *record);
-void power_brackets_enable(bool enabled);
+void process_power_brackets(uint16_t keycode, const keyrecord_t *record);

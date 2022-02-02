@@ -45,9 +45,9 @@
 #endif
 
 #ifndef IS_LEFT
-#define OLED_FONT_H "keyboards/fisk/fonts/glcdfont_fisk_right.c"
+#define OLED_FONT_H "keyboards/handwired/fisk/fonts/glcdfont_fisk_right.c"
 #else
-#define OLED_FONT_H "keyboards/fisk/fonts/glcdfont_fisk_left.c"
+#define OLED_FONT_H "keyboards/handwired/fisk/fonts/glcdfont_fisk_left.c"
 #endif
 
 

@@ -22,7 +22,7 @@ This is my personal keymap, main features include: one rotary encoder, Colemak-d
 Custom leader key implementation, original author is [@andrewjrae](https://github.com/andrewjrae).  
 I made a few changes:   
 - for one I changed the leader key to toggle, so it can be used to escape the leader sequence.   
-- When activated, the leader key changes layers back to the default layer if it is not the highest layer (can be disabled by commenting out `#define CUSTOM_LEADER_TO_DL` in `config.c`).
+- When activated, the leader key changes layers back to the default layer if it is not the highest layer (can be disabled by setting `CUSTOM_LEADER_TO_DL = no` in `rules.mk`).
 - I made a few changes to how the leader sequence is displayed on the oled. If the sequence gets too long, it starts scrolling with every new key press, only displaying the last n (of course this value can easily be changed by adjusting `LEADER_DISPLAY_LEN`) keys.
 - Probably the biggest aspect is more a different approach of implementation/usage. For me the biggest limitation of the leader key was that the action was not easily repeatable, so I added open ended sequences. When a leader sequence is finished, the action is executed, as one would expect, but a repeatable leader sequence then keeps listening instead of terminating, so if the last key in the sequence is tapped again, the action is being repeated. This is done so long as no other key is pressed. If an other key gets pressed, the sequence is terminated and the key is processed as normally. For actions like next/previous or up/down actions, I let both corresponding keys through, e.g. if `w` were up and `s` down, pressing `s` after `w` would not disable the leader function but instead perform the down action.
 - I also fiddled around with the logic in general to adapt it to my use case.
@@ -63,8 +63,6 @@ I made a few changes:
 | Leader | SHIFT + \[\] | \]                 | Repeatable |
 |        | ()           | (                  | Repeatable |
 |        | SHIFT + ()   | )                  | Repeatable |
-|        |  '           | Power brackets on  |            |
-|        | SHIFT + '    | Power brackets off |            |
 ##### Encoder Mode
 |        | EH | Horizontal scroll    |
 | ------ | -- | -------------------- |
@@ -73,6 +71,12 @@ I made a few changes:
 |        | ET | Nxt/Prv Tab          |
 |        | EP | Paging               |
 |        | EW | Word selection       |
+##### Macro stuff
+Disabled by default, can be enabled by setting `DYNAMIC_MACRO_ENABLE = yes` in `rules.mk` (adds about 550 b)   
+|        | MR | Record macro         |
+| ------ | -- | -------------------- |
+| Leader | MS | Stop macro recording |
+|        | MP | Play macro           |
 ##### Umlaut stuff (probably not so interesting for most people)
 |        | UA | Ä       |
 | ------ | -- | ------- |
@@ -139,7 +143,7 @@ NUMWORD is a similar concept by Joshua T. aka [@replicaJunction](https://github.
 ### Power Brackets
 These are bracket pairs of different types, single- and double-quote pairs. On a simple key press an empty pair with the cursor placed inside the brackets like `(I)`, `{I}`, `[I]` is produced. This does not conflict with the way Vscode handles empty brackets.   
 When modified with ALT they `(wrap)` `{the}` `[previous]` `"word"` without having to select the word first.  
-Power brackets can be disabled by calling `power_brackets_enable(false);` and enabled by calling `power_brackets_enable(true);`. I mapped this to `Leader` , `'` to enable and `Leader` , `SHIFT`+`'` to disable.
+<!-- Power brackets can be disabled by calling `power_brackets_enable(false);` and enabled by calling `power_brackets_enable(true);`. I mapped this to `Leader` , `'` to enable and `Leader` , `SHIFT`+`'` to disable. -->
 
 **Note:** I mapped left brackets to `Leader`, `corresponding bracket key` and right brackets when modified with `SHIFT`.
 
@@ -190,8 +194,8 @@ If mirroring is on, instead of cramming yet another icon into my very limited OL
 - Leader key sequence
 
 ### Cheap trick OLED
-As I was pressed for space with console/debug enabled, I got rid of something rather unnecessary, instead of disabling core features of my keymap...
-OLED will save some space at compile time by disabling most graphics. Information is still being displayed, just not in a pretty way. 
+As I was pressed for space with console/debug enabled, I got rid of something rather unnecessary, instead of disabling more core features in my keymap than absolutely neccessary...
+OLED will save some space at compile time by disabling most graphics. Information is still being displayed, just not in a pretty way. Although it helps, it won't be enough with all bells and whistles turned on...
 
 ## Mirroring 
 Is supported for one hand typing, can be disabled in rules.mk (SWAP_HANDS_ENABLE)
@@ -239,12 +243,12 @@ Make example for this keyboard (after setting up your build environment):
 
 For Elite-C or compatible controllers using `DFU` bootloader, make sure the line `BOOTLOADER = atmel-dfu` is in the `rules.mk` file and use the following make commands:
 
-    make fisk:vvhg1:dfu-split-left
-    make fisk:vvhg1:dfu-split-right
+    make handwired/fisk:vvhg1:dfu-split-left
+    make handwired/fisk:vvhg1:dfu-split-right
 For Pro micros, delete the line `BOOTLOADER = atmel-dfu` from the `rules.mk` file. The make commands are:
 
-    make fisk:vvhg1:avrdude-split-left
-    make fisk:vvhg1:avrdude-split-right
+    make handwired/fisk:vvhg1:avrdude-split-left
+    make handwired/fisk:vvhg1:avrdude-split-right
 
 [QMK Toolbox](http://qmk.fm/toolbox) can also be used to set EEPROM handedness. Place the controller in bootloader mode and select menu option Tools -> EEPROM -> Set Left/Right Hand
 

@@ -234,9 +234,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif
 // ----------------------------------------------------------------------------------power brackets-----------------------------------------------------------------
 #ifdef POWER_BRACKETS_ENABLE
-    if (!process_power_brackets(keycode, record)) {
-        return false;
-    }
+    process_power_brackets(keycode, record);
 #endif
 #ifdef CUSTOM_WORD_LINE_SELECTION_ENABLE
     if (!process_word_line_selection(keycode, record)) {

@@ -26,15 +26,6 @@
 
 void *leader_start_func(uint16_t keycode) {
     switch (keycode) {
-#ifdef POWER_BRACKETS_ENABLE
-        case QuotWrap:
-            if (get_mods() & MOD_MASK_SHIFT) { //switch power brackets off with shift + '
-                power_brackets_enable(false);
-            } else {
-                power_brackets_enable(true); //switch power brackets on with '
-            }
-            break;
-#endif
         case Sq_Br:
             if (get_mods() & MOD_MASK_SHIFT) { //single brackets
             tap_code(KC_RBRC);
