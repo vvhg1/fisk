@@ -8,20 +8,20 @@ An ergonomic 54-key hand wired split keyboard running QMK on the Elite-C microco
 - 54-keys, split, Elite-C microcontroller, column stagger, ring finger (5°) and pinky (12°) splay, slightly tented case (2° toward user and 3° outward), support for one rotary encoder per half, one 128x32 OLED per half, hot-pluggable RJ10 connection between halfs and a transport case
 
 Keyboard Maintainer: [@vvhg1](https://github.com/vvhg1)   
-Build guide and 3D files are at (coming soon)
+Build guide and 3D files are at [https://github.com/vvhg1/fisk_build_guide.git](https://github.com/vvhg1/fisk_build_guide.git)
 ## Acknowledgements
 This keyboard draws inspiration from many sources and would not have been possible without the works of others.
 Some that deserve to be mentioned above all else are:
 - the famous Kyria by Thomas Baart, [splitkb.com](https://splitkb.com)
 
-    The aggressive column stagger, the thumb cluster and the general shape are heavily influenced by the Kyria. The use and placement of a rotary encoder also comes from the various Kyria layouts floating around. Even the two extra index finger keys draw inspiration from here, as there was enough space in my 3D mock-up due to the different MCU placement and I just love dedicated keys for brackets.
+    The aggressive column stagger, the thumb cluster and the general shape are inspired by the Kyria. The use and placement of a rotary encoder also comes from the various Kyria layouts floating around. Even the two extra index finger keys draw inspiration from here, as there was enough space in my 3D mock-up due to the different MCU placement and I just love dedicated keys for brackets.
     Would I not have gone down the route of designing a keyboard from scratch, the Kyria would have been one of the most tempting options of all the split keyboards I have come across in my research.
     
 - the [Architeuthis dux](https://github.com/tapioki/cephalopoda/tree/main/Architeuthis%20dux) by [@tapioki](https://github.com/tapioki)
 
-    Going one step beyond a mere column stagger and adding column splay immedietely made sense to me and seemed like the next logical step. The even more extreme pinky stagger was a welcome encouragement in the design process of the physical layout (apparently my pinkies are rather short) and the column splay turned out to feel very natural.
+    Going one step beyond a mere column stagger and adding column splay immideately made sense to me and seemed like the next logical step. The even more extreme pinky stagger was a welcome encouragement in the design process of the physical layout and the column splay turned out to feel very natural.
     
-- the [Lotus58 case design](https://www.thingiverse.com/thing:4768218) by Matt James.
+- the [Lotus58 case design](https://www.thingiverse.com/thing:4768218) by Matt James, a welcome breather from the usual blocky, vertical wall case designs.
 
 - QMK wizardry by (in alphabetical order): [@andrewjrae](https://github.com/andrewjrae), [@drashna](https://github.com/drashna), [@GauthamYerroju](https://github.com/GauthamYerroju), [@JReneHS](https://github.com/JReneHS), [@rafaelromao](https://github.com/rafaelromao)   
    
