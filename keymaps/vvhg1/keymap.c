@@ -298,6 +298,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
                 if (IS_LAYER_ON(_NAV)) {
                     if (prev_layer_toggle_flag) {
+                        came_from_NAV = false;
                         return true;
                     }
                     layer_off(_NAV);
@@ -329,6 +330,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
                 if (IS_LAYER_ON(_NUM)) {
                     if (prev_layer_toggle_flag) {
+                        came_from_NAV = false;
                         return true;
                     }
                     layer_off(_NUM);
