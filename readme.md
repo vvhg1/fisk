@@ -107,7 +107,7 @@ Disabled by default, can be enabled by setting `DYNAMIC_MACRO_ENABLE = yes` in `
 
 ### Custom Layer logic
 This also works with NO_ACTION_TAPPING defined.
-Layers toggle on tap and momentarily activate when held. Memory of previously active layer, returning to it, rather than to the base layer. The hold has a timer, so a longer hold is automatically recognised as a momentary hold and not as a tap. This behaviour is somewhat similar to the custom one shot modifiers.
+Layers toggle on tap and momentarily activate when held. Memory of previously active layer, returning to it only if the layer was activated momentarily, if the layer was activated as toggle, deactivating will revert to the base layer. The hold has a timer, so a longer hold is automatically recognised as a momentary hold and not as a tap. This behaviour is somewhat similar to the custom one shot modifiers.
 
 ### Custom one shot modifiers
 Light weight modifiers that work when NO_ACTION_TAPPING and NO_ACTION_ONESHOT are defined. They behave like normal modefiers when held, but when tapped they modify only the next key. The one shot function is disarmed when tapped again, or when tapped and then held behave like normal modifiers.

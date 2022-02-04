@@ -314,10 +314,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 if (!layer_toggle_flag || (timer_elapsed(one_shot_timer) > 500)) {
                     if (IS_LAYER_ON(_NAV)) {
                         layer_off(_NAV);
-                    }
                     if (came_from_NAV) {
                         layer_on(_NUM);
                         came_from_NAV = false;
+                    }
                     }
                 }
             }
@@ -345,10 +345,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 if (!layer_toggle_flag || (timer_elapsed(one_shot_timer) > 500)) {
                     if (IS_LAYER_ON(_NUM)) {
                         layer_off(_NUM);
-                    }
                     if (came_from_NAV) {
                         layer_on(_NAV);
                         came_from_NAV = false;
+                    }
                     }
                 }
             }
