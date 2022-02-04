@@ -131,16 +131,16 @@ void *bracket_repeat(uint16_t keycode)
 void *umlaut_stuff(uint16_t keycode) {
     switch (keycode) {
         case KC_S:
-            tap_code16((RALT(KC_S)));  // here S ß
+            SEND_STRING(SS_LALT(SS_TAP(X_P0) SS_TAP(X_P1) SS_TAP(X_P5) SS_TAP(X_P9)));// here S ß
             break;
         case KC_A:
-            tap_code16((RALT(KC_Q)));  // here A Ä
+            SEND_STRING(SS_LALT(SS_TAP(X_P1) SS_TAP(X_P3) SS_TAP(X_P2)));// here A Ä
             break;
         case KC_U:
-            tap_code16((RALT(KC_Y)));  //  here U Ü
+            SEND_STRING(SS_LALT(SS_TAP(X_P1) SS_TAP(X_P2) SS_TAP(X_P9)));//  here U Ü
             break;
         case KC_O:
-            tap_code16((RALT(KC_P)));  // here O Ö
+            SEND_STRING(SS_LALT(SS_TAP(X_P1) SS_TAP(X_P4) SS_TAP(X_P8)));// here O Ö
             break;
         case KC_LSHIFT:
         case KC_RSHIFT:

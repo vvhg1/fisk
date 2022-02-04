@@ -35,24 +35,24 @@ void process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
                     del_mods(MOD_MASK_ALT);
                     if (get_mods() & MOD_MASK_SHIFT){
                         del_mods(MOD_MASK_SHIFT);
-                        SEND_STRING(SS_TAP(X_ESC) SS_LCTL(SS_TAP(X_LEFT)) SS_LSFT(SS_TAP(X_QUOT)) SS_TAP(X_SPC) SS_LCTL(SS_TAP(X_RGHT)) SS_LSFT(SS_TAP(X_QUOT)) SS_TAP(X_SPC));
+                        SEND_STRING(SS_TAP(X_ESC) SS_LCTL(SS_TAP(X_LEFT)) SS_LSFT(SS_TAP(X_QUOT)) SS_LCTL(SS_TAP(X_RGHT)) SS_LSFT(SS_TAP(X_QUOT)));
                     } else {
-                        SEND_STRING(SS_TAP(X_ESC) SS_LCTL(SS_TAP(X_LEFT)) SS_TAP(X_QUOT) SS_TAP(X_SPC) SS_LCTL(SS_TAP(X_RGHT)) SS_TAP(X_QUOT) SS_TAP(X_SPC));
+                        SEND_STRING(SS_TAP(X_ESC) SS_LCTL(SS_TAP(X_LEFT)) SS_TAP(X_QUOT) SS_LCTL(SS_TAP(X_RGHT)) SS_TAP(X_QUOT));
                     }
                 } else {
-                    //account for dead key behaviour
-                    SEND_STRING(SS_TAP(X_QUOT) SS_TAP(X_SPC));
+                    SEND_STRING(SS_TAP(X_QUOT));
                 }
             }
             break;
                     // ------------------------------------------------------------------------ empty and wrapping bracket pairs ----------------------------------------------------------------
         case Op_BrS:  // like the other but £ instead of ! on shift
             if (record->event.pressed) {
-                if ((get_mods() & MOD_MASK_ALT) || (get_mods() & MOD_MASK_ALT)) {
+                if (get_mods() & MOD_MASK_ALT) {
                     del_mods(MOD_MASK_ALT);
                     SEND_STRING(SS_TAP(X_ESC) SS_LCTL(SS_TAP(X_LEFT)) SS_LSFT(SS_TAP(X_9)) SS_LCTL(SS_TAP(X_RGHT)) SS_LSFT(SS_TAP(X_0)));
                 } else if (get_mods() & MOD_MASK_SHIFT) {
-                    tap_code16(LSFT(RALT(KC_4)));
+                    del_mods(MOD_MASK_SHIFT);
+                    SEND_STRING(SS_LALT(SS_TAP(X_P0) SS_TAP(X_P1) SS_TAP(X_P6) SS_TAP(X_P3)));
                 } else {
                     tap_code16(S(KC_9));
                     tap_code16(S(KC_0));
@@ -62,7 +62,7 @@ void process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
             break;
         case Sq_Br:
             if (record->event.pressed) {
-                if ((get_mods() & MOD_MASK_ALT) || (get_mods() & MOD_MASK_ALT)) {
+                if (get_mods() & MOD_MASK_ALT) {
                     del_mods(MOD_MASK_ALT);
                     SEND_STRING(SS_TAP(X_ESC) SS_LCTL(SS_TAP(X_LEFT)) SS_TAP(X_LBRC) SS_LCTL(SS_TAP(X_RGHT)) SS_TAP(X_RBRC));
                 } else if (get_mods() & MOD_MASK_SHIFT) {
@@ -76,7 +76,7 @@ void process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
             break;
         case Cr_Br:
             if (record->event.pressed) {
-                if ((get_mods() & MOD_MASK_ALT) || (get_mods() & MOD_MASK_ALT)) {
+                if (get_mods() & MOD_MASK_ALT) {
                     del_mods(MOD_MASK_ALT);
                     SEND_STRING(SS_TAP(X_ESC) SS_LCTL(SS_TAP(X_LEFT)) SS_LSFT(SS_TAP(X_LBRC)) SS_LCTL(SS_TAP(X_RGHT)) SS_LSFT(SS_TAP(X_RBRC)));
                 } else if (get_mods() & MOD_MASK_SHIFT) {
@@ -93,7 +93,7 @@ void process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
             break;
         case Op_Br:
             if (record->event.pressed) {
-                if ((get_mods() & MOD_MASK_ALT) || (get_mods() & MOD_MASK_ALT)) {
+                if (get_mods() & MOD_MASK_ALT) {
                     del_mods(MOD_MASK_ALT);
                     SEND_STRING(SS_TAP(X_ESC) SS_LCTL(SS_TAP(X_LEFT)) SS_LSFT(SS_TAP(X_9)) SS_LCTL(SS_TAP(X_RGHT)) SS_LSFT(SS_TAP(X_0)));
                 } else if (get_mods() & MOD_MASK_SHIFT) {

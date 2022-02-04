@@ -96,6 +96,7 @@ __attribute__((weak)) bool process_custom_one_shot(uint16_t keycode, const keyre
                     is_oneshot_lalt = false;
                     lalt_on         = false;
                     unregister_code(KC_LALT);
+                    tap_code(KC_ESC);
                 }
             }
             return true;

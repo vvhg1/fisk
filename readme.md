@@ -30,7 +30,7 @@ Some that deserve to be mentioned above all else are:
 ![image info](./images/keymap.png)
 This is my personal keymap, main features include: one rotary encoder, Colemak-dh and Qwerty (both have somewhat modified symbols), layers, custom leader key, custom layer logic, custom oneshot modifiers, end of sentence, case modes (CAPSWORD, x_case, NUMW0RD), power brackets and dynamic info on both OLED displays.
 
-**Note:** This keymap assumes a US International ANSI layout and a Windows OS. This is due to my need for some international characters like £, Ä, Ö, Ü, ß. I have not tested it on other OS and shortcuts are the Win ones, but it should not be overly complicated to adapt.
+**Note:** This keymap assumes US ANSI layout on Windows OS. I have not tested it on other OS and shortcuts are the Win ones, but it should not be overly complicated to adapt.
 
 **Note:** There is also a default keymap included, in case anyone wants to start with a clean slate.
 
@@ -112,6 +112,7 @@ Layers toggle on tap and momentarily activate when held. Memory of previously ac
 ### Custom one shot modifiers
 Light weight modifiers that work when NO_ACTION_TAPPING and NO_ACTION_ONESHOT are defined. They behave like normal modefiers when held, but when tapped they modify only the next key. The one shot function is disarmed when tapped again, or when tapped and then held behave like normal modifiers.
 One shot is not disabled by: space, del, backspace and modifiers. That means that e.g. `CTL` + `SHIFT` + `A` do not have to be chorded but can be hit in sequence.
+When toggled on and then off again without any key press in between or when disarming on key up after the one shot timer elapsed, ESC is sent to refocus.
 
 ### End Of Sentence
 This makes the transition between sentences a little smoother. Instead of typing `.`-`SPACE`-`SHIFT`- typing -`..`- has the same effect, the next character will be shifted. The idea is not mine, I think I first saw it in [@precondition](https://github.com/precondition)'s [Dactyl manuform keymap](https://github.com/precondition/dactyl-manuform-keymap). The implementation however is my work and will work without making use of One Shot Shifts.
@@ -159,11 +160,10 @@ NUMWORD is a similar concept by Joshua T. aka [@replicaJunction](https://github.
 ### Power Brackets
 These are bracket pairs of different types, single- and double-quote pairs. On a simple key press an empty pair with the cursor placed inside the brackets like `(I)`, `{I}`, `[I]` is produced. This does not conflict with the way Vscode handles empty brackets.   
 When modified with ALT they `(wrap)` `{the}` `[previous]` `"word"` without having to select the word first.  
-<!-- Power brackets can be disabled by calling `power_brackets_enable(false);` and enabled by calling `power_brackets_enable(true);`. I mapped this to `Leader` , `'` to enable and `Leader` , `SHIFT`+`'` to disable. -->
 
 **Note:** I mapped left brackets to `Leader`, `corresponding bracket key` and right brackets when modified with `SHIFT`.
 
-**Note:** Due to the ALT modifier, ESC is sent to neutralise the dead ALT keypress on the US Intl. layout.
+**Note:** Due to the ALT modifier, ESC is sent to neutralise the  ALT keypress  focus change.
 ### Other
 I made the Grave key, which is a dead key in the US Intl. layout, active again as I don't need the dead key behaviour of it and I find it annoying. To revert to the standard behaviour, simply comment out the `case KC_GRAVE:` switch case in keymap.c.
 

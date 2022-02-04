@@ -106,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_NUM] = LAYOUT(
            KC_GRV, KC_HASH,    KC_UP  , KC_PERC ,KC_LPRN , KC_RPRN,                                      _______,   KC_PAST,   KC_7 ,   KC_8 ,   KC_9 ,   Op_BrS,
-    _______ , RALT(KC_5), KC_LEFT, KC_DOWN , KC_RIGHT,Op_Br, _______,                                     _______,  KC_0,      KC_1,    KC_2,    KC_3,    DotC,   S(KC_4),
+    _______ , EURO_SYM, KC_LEFT, KC_DOWN , KC_RIGHT,Op_Br, _______,                                     _______,  KC_0,      KC_1,    KC_2,    KC_3,    DotC,   S(KC_4),
     _______,  KC_F2,     Cut,    Copy,  Redo,   Paste,               _______,_______,        _______, _______,    KC_PSLS,   KC_4,    KC_5,    KC_6,  KC_PLUS,   _______,
     _______,    Undo,             _______,  _______,  _______,                  _______,        _______,            _______, _______, _______,                   _______,   KC_EQL
 
@@ -251,13 +251,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif
     }
     switch (keycode) {  //!#######################################################--switch(keycode)--#######################################################
-        case KC_GRAVE:
+        case EURO_SYM:
             if (record->event.pressed) {
-                if (get_mods() & MOD_MASK_SHIFT) {
-                    SEND_STRING(SS_LSFT(SS_TAP(X_GRAVE) SS_TAP(X_SPC)));
-                } else {
-                    SEND_STRING(SS_TAP(X_GRAVE) SS_TAP(X_SPC));
-                }
+                SEND_STRING(SS_LALT(SS_TAP(X_P0) SS_TAP(X_P1) SS_TAP(X_P2) SS_TAP(X_P8)));// send euro symbol
             }
             return false;
 
@@ -271,7 +267,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             } else {
                 swap_hands = false;
                 if (!no_swap && (timer_elapsed(one_shot_timer) < 500)) {
-                    tap_code(KC_SPC);
+                    tap_code(KC_ESC);
                 }
             }
             return true;

@@ -54,6 +54,7 @@ enum custom_keycodes {
     CAPS_WORD,
     SNAKE_CASE,
     NUM_WORD,
+    EURO_SYM,
     DotC,
     SelWrdL,
     SelWrdR,
