@@ -21,7 +21,9 @@
 #include "leader.h"
 #include "keycodes.h"
 #include <string.h>
-
+#ifdef CUSTOM_ONE_SHOT_ENABLE
+#include "features/custom_oneshot.h"
+#endif
 #ifndef LEADER_ESC_KEY
 #define LEADER_ESC_KEY KC_ESC
 #endif
@@ -88,6 +90,23 @@ void start_leading(void) {
 void stop_leading(void) {
     leading     = false;
     leader_func = NULL;
+    #ifdef CUSTOM_ONE_SHOT_ENABLE
+                    if (is_oneshot_rshift) {
+                    unregister_code(KC_RSHIFT);
+                    is_oneshot_rshift = false;
+                }
+                if (rshift_on) {
+                    rshift_on = false;
+                }
+
+                if (is_oneshot_lshift) {
+                    unregister_code(KC_LSHIFT);
+                    is_oneshot_lshift = false;
+                }
+                if (lshift_on) {
+                    lshift_on = false;
+                }
+#endif
 #ifdef LEADER_DISPLAY_STR
     leader_display[leader_display_size] = ' ';
 #endif
