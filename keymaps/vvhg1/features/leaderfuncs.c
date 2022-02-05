@@ -28,6 +28,7 @@ void *leader_start_func(uint16_t keycode) {
     switch (keycode) {
         case Sq_Br:
             if (get_mods() & MOD_MASK_SHIFT) { //single brackets
+            del_mods(MOD_MASK_SHIFT);
             tap_code(KC_RBRC);
             } else {
             tap_code(KC_LBRC);
@@ -131,16 +132,34 @@ void *bracket_repeat(uint16_t keycode)
 void *umlaut_stuff(uint16_t keycode) {
     switch (keycode) {
         case KC_S:
+        if (get_mods() & MOD_MASK_SHIFT) {
+            del_mods(MOD_MASK_SHIFT);
+            }
             SEND_STRING(SS_LALT(SS_TAP(X_P0) SS_TAP(X_P2) SS_TAP(X_P2) SS_TAP(X_P3)));// here S ß
             break;
         case KC_A:
+        if (get_mods() & MOD_MASK_SHIFT) {
+            del_mods(MOD_MASK_SHIFT);
+            SEND_STRING(SS_LALT(SS_TAP(X_P1) SS_TAP(X_P4) SS_TAP(X_P2)));// here A Ä
+            } else {
             SEND_STRING(SS_LALT(SS_TAP(X_P1) SS_TAP(X_P3) SS_TAP(X_P2)));// here A Ä
+            }
             break;
         case KC_U:
+        if (get_mods() & MOD_MASK_SHIFT) {
+            del_mods(MOD_MASK_SHIFT);
+                SEND_STRING(SS_LALT(SS_TAP(X_P0) SS_TAP(X_P2) SS_TAP(X_P2) SS_TAP(X_P0)));// here U Ü
+            } else {
             SEND_STRING(SS_LALT(SS_TAP(X_P1) SS_TAP(X_P2) SS_TAP(X_P9)));//  here U Ü
+            }
             break;
         case KC_O:
+        if (get_mods() & MOD_MASK_SHIFT) {
+            del_mods(MOD_MASK_SHIFT);
+                SEND_STRING(SS_LALT(SS_TAP(X_P0) SS_TAP(X_P2) SS_TAP(X_P1) SS_TAP(X_P4)));// here O Ö
+            } else {
             SEND_STRING(SS_LALT(SS_TAP(X_P1) SS_TAP(X_P4) SS_TAP(X_P8)));// here O Ö
+            }
             break;
         case KC_LSHIFT:
         case KC_RSHIFT:
