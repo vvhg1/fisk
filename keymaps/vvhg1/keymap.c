@@ -95,9 +95,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Num Layer
  *
  *          ,----------------------------------------------------.                                       ,-----------------------------------------------------.
- *          |   ` ~  |    #   |    Up  |    %   |    (   |   )   |                                       |  {c} + |    *   |   7 &  |   8 *  |   9 (  | (e) £  |
+ *          |        |  ` ~   |    Up  |    %   |    (   |   )   |                                       |  {c} + |    *   |   7 &  |   8 *  |   9 (  | (e) £  |
  * +--------+--------+--------+--------+--------+--------+-------|                                       |--------+--------+--------+--------+--------+--------+--------.
- * |        |    €   |  Left  |   Down | Right  |   ()   |       |                                       |  [c] = |   0 )  |   1 !  |   2 @  |   3 #  |   . ,  |   $    |
+ * |        |    €   |  Left  |   Down | Right  |   F2   |       |                                       |  [c] = |   0 )  |   1 !  |   2 @  |   3 #  |   . ,  |   $    |
  * |--------+--------+--------+--------+--------+--------+-------+--------+--------.     ,---------------+--------+--------+--------+--------+--------+--------+--------|
  * |        |   F2   |  Cut   |  Copy  |  Redo  |  Paste |       |        |        |     |        |      |        |   /    |   4 $  |   5 %  |   6 ^  |   +    |        |
  * |--------+--------+--------+--------+--------+--------+--.    |        +--------|     |--------+      |     ,--+--------+--------+--------+--------+--------+--------|
@@ -105,8 +105,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------'           `--------------------------'    '--------+--------'     `---------------'     '-------------------------'            '-----------------'
  */
     [_NUM] = LAYOUT(
-           KC_GRV, KC_HASH,    KC_UP  , KC_PERC ,KC_LPRN , KC_RPRN,                                      _______,   KC_PAST,   KC_7 ,   KC_8 ,   KC_9 ,   Op_BrS,
-    _______ , EURO_SYM, KC_LEFT, KC_DOWN , KC_RIGHT,Op_Br, _______,                                     _______,  KC_0,      KC_1,    KC_2,    KC_3,    DotC,   S(KC_4),
+             _______,    KC_GRV,   KC_UP  , KC_PERC ,KC_LPRN , KC_RPRN,                                      _______,   KC_PAST,   KC_7 ,   KC_8 ,   KC_9 ,   Op_BrS,
+    _______ , EURO_SYM, KC_LEFT, KC_DOWN , KC_RIGHT,KC_F2, _______,                                     _______,  KC_0,      KC_1,    KC_2,    KC_3,    DotC,   S(KC_4),
     _______,  KC_F2,     Cut,    Copy,  Redo,   Paste,               _______,_______,        _______, _______,    KC_PSLS,   KC_4,    KC_5,    KC_6,  KC_PLUS,   _______,
     _______,    Undo,             _______,  _______,  _______,                  _______,        _______,            _______, _______, _______,                   _______,   KC_EQL
 
@@ -139,7 +139,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * +--------+--------+--------+--------+--------+--------+-------|                                       |--------+--------+--------+--------+--------+--------+--------.
  * |        | Qwerty |        |        |        |        |       |                                       |        |        |  KC_F1 |  KC_F2 |  KC_F3 | KC_F10 |        |
  * |--------+--------+--------+--------+--------+--------+-------+--------+--------.     ,---------------+--------+--------+--------+--------+--------+--------+--------|
- * |        |        |        | Colemak|        |        |       |        |        |     |        |      |        |        |  KC_F4 |  KC_F5 |  KC_F6 | KC_F11 |        |
+ * |        |        |        | Colemak|FLP_DOT |        |       |        |        |     |        |      |        |        |  KC_F4 |  KC_F5 |  KC_F6 | KC_F11 |        |
  * |--------+--------+--------+--------+--------+--------+--.    |        +--------|     |--------+      |     ,--+--------+--------+--------+--------+--------+--------|
  * |        | Mirror |           |     |        |        |       |        |        |     |        |      |     |      |        |         |            | KC_F12 |        |
  * `-----------------'           `--------------------------'    '--------+--------'     `---------------'     '-------------------------'            '-----------------'
@@ -147,7 +147,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    [_FUNX] = LAYOUT(
              _______, _______, FLP_MIN, _______, _______, mo_AUX,                                        _______, _______,  KC_F7,   KC_F8,   KC_F9,  _______,
     _______, DF(_QW), _______, _______, _______, _______, _______,                                         _______, _______,  KC_F1,   KC_F2,   KC_F3,   KC_F10,  _______,
-    _______, _______,  _______, DF(_COLEMAK), _______, _______,  _______, _______,      _______, _______,           _______,  KC_F4,   KC_F5,   KC_F6,   KC_F11, _______,
+    _______, _______,  _______, DF(_COLEMAK), FLP_DOT_C, _______,  _______, _______,      _______, _______,           _______,  KC_F4,   KC_F5,   KC_F6,   KC_F11, _______,
     _______,
     #ifdef SWAP_HANDS_ENABLE
             TG(_MIR)
@@ -267,7 +267,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             } else {
                 swap_hands = false;
                 if (!no_swap && (timer_elapsed(one_shot_timer) < 500)) {
-                    tap_code(KC_ESC);
+                    tap_code(KC_SPC);
                 }
             }
             return true;
@@ -392,6 +392,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             break;
+        // ------------------------------------------------------------------------ toggles num dot and comma flip ----------------------------------------------------------------
+        case FLP_DOT_C:
+            if (record->event.pressed) {
+                if (dot_flipped) {
+                    dot_flipped = false;
+                } else {
+                    dot_flipped = true;
+                }
+            }
+            break;
         // ------------------------------------------------------------------------ processes minus and accounts for flipped minus ----------------------------------------------------------------
         case KC_MINS:
             if (record->event.pressed) {
@@ -433,9 +443,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 if (get_mods() & MOD_MASK_SHIFT) {
                     del_mods(MOD_MASK_SHIFT);
-                    tap_code(KC_COMM);
+                    if(dot_flipped){
+                        tap_code(KC_DOT);
+                    }else {
+                        tap_code(KC_COMM);
+                        }
                 } else {
-                    tap_code(KC_DOT);
+                    if(dot_flipped){
+                        tap_code(KC_COMM);
+                    }else {
+                        tap_code(KC_DOT);
+                        }
                 }
                 return false;
             }
