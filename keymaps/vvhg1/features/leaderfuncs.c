@@ -49,7 +49,10 @@ void *leader_start_func(uint16_t keycode) {
             }
            return bracket_repeat;
         case KC_Q:
-            return reset_keyboard1;  // here LDR QRK will reset the keyboard
+            tap_code16(C(KC_F4));  // here WQ closes window
+            return windows_stuff;
+        // case KC_Q:
+        //     return reset_keyboard1;  // here LDR QRK will reset the keyboard
         case KC_W:
             return windows_stuff;  // here W is the start for Win related actions
         case KC_V:
@@ -97,6 +100,7 @@ void *bracket_repeat(uint16_t keycode)
     case Sq_Br:
         if (get_mods() & MOD_MASK_SHIFT)
         { //single brackets
+            del_mods(MOD_MASK_SHIFT);
             tap_code(KC_RBRC);
         }
         else
@@ -189,24 +193,24 @@ void *macro_stuff(uint16_t keycode) {
     }
 }
 #endif
-void *reset_keyboard1(uint16_t keycode) {
-    switch (keycode) {
-        case KC_R:
-            return reset_keyboard2;  // here LDR qrk will reset the keyboard
-        default:
-            return NULL;
-    }
-}
-void *reset_keyboard2(uint16_t keycode) {
-    switch (keycode) {
-        case KC_K:
-            reset_keyboard();// here LDR qrk will reset the keyboard
-            break;
-        default:
-            break;
-    }
-    return NULL;  // this function is always an endpoint
-}
+// void *reset_keyboard1(uint16_t keycode) {
+//     switch (keycode) {
+//         case KC_R:
+//             return reset_keyboard2;  // here LDR qrk will reset the keyboard
+//         default:
+//             return NULL;
+//     }
+// }
+// void *reset_keyboard2(uint16_t keycode) {
+//     switch (keycode) {
+//         case KC_K:
+//             reset_keyboard();// here LDR qrk will reset the keyboard
+//             break;
+//         default:
+//             break;
+//     }
+//     return NULL;  // this function is always an endpoint
+// }
 void *windows_stuff(uint16_t keycode) {
     switch (keycode) {  // here WS is Start menu, WM is context menu
         case KC_S:
