@@ -263,13 +263,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
     case In_br:
         if (record->event.pressed)
         {
-            inside_cursor = inside_cursor ? false : true;
+            outside_cursor = outside_cursor ? false : true;
         }
         return true;
     case In_br_o:
         if (record->event.pressed)
         {
-            inside_cursor_other = inside_cursor_other ? false : true;
+            outside_cursor_other = outside_cursor_other ? false : true;
         }
         return true;
 #endif

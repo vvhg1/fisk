@@ -18,6 +18,7 @@
 #pragma once
 
 #include QMK_KEYBOARD_H
-bool inside_cursor = true;
-bool inside_cursor_other = true;
+
+bool outside_cursor;
+bool outside_cursor_other;
 void process_power_brackets(uint16_t keycode, const keyrecord_t *record);

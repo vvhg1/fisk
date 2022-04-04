@@ -25,7 +25,6 @@
 #endif
 uint8_t current_mod_state;
 
-
 void process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
    switch (keycode) {
         // ------------------------------------------------------------------------ wraps quotes around word ----------------------------------------------------------------
@@ -56,7 +55,7 @@ void process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
                 } else {
                     tap_code16(S(KC_9));
                     tap_code16(S(KC_0));
-                    if(inside_cursor) {tap_code(KC_LEFT);}
+                    if(outside_cursor) {tap_code(KC_LEFT);}
                 }
             }
             break;
@@ -70,7 +69,7 @@ void process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
                 } else {
                     tap_code(KC_LBRC);
                     tap_code(KC_RBRC);
-                    if(inside_cursor_other) {tap_code(KC_LEFT);}
+                    if(outside_cursor_other) {tap_code(KC_LEFT);}
                 }
             }
             break;
@@ -87,7 +86,7 @@ void process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
                 } else {
                     tap_code16(S(KC_LBRC));
                     tap_code16(S(KC_RBRC));
-                    if(inside_cursor_other) {tap_code(KC_LEFT);}
+                    if(outside_cursor_other) {tap_code(KC_LEFT);}
                 }
             }
             break;
@@ -101,7 +100,7 @@ void process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
                 } else {
                     tap_code16(S(KC_9));
                     tap_code16(S(KC_0));
-                    if(inside_cursor) {tap_code(KC_LEFT);}
+                    if(outside_cursor) {tap_code(KC_LEFT);}
                 }
             }
             break;

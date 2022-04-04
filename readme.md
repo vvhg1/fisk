@@ -165,7 +165,7 @@ NUMWORD is a similar concept by Joshua T. aka [@replicaJunction](https://github.
 **Note:** The implementation of NUMWORD requires that the keyboard's layer definitions be accessible in a header file. In this case, the layer definitions are in enumlayers.h, so I make them accessible by adding `#include enumlayers.h` in casemodes.c.
 
 ### Power Brackets
-These are bracket pairs of different types, single- and double-quote pairs. On a simple key press an empty pair with the cursor placed inside the brackets like `(I)`, `{I}`, `[I]` is produced. This does not conflict with the way Vscode handles empty brackets. The behaviour can be toggled to bracket pairs with the cursor to the right of the pair by setting the flags `inside_cursor = false;` for opening brackets and `inside_cursor_other = false;` for the other brackets.    
+These are bracket pairs of different types, single- and double-quote pairs. On a simple key press an empty pair with the cursor placed inside the brackets like `(I)`, `{I}`, `[I]` is produced. This does not conflict with the way Vscode handles empty brackets. The behaviour can be toggled to bracket pairs with the cursor to the right of the pair by setting the flags `outside_cursor = true;` for opening brackets and `outside_cursor_other = true;` for the other brackets.    
 When modified with ALT they `(wrap)` `{the}` `[previous]` `"word"` without having to select the word first.  
 
 **Note:** I mapped left brackets to `Leader`, `corresponding bracket key` and right brackets when modified with `SHIFT`.
