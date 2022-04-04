@@ -28,6 +28,7 @@ uint16_t startup_timer;
 uint16_t one_shot_timer;
 
 bool mns_flipped;
+bool dot_flipped;
 bool layer_toggle_flag;
 bool prev_layer_toggle_flag;
 bool came_from_NAV;
@@ -62,6 +63,7 @@ enum custom_keycodes {
     SelLnUp,
     SelLnDn,
     FLP_MIN,
+    FLP_DOT_C,
     QuotWrap,
     LEADER,
     ML_sft,
@@ -71,6 +73,10 @@ enum custom_keycodes {
     mo_FUNX,
 #ifdef SWAP_HANDS_ENABLE
     Mir_spc,
+#endif
+#ifdef POWER_BRACKETS_ENABLE
+    In_br,
+    In_br_o,
 #endif
     mo_AUX
 
