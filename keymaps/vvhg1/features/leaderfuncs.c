@@ -26,6 +26,20 @@
 
 void *leader_start_func(uint16_t keycode) {
     switch (keycode) {
+        case KC_O:
+            tap_code16(LCTL(KC_F2));  //  Ctrl+F2 Select all occurrences of word VSCode
+            return NULL;
+        case KC_Z:
+            tap_code16(LCTL(KC_K));  //  Ctrl+K,Z VSCode Zen Mode
+            tap_code16(KC_Z);  //  Ctrl+K,Z VSCode Zen Mode
+            return NULL;
+        case KC_ENTER:
+            tap_code16(LCTL(LSFT(KC_P)));  //  Ctrl+Shift+P Show command palette VSCode
+            tap_code16(KC_F1);  //  Ctrl+Shift+P Show command palette VSCode
+            return NULL;
+        case KC_T:
+        tap_code16(LCTL(KC_GRV));
+        return NULL;
         case Sq_Br:
             if (get_mods() & MOD_MASK_SHIFT) { //single brackets
             del_mods(MOD_MASK_SHIFT);
@@ -80,6 +94,9 @@ void *leader_start_func(uint16_t keycode) {
             break;
         case KC_N:
             toggle_num_word();
+            break;
+        case KC_D:
+            enable_xcase_with(MR_sft);
             break;
 #endif
         case KC_LSHIFT:
@@ -252,18 +269,7 @@ void *vscode_stuff(uint16_t keycode) {
             tap_code16(LCTL(KC_K)); // format selection
             tap_code16(LCTL(KC_F)); // format selection
             return vscode_stuff_p;
-        case KC_O:
-            tap_code16(LCTL(KC_F2));  //  vo relect all occurrences
-            return NULL;
-        case KC_Z:
-            tap_code16(LCTL(KC_K));  //  vo relect all occurrences
-            tap_code16(KC_Z);  //  vo relect all occurrences
-            return NULL;
-        case KC_ENTER:
-            tap_code16(LCTL(LSFT(KC_P)));  //  vo relect all occurrences
-            tap_code16(KC_F1);  //  vo relect all occurrences
-            return NULL;
-
+        
         default:
             return NULL;
     }
@@ -284,7 +290,7 @@ void *vscode_stuff_ne(uint16_t keycode) {
 void *vscode_stuff_a(uint16_t keycode) {
     switch (keycode) {
         case KC_P:
-            tap_code16(LSA(KC_A));  // format document
+            tap_code16(LSA(KC_F));  // format document
             return NULL;
         default:
             return NULL;
