@@ -1,4 +1,4 @@
-/* Copyright 2022 @vvhg1
+/* Copyright 2021 @vvhg1
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,33 +16,7 @@
 
 #pragma once
 
-#ifdef CASEMODES_ENABLE
-#include "features/casemodes.h"
-#endif
+#include QMK_KEYBOARD_H
 
-#ifdef CUSTOM_LEADER_ENABLE
-#include "features/leader.h"
-#include "features/leaderfuncs.h"
-#endif
-#ifdef CUSTOM_ONE_SHOT_ENABLE
-#include "features/custom_oneshot.h"
-#endif
+void process_custom_layer(const keyrecord_t *record, uint8_t targetlayer);
 
-#include "features/custom_layers.h"
-
-#ifdef ENCODER_ENABLE
-#    include "features/encoder_utils.h"
-#endif
-
-#ifdef OLED_ENABLE
-#    include "features/oled_utils.h"
-#endif
-#ifdef   EOS_ENABLE
-#    include "features/eos_util.h"
-#endif
-#ifdef   POWER_BRACKETS_ENABLE
-#    include "features/power_brackets.h"
-#endif
-#ifdef CUSTOM_WORD_LINE_SELECTION_ENABLE
-#    include "features/word_line_selection.h"
-#endif

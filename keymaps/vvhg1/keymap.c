@@ -198,13 +198,15 @@ _______
 //     ),
 };
 
-void matrix_init_user(void) {
+void matrix_init_user(void)
+{
 #ifdef ENCODER_ENABLE
     encoder_utils_init();
 #endif
 }
 #ifdef CONSOLE_ENABLE
-void keyboard_post_init_user(void) {
+void keyboard_post_init_user(void)
+{
     // Customise these values to desired behaviour
     debug_enable = true;
     //   debug_matrix=true;
@@ -212,15 +214,18 @@ void keyboard_post_init_user(void) {
     // debug_mouse=true;
 }
 #endif
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+bool process_record_user(uint16_t keycode, keyrecord_t *record)
+{
 #ifdef CUSTOM_LEADER_ENABLE
-    if (!process_leader(keycode, record)) {
+    if (!process_leader(keycode, record))
+    {
         return false;
     }
 #endif
     // ------------------------------------------------------------------------call case modes----------------------------------------------------------------
 #ifdef CASEMODES_ENABLE
-    if (!process_case_modes(keycode, record)) {
+    if (!process_case_modes(keycode, record))
+    {
         return false;
     }
 #endif
@@ -237,294 +242,306 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     process_power_brackets(keycode, record);
 #endif
 #ifdef CUSTOM_WORD_LINE_SELECTION_ENABLE
-    if (!process_word_line_selection(keycode, record)) {
+    if (!process_word_line_selection(keycode, record))
+    {
         return false;
     }
 #endif
     // -----------------------------------------------------------flags for line selection and a few other things----------------------------------------------------------------
-    if (record->event.pressed) {
+    if (record->event.pressed)
+    {
         prev_layer_toggle_flag = layer_toggle_flag;
-        layer_toggle_flag      = false;
-        finished_logo          = true;
+        layer_toggle_flag = false;
+        finished_logo = true;
 #ifdef SWAP_HANDS_ENABLE
         no_swap = true;
 #endif
     }
-    switch (keycode) {  //!#######################################################--switch(keycode)--#######################################################
+    switch (keycode)
+    { //!#######################################################--switch(keycode)--#######################################################
 #ifdef POWER_BRACKETS_ENABLE
-        case In_br:
-            if (record->event.pressed) {
-                inside_cursor = inside_cursor ? false : true;
-            }
-            return true;
-        case In_br_o:
-            if (record->event.pressed) {
-                inside_cursor_other = inside_cursor_other ? false : true;
-            }
-            return true;
+    case In_br:
+        if (record->event.pressed)
+        {
+            inside_cursor = inside_cursor ? false : true;
+        }
+        return true;
+    case In_br_o:
+        if (record->event.pressed)
+        {
+            inside_cursor_other = inside_cursor_other ? false : true;
+        }
+        return true;
 #endif
-        case EURO_SYM:
-            if (record->event.pressed) {
-                SEND_STRING(SS_LALT(SS_TAP(X_P0) SS_TAP(X_P1) SS_TAP(X_P2) SS_TAP(X_P8)));// send euro symbol
-            }
-            return false;
+    case EURO_SYM:
+        if (record->event.pressed)
+        {
+            SEND_STRING(SS_LALT(SS_TAP(X_P0) SS_TAP(X_P1) SS_TAP(X_P2) SS_TAP(X_P8))); // send euro symbol
+        }
+        return false;
 
 #ifdef SWAP_HANDS_ENABLE
-        case Mir_spc:
-            if (record->event.pressed) {
-                swap_hands = true;
-                no_swap    = false;
-                one_shot_timer = timer_read();
-
-            } else {
-                swap_hands = false;
-                if (!no_swap && (timer_elapsed(one_shot_timer) < 500)) {
-                    tap_code(KC_SPC);
-                }
+    case Mir_spc:
+        if (record->event.pressed)
+        {
+            swap_hands = true;
+            no_swap = false;
+            one_shot_timer = timer_read();
+        }
+        else
+        {
+            swap_hands = false;
+            if (!no_swap && (timer_elapsed(one_shot_timer) < 500))
+            {
+                tap_code(KC_SPC);
             }
-            return true;
+        }
+        return true;
 #endif
-            // ------------------------------------------------------------------------custom layer logic ----------------------------------------------------------------
-        case mo_FUNX:
-            if (record->event.pressed) {
-                layer_on(_FUNX);
-            } else {
-                layer_off(_FUNX);
+        // ------------------------------------------------------------------------custom layer logic ----------------------------------------------------------------
+    case mo_FUNX:
+        process_custom_layer(record, _FUNX);
+        return true;
+
+    case mo_AUX:
+        process_custom_layer(record, _AUX);
+        return true;
+
+    case go_NAV:
+        if (get_mods() & MOD_MASK_SHIFT)
+        {
+            // go to num
+            // shifted_layer = true;
+            process_custom_layer(record, _NUM);
+        }
+        else
+        {
+            // go to nav
+            if (IS_LAYER_ON(_NUM))
+            {
+                // shifted_layer = false;
+                process_custom_layer(record, _NUM);
             }
-            return true;
-        case mo_AUX:
-            if (record->event.pressed) {
-                layer_on(_AUX);
-            } else {
-                layer_off(_AUX);
+            else
+            {
+                process_custom_layer(record, _NAV);
             }
-            return true;
+        }
+        return true;
 
-        case go_NAV:
-            if (record->event.pressed) {
-                one_shot_timer = timer_read();
+    case go_NUM:
+        process_custom_layer(record, _NUM);
+        return true;
 
-                if (IS_LAYER_ON(_NUM)) {
-                    layer_off(_NUM);
-                    came_from_NAV = true;
-                }
-                if (IS_LAYER_ON(_NAV)) {
-                    if (prev_layer_toggle_flag) {
-                        came_from_NAV = false;
-                        return true;
-                    }
-                    layer_off(_NAV);
-                    layer_toggle_flag = false;
-                } else {
-                    layer_toggle_flag = true;
-                    layer_on(_NAV);
-                }
-            } else {
-                if (!layer_toggle_flag || (timer_elapsed(one_shot_timer) > 500)) {
-                    if (IS_LAYER_ON(_NAV)) {
-                        layer_off(_NAV);
-                    if (came_from_NAV) {
-                        layer_on(_NUM);
-                        came_from_NAV = false;
-                    }
-                    }
-                }
-            }
-            return true;
-
-        case go_NUM:
-            if (record->event.pressed) {
-                one_shot_timer = timer_read();
-
-                if (IS_LAYER_ON(_NAV)) {
-                    layer_off(_NAV);
-                    came_from_NAV = true;
-                }
-                if (IS_LAYER_ON(_NUM)) {
-                    if (prev_layer_toggle_flag) {
-                        came_from_NAV = false;
-                        return true;
-                    }
-                    layer_off(_NUM);
-                    layer_toggle_flag = false;
-                } else {
-                    layer_toggle_flag = true;
-                    layer_on(_NUM);
-                }
-            } else {
-                if (!layer_toggle_flag || (timer_elapsed(one_shot_timer) > 500)) {
-                    if (IS_LAYER_ON(_NUM)) {
-                        layer_off(_NUM);
-                    if (came_from_NAV) {
-                        layer_on(_NAV);
-                        came_from_NAV = false;
-                    }
-                    }
-                }
-            }
-            return true;
-
-            // ------------------------------------------------------------------------call leader ----------------------------------------------------------------
+        // ------------------------------------------------------------------------call leader ----------------------------------------------------------------
 #ifdef CUSTOM_LEADER_ENABLE
-        case LEADER:
-            if (record->event.pressed) {
+    case LEADER:
+        if (record->event.pressed)
+        {
 #ifdef CUSTOM_LEADER_TO_DL
-               if (IS_LAYER_ON(_NAV)) {
-                    layer_off(_NAV);
-                    layer_toggle_flag = false;
-                }
-                if (IS_LAYER_ON(_NUM)) {
-                    layer_off(_NUM);
-                    layer_toggle_flag = false;
-                }
-#endif
-                start_leading();
+            if (IS_LAYER_ON(_NAV))
+            {
+                layer_off(_NAV);
+                layer_toggle_flag = false;
             }
-            return false;
+            if (IS_LAYER_ON(_NUM))
+            {
+                layer_off(_NUM);
+                layer_toggle_flag = false;
+            }
 #endif
-            // ------------------------------------------------------------------------ cycle_encoder_mode ----------------------------------------------------------------
+            start_leading();
+        }
+        return false;
+#endif
+        // ------------------------------------------------------------------------ cycle_encoder_mode ----------------------------------------------------------------
 #ifdef ENCODER_ENABLE
-        case Enc_M:
-            if (record->event.pressed) {
-                if (get_mods() & MOD_MASK_SHIFT) {
+    case Enc_M:
+        if (record->event.pressed)
+        {
+            if (get_mods() & MOD_MASK_SHIFT)
+            {
                 cycle_encoder_mode(false);
-                } else {
+            }
+            else
+            {
                 cycle_encoder_mode(true);
-                }
             }
-            break;
+        }
+        break;
 #endif
-        // ------------------------------------------------------------------------ toggles minus and underscore flip ----------------------------------------------------------------
-        case FLP_MIN:
-            if (record->event.pressed) {
-                if (mns_flipped) {
-                    mns_flipped = false;
-                } else {
-                    mns_flipped = true;
-                }
+    // ------------------------------------------------------------------------ toggles minus and underscore flip ----------------------------------------------------------------
+    case FLP_MIN:
+        if (record->event.pressed)
+        {
+            if (mns_flipped)
+            {
+                mns_flipped = false;
             }
-            break;
-        // ------------------------------------------------------------------------ toggles num dot and comma flip ----------------------------------------------------------------
-        case FLP_DOT_C:
-            if (record->event.pressed) {
-                if (dot_flipped) {
-                    dot_flipped = false;
-                } else {
-                    dot_flipped = true;
-                }
+            else
+            {
+                mns_flipped = true;
             }
-            break;
-        // ------------------------------------------------------------------------ processes minus and accounts for flipped minus ----------------------------------------------------------------
-        case KC_MINS:
-            if (record->event.pressed) {
-                if (mns_flipped) {
-                    if (get_mods() & MOD_MASK_SHIFT) {
-                        mod_state = get_mods();
-                        del_mods(MOD_MASK_SHIFT);
-                        tap_code(KC_MINS);
-                        set_mods(mod_state);
-                    } else {
-                        tap_code16(KC_UNDS);
-                    }
-                    return false;
-                }
+        }
+        break;
+    // ------------------------------------------------------------------------ toggles num dot and comma flip ----------------------------------------------------------------
+    case FLP_DOT_C:
+        if (record->event.pressed)
+        {
+            if (dot_flipped)
+            {
+                dot_flipped = false;
             }
-            break;
-            // ------------------------------------------------------------------------ toggles case modes ----------------------------------------------------------------
-#ifdef CASEMODES_ENABLE
-        case CAPS_WORD:
-            if (record->event.pressed) {
-                toggle_caps_word();
+            else
+            {
+                dot_flipped = true;
             }
-            return false;
-
-        case SNAKE_CASE:
-            if (record->event.pressed) {
-                toggle_xcase();
-            }
-            return false;
-
-        case NUM_WORD:
-            if (record->event.pressed) {
-                toggle_num_word();
-            }
-            return false;
-#endif
-        // ------------------------------------------------------------------------ custom key on num layer with dot and comma when shifted ----------------------------------------------------------------
-        case DotC:
-            if (record->event.pressed) {
-                if (get_mods() & MOD_MASK_SHIFT) {
+        }
+        break;
+    // ------------------------------------------------------------------------ processes minus and accounts for flipped minus ----------------------------------------------------------------
+    case KC_MINS:
+        if (record->event.pressed)
+        {
+            if (mns_flipped)
+            {
+                if (get_mods() & MOD_MASK_SHIFT)
+                {
+                    mod_state = get_mods();
                     del_mods(MOD_MASK_SHIFT);
-                    if(dot_flipped){
-                        tap_code(KC_DOT);
-                    }else {
-                        tap_code(KC_COMM);
-                        }
-                } else {
-                    if(dot_flipped){
-                        tap_code(KC_COMM);
-                    }else {
-                        tap_code(KC_DOT);
-                        }
+                    tap_code(KC_MINS);
+                    set_mods(mod_state);
+                }
+                else
+                {
+                    tap_code16(KC_UNDS);
                 }
                 return false;
             }
-        // ------------------------------------------------------------------------ cut copy paste undo redo ----------------------------------------------------------------
-        case Undo:
-            if (record->event.pressed) {
-                tap_code16(C(KC_Z));
+        }
+        break;
+        // ------------------------------------------------------------------------ toggles case modes ----------------------------------------------------------------
+#ifdef CASEMODES_ENABLE
+    case CAPS_WORD:
+        if (record->event.pressed)
+        {
+            toggle_caps_word();
+        }
+        return false;
+
+    case SNAKE_CASE:
+        if (record->event.pressed)
+        {
+            toggle_xcase();
+        }
+        return false;
+
+    case NUM_WORD:
+        if (record->event.pressed)
+        {
+            toggle_num_word();
+        }
+        return false;
+#endif
+    // ------------------------------------------------------------------------ custom key on num layer with dot and comma when shifted ----------------------------------------------------------------
+    case DotC:
+        if (record->event.pressed)
+        {
+            if (get_mods() & MOD_MASK_SHIFT)
+            {
+                del_mods(MOD_MASK_SHIFT);
+                if (dot_flipped)
+                {
+                    tap_code(KC_DOT);
+                }
+                else
+                {
+                    tap_code(KC_COMM);
+                }
             }
-            break;
-        case Cut:
-            if (record->event.pressed) {
-                tap_code16(C(KC_X));
+            else
+            {
+                if (dot_flipped)
+                {
+                    tap_code(KC_COMM);
+                }
+                else
+                {
+                    tap_code(KC_DOT);
+                }
             }
-            break;
-        case Copy:
-            if (record->event.pressed) {
-                tap_code16(C(KC_C));
-            }
-            break;
-        case Paste:
-            if (record->event.pressed) {
-                tap_code16(C(KC_V));
-            }
-            break;
-        case Redo:
-            if (record->event.pressed) {
-                tap_code16(C(KC_Y));
-            }
-            break;
+            return false;
+        }
+    // ------------------------------------------------------------------------ cut copy paste undo redo ----------------------------------------------------------------
+    case Undo:
+        if (record->event.pressed)
+        {
+            tap_code16(C(KC_Z));
+        }
+        break;
+    case Cut:
+        if (record->event.pressed)
+        {
+            tap_code16(C(KC_X));
+        }
+        break;
+    case Copy:
+        if (record->event.pressed)
+        {
+            tap_code16(C(KC_C));
+        }
+        break;
+    case Paste:
+        if (record->event.pressed)
+        {
+            tap_code16(C(KC_V));
+        }
+        break;
+    case Redo:
+        if (record->event.pressed)
+        {
+            tap_code16(C(KC_Y));
+        }
+        break;
     }
     return true;
 };
 
-void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
+void post_process_record_user(uint16_t keycode, keyrecord_t *record)
+{
 #ifdef CUSTOM_ONE_SHOT_ENABLE
     release_custom_one_shot(keycode, record);
 #endif
-#ifdef EOS_ENABLE  //----------------------------------------------------------process_eos_logic----------------------------------------------------------------
+#ifdef EOS_ENABLE //----------------------------------------------------------process_eos_logic----------------------------------------------------------------
     release_eos(keycode, record);
 #endif
 }
 
 #ifdef OLED_ENABLE
-oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+oled_rotation_t oled_init_user(oled_rotation_t rotation)
+{
     startup_timer = timer_read();
-    cleared_oled  = false;
+    cleared_oled = false;
     return rotation;
 }
 
-#    ifndef CONSOLE_ENABLE
-bool oled_task_user(void) {
-    if ((timer_elapsed(startup_timer) < 6000) && !finished_logo) {
-        if (is_keyboard_left()) {
+#ifndef CONSOLE_ENABLE
+bool oled_task_user(void)
+{
+    if ((timer_elapsed(startup_timer) < 6000) && !finished_logo)
+    {
+        if (is_keyboard_left())
+        {
             render_logo_l();
-        } else {
+        }
+        else
+        {
             render_logo_r();
         }
-    } else {
-        if (!cleared_oled) {
+    }
+    else
+    {
+        if (!cleared_oled)
+        {
             oled_clear();
             cleared_oled = true;
         }
@@ -534,24 +551,29 @@ bool oled_task_user(void) {
     }
     return false;
 }
-#    endif
-#    ifdef CONSOLE_ENABLE
-bool oled_task_user(void) {
+#endif
+#ifdef CONSOLE_ENABLE
+bool oled_task_user(void)
+{
     render_status();
     return false;
 }
-#    endif
+#endif
 #endif
 
 #ifdef ENCODER_ENABLE
-bool encoder_update_user(uint8_t index, bool clockwise) {
+bool encoder_update_user(uint8_t index, bool clockwise)
+{
     encoder_action(get_encoder_mode(), clockwise);
-#    ifdef OLED_ENABLE
+#ifdef OLED_ENABLE
     oled_on();
-#    endif
+#endif
     return true;
 }
 #endif
 #ifdef SPLIT_TRANSPORT_MIRROR
-bool should_process_keypress(void) { return true; }
+bool should_process_keypress(void)
+{
+    return true;
+}
 #endif
