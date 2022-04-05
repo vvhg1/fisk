@@ -21,18 +21,18 @@
 #include "power_brackets.h"
 #include "keycodes.h"
 #ifdef CUSTOM_ONE_SHOT_ENABLE
-#include "features/custom_oneshot.h"
+#    include "features/custom_oneshot.h"
 #endif
 uint8_t current_mod_state;
 
 void process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
-   switch (keycode) {
+    switch (keycode) {
         // ------------------------------------------------------------------------ wraps quotes around word ----------------------------------------------------------------
         case QuotWrap:
             if (record->event.pressed) {
-                if (get_mods() & MOD_MASK_ALT){
+                if (get_mods() & MOD_MASK_ALT) {
                     del_mods(MOD_MASK_ALT);
-                    if (get_mods() & MOD_MASK_SHIFT){
+                    if (get_mods() & MOD_MASK_SHIFT) {
                         del_mods(MOD_MASK_SHIFT);
                         SEND_STRING(SS_TAP(X_ESC) SS_LCTL(SS_TAP(X_LEFT)) SS_LSFT(SS_TAP(X_QUOT)) SS_LCTL(SS_TAP(X_RGHT)) SS_LSFT(SS_TAP(X_QUOT)));
                     } else {
@@ -43,7 +43,7 @@ void process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
                 }
             }
             break;
-                    // ------------------------------------------------------------------------ empty and wrapping bracket pairs ----------------------------------------------------------------
+            // ------------------------------------------------------------------------ empty and wrapping bracket pairs ----------------------------------------------------------------
         case Op_BrS:  // like the other but £ instead of ! on shift
             if (record->event.pressed) {
                 if (get_mods() & MOD_MASK_ALT) {
@@ -55,7 +55,9 @@ void process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
                 } else {
                     tap_code16(S(KC_9));
                     tap_code16(S(KC_0));
-                    if(outside_cursor) {tap_code(KC_LEFT);}
+                    if (!outside_cursor) {
+                        tap_code(KC_LEFT);
+                    }
                 }
             }
             break;
@@ -69,7 +71,9 @@ void process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
                 } else {
                     tap_code(KC_LBRC);
                     tap_code(KC_RBRC);
-                    if(outside_cursor_other) {tap_code(KC_LEFT);}
+                    if (!outside_cursor_other) {
+                        tap_code(KC_LEFT);
+                    }
                 }
             }
             break;
@@ -86,7 +90,9 @@ void process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
                 } else {
                     tap_code16(S(KC_LBRC));
                     tap_code16(S(KC_RBRC));
-                    if(outside_cursor_other) {tap_code(KC_LEFT);}
+                    if (!outside_cursor_other) {
+                        tap_code(KC_LEFT);
+                    }
                 }
             }
             break;
@@ -100,11 +106,13 @@ void process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
                 } else {
                     tap_code16(S(KC_9));
                     tap_code16(S(KC_0));
-                    if(outside_cursor) {tap_code(KC_LEFT);}
+                    if (!outside_cursor) {
+                        tap_code(KC_LEFT);
+                    }
                 }
             }
             break;
         default:
             break;
-   }
+    }
 }

@@ -64,9 +64,9 @@ I made a few changes:
 |        | VCE     | Copy Line Dn           | Repeatable |
 |        | VP      | Format selection       | Repeatable |
 |        | VAP     | Format all             |            |
-|        | VO      | Select all occurrences |            |
-|        | VZ      | Zen Mode toggle        |            |
-|        | V enter | Command Palette        |            |
+|        | O       | Select all occurrences |            |
+|        | Z       | Zen Mode toggle        |            |
+|        | Enter   | Command Palette        |            |
 ##### CaseModes
 |        |   |                |
 | ------ | - | -------------- |
@@ -74,6 +74,7 @@ I made a few changes:
 | Leader | S | Snake Case     |
 |        | X | Caps and Snake |
 |        | N | Num Word       |
+|        | N | XCase w. Shift |
 ##### Brackets
 |        |              |                    |            |
 | ------ | ------------ | ------------------ | ---------- |
