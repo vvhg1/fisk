@@ -18,6 +18,5 @@
 
 #include QMK_KEYBOARD_H
 
-bool outside_cursor;
-bool outside_cursor_other;
-void process_power_brackets(uint16_t keycode, const keyrecord_t *record);
+void process_custom_layer(const keyrecord_t *record, uint8_t targetlayer);
+

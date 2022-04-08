@@ -34,7 +34,7 @@
  *       configurable default separator and overrideable function to determine
  *       if the default should be used.
  *
- *  - @vvhg1 
+ *  - @vvhg1
  *      - included adaption of NumWord by Joshua T.
  *      - added toggle for xcase
  *      - works with custom one shot mods
@@ -150,7 +150,9 @@ static void remove_delimiter(void) {
         tap_code(KC_BSPC);
     }
 #else
-    tap_code(KC_BSPC);
+    if(xcase_delimiter == MR_sft){
+        return;
+    }tap_code(KC_BSPC);
 #endif
 }
 
@@ -357,8 +359,10 @@ bool process_case_modes(uint16_t keycode, const keyrecord_t *record) {
                     default:
                         if (distance_to_last_delim >= 0) {
                             // puts back a one shot delimiter if you we're back to the delimiter pos
-                            if (distance_to_last_delim == 0 && (IS_OSM(xcase_delimiter))) {
-                                place_delimiter();
+                            if (distance_to_last_delim == 0 && ((IS_OSM(xcase_delimiter))||(xcase_delimiter == MR_sft))) {
+                                tap_code16(LSFT(keycode));
+                            ++distance_to_last_delim;
+                            return false;
                             }
                             ++distance_to_last_delim;
                         }

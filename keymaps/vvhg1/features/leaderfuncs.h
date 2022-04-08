@@ -19,8 +19,8 @@
 #include QMK_KEYBOARD_H
 
 // Leader functions
-void *reset_keyboard1(uint16_t keycode); // here LDR qrk will reset the keyboard
-void *reset_keyboard2(uint16_t keycode); //
+// void *reset_keyboard1(uint16_t keycode); // here LDR qrk will reset the keyboard
+// void *reset_keyboard2(uint16_t keycode); //
 void *windows_stuff(uint16_t keycode); // here WS is Start menu, WM is context menu WQ  close tab
 void *vscode_stuff(uint16_t keycode);
 void *vscode_stuff_ne(uint16_t keycode); // here vn select editor right/ vi left

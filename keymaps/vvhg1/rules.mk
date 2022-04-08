@@ -56,5 +56,6 @@ ifeq ($(strip $(CUSTOM_WORD_LINE_SELECTION_ENABLE)), yes)
 	OPT_DEFS += -DCUSTOM_WORD_LINE_SELECTION_ENABLE
 	SRC += features/word_line_selection.c
 endif
+	SRC += features/custom_layers.c
 
 

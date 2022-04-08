@@ -44,13 +44,15 @@ I made a few changes:
 - I also fiddled around with the logic in general to adapt it to my use case.
 #### Leader Key Sequences
 ##### General stuff
-|        | WS | Start Menu   |            |
+|        |    |              |            |
 | ------ | -- | ------------ | ---------- |
+|        | WS | Start Menu   |            |
 | Leader | WM | Context Menu |            |
 |        | WQ | Close Tab    | Repeatable |
 ##### Vscode stuff
-|        | VN      | Nxt Editor Tab         | Repeatable |
+|        |         |                        |            |
 | ------ | ------- | ---------------------- | ---------- |
+|        | VN      | Nxt Editor Tab         | Repeatable |
 |        | VI      | Prv Editor Tab         | Repeatable |
 |        | VU      | Move Line Up           | Repeatable |
 |        | VE      | Move Line Dn           | Repeatable |
@@ -62,26 +64,30 @@ I made a few changes:
 |        | VCE     | Copy Line Dn           | Repeatable |
 |        | VP      | Format selection       | Repeatable |
 |        | VAP     | Format all             |            |
-|        | VO      | Select all occurrences |            |
-|        | VZ      | Zen Mode toggle        |            |
-|        | V enter | Command Palette        |            |
+|        | O       | Select all occurrences |            |
+|        | Z       | Zen Mode toggle        |            |
+|        | Enter   | Command Palette        |            |
 ##### CaseModes
-|        | C | Caps Word      |
+|        |   |                |
 | ------ | - | -------------- |
+|        | C | Caps Word      |
 | Leader | S | Snake Case     |
 |        | X | Caps and Snake |
 |        | N | Num Word       |
+|        | N | XCase w. Shift |
 ##### Brackets
-|        | {}           | {                  | Repeatable |
+|        |              |                    |            |
 | ------ | ------------ | ------------------ | ---------- |
+|        | {}           | {                  | Repeatable |
 |        | SHIFT + {}   | }                  | Repeatable |
 |        | \[\]         | \[                 | Repeatable |
 | Leader | SHIFT + \[\] | \]                 | Repeatable |
 |        | ()           | (                  | Repeatable |
 |        | SHIFT + ()   | )                  | Repeatable |
 ##### Encoder Mode
-|        | EH | Horizontal scroll    |
+|        |    |                      |
 | ------ | -- | -------------------- |
+|        | EH | Horizontal scroll    |
 |        | EV | Vertical scroll      |
 | Leader | EE | Nxt/Prv Editor group |
 |        | ET | Nxt/Prv Tab          |
@@ -89,20 +95,22 @@ I made a few changes:
 |        | EW | Word selection       |
 ##### Macro stuff
 Disabled by default, can be enabled by setting `DYNAMIC_MACRO_ENABLE = yes` in `rules.mk` (adds about 550 b)   
-|        | MR | Record macro         |
+|        |    |                      |
 | ------ | -- | -------------------- |
+|        | MR | Record macro         |
 | Leader | MS | Stop macro recording |
 |        | MP | Play macro           |
 ##### Umlaut stuff (probably not so interesting for most people)
-|        | UA | Ä       |
+|        |    |         |
 | ------ | -- | ------- |
+|        | UA | Ä       |
 | Leader | UO | Ö       |
 |        | UU | Ü       |
 |        | US | Eszet ß |
 
-##### Reset	
+<!-- ##### Reset	
 | Leader | QRK |  Reset Keyboard for flashing |
-|--------|-----|------------------------------|
+|--------|-----|------------------------------| -->
 
 
 ### Custom Layer logic
@@ -158,7 +166,7 @@ NUMWORD is a similar concept by Joshua T. aka [@replicaJunction](https://github.
 **Note:** The implementation of NUMWORD requires that the keyboard's layer definitions be accessible in a header file. In this case, the layer definitions are in enumlayers.h, so I make them accessible by adding `#include enumlayers.h` in casemodes.c.
 
 ### Power Brackets
-These are bracket pairs of different types, single- and double-quote pairs. On a simple key press an empty pair with the cursor placed inside the brackets like `(I)`, `{I}`, `[I]` is produced. This does not conflict with the way Vscode handles empty brackets.   
+These are bracket pairs of different types, single- and double-quote pairs. On a simple key press an empty pair with the cursor placed inside the brackets like `(I)`, `{I}`, `[I]` is produced. This does not conflict with the way Vscode handles empty brackets. The behaviour can be toggled to bracket pairs with the cursor to the right of the pair by setting the flags `outside_cursor = true;` for opening brackets and `outside_cursor_other = true;` for the other brackets.    
 When modified with ALT they `(wrap)` `{the}` `[previous]` `"word"` without having to select the word first.  
 
 **Note:** I mapped left brackets to `Leader`, `corresponding bracket key` and right brackets when modified with `SHIFT`.

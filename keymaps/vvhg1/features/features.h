@@ -28,6 +28,7 @@
 #include "features/custom_oneshot.h"
 #endif
 
+#include "features/custom_layers.h"
 
 #ifdef ENCODER_ENABLE
 #    include "features/encoder_utils.h"
