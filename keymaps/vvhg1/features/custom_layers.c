@@ -34,12 +34,8 @@ void process_custom_layer(const keyrecord_t *record, uint8_t targetlayer) {
                     came_from_NAV = true;
                 }
                 if (IS_LAYER_ON(_NAV)) {
-                    if (prev_layer_toggle_flag) {
-                        came_from_NAV = false;
-                        break;
-                    }
-                    layer_off(_NAV);
-                    layer_toggle_flag = false;
+                    came_from_NAV = false;
+                    break;
                 } else {
                     layer_toggle_flag = true;
                     layer_on(_NAV);
@@ -54,12 +50,8 @@ void process_custom_layer(const keyrecord_t *record, uint8_t targetlayer) {
                     came_from_NAV = true;
                 }
                 if (IS_LAYER_ON(_NUM)) {
-                    if (prev_layer_toggle_flag) {
-                        came_from_NAV = false;
-                        break;
-                    }
-                    layer_off(_NUM);
-                    layer_toggle_flag = false;
+                    came_from_NAV = false;
+                    break;
                 } else {
                     layer_toggle_flag = true;
                     layer_on(_NUM);

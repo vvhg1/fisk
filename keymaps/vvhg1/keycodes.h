@@ -43,6 +43,7 @@ enum custom_keycodes {
     Copy,
     Paste,
     Redo,
+    Cmnt,
     Sq_Br,
     Cr_Br,
     Op_Br,
@@ -87,5 +88,3 @@ enum custom_keycodes {
 #else
 # define DEBUGg _______
 #endif
-
-
