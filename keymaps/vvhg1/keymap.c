@@ -25,7 +25,7 @@
 bool finished_logo = false;
 
 // these are the keymaps for the different layers
-//  clang-format off
+//clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
  * Base Layer: Colemak
@@ -116,17 +116,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Navigation Layer: Mouse Navigation
  *
  *          ,----------------------------------------------------.                                       ,-----------------------------------------------------.
- *          |        | M WH dn| M up   | M WH up| M WH R |       |                                       |   { +  | PG UP  |   Home |   ↑    |  End   |  ( !   |
+ *          |        | M WH dn| M up   | M WH up| M WH R | Cmmnt |                                       |   { +  | PG UP  |   Home |   ↑    |  End   |  ( !   |
  * +--------+--------+--------+--------+--------+--------+-------|                                       |--------+--------+--------+--------+--------+--------+--------.
  * |        | M WH L | M left | M down | M right| M btn1 |  Save |                                       |   [ =  | PG DN  |    ←   |   ↓    |    →   |SelLnUp |        |
  * |--------+--------+--------+--------+--------+--------+-------+--------+--------.     ,---------------+--------+--------+--------+--------+--------+--------+--------|
- * |        | M btn2 |  Cut   |  Copy  |  Redo  |  Paste |       |        |        |     |        |      |        |Sel All | SelWrdL|  SelLn | SelWrdR|SelLnDn |        |
+ * |        | M btn2 |  Cut   |  Copy  |  Redo  |  Paste |       |        |        |     |        |      |        |        | SelWrdL|  SelLn | SelWrdR|SelLnDn |        |
  * |--------+--------+--------+--------+--------+--------+--.    |        +--------|     |--------+      |     ,--+--------+--------+--------+--------+--------+--------|
  * |        |  Undo  |           |        |        |     |       |        |        |     |        |      |     |        |      |         |            |        |   F2   |
  * `-----------------'           `--------------------------'    '--------+--------'     `---------------'     '-------------------------'            '-----------------'
  */
     [_NAV] = LAYOUT(
-             _______, KC_WH_D, KC_MS_U, KC_WH_U, KC_WH_R, _______,                                        _______, KC_PGUP, KC_HOME, KC_UP, KC_END, Op_Br,
+             _______, KC_WH_D, KC_MS_U, KC_WH_U, KC_WH_R, Cmnt,                                        _______, KC_PGUP, KC_HOME, KC_UP, KC_END, Op_Br,
     _______, KC_WH_L, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN1, C(KC_S),                                        _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RIGHT, SelLnUp, KC_QUOT,
     _______, KC_BTN2,  Cut   ,    Copy,   Redo,   Paste,          _______, _______,      _______, _______,         C(KC_A), SelWrdL,   SelLn,  SelWrdR, SelLnDn, _______,
     _______,    Undo,           _______,  _______, _______,                _______,      _______,                _______, _______, _______,           _______,     KC_F2
@@ -198,7 +198,8 @@ _______
 
 //     ),
 };
-// clang-format on
+
+//clang-format on
 
 void matrix_init_user(void) {
 #ifdef ENCODER_ENABLE
@@ -253,6 +254,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif
     }
     switch (keycode) {  //!#######################################################--switch(keycode)--#######################################################
+        case Cmnt:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    tap_code16(LSA(KC_A));
+                } else {
+                    tap_code16(C(KC_SLASH));
+                }
+            }
+            return true;
+
 #ifdef POWER_BRACKETS_ENABLE
         case In_br:
             if (record->event.pressed) {
@@ -297,16 +308,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case go_NAV:
             if (get_mods() & MOD_MASK_SHIFT) {
                 // go to num
-                // shifted_layer = true;
                 process_custom_layer(record, _NUM);
             } else {
                 // go to nav
-                if (IS_LAYER_ON(_NUM)) {
-                    // shifted_layer = false;
-                    process_custom_layer(record, _NUM);
-                } else {
                     process_custom_layer(record, _NAV);
-                }
             }
             return true;
 
