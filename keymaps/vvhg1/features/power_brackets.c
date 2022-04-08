@@ -55,7 +55,7 @@ void process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
                 } else {
                     tap_code16(S(KC_9));
                     tap_code16(S(KC_0));
-                    if (!outside_cursor) {
+                    if (!outside_cursor_op) {
                         tap_code(KC_LEFT);
                     }
                 }
@@ -71,7 +71,7 @@ void process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
                 } else {
                     tap_code(KC_LBRC);
                     tap_code(KC_RBRC);
-                    if (!outside_cursor_other) {
+                    if (!outside_cursor_sq) {
                         tap_code(KC_LEFT);
                     }
                 }
@@ -90,7 +90,7 @@ void process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
                 } else {
                     tap_code16(S(KC_LBRC));
                     tap_code16(S(KC_RBRC));
-                    if (!outside_cursor_other) {
+                    if (!outside_cursor_cr) {
                         tap_code(KC_LEFT);
                     }
                 }
@@ -106,7 +106,7 @@ void process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
                 } else {
                     tap_code16(S(KC_9));
                     tap_code16(S(KC_0));
-                    if (!outside_cursor) {
+                    if (!outside_cursor_op) {
                         tap_code(KC_LEFT);
                     }
                 }

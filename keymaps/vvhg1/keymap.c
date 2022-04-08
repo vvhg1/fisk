@@ -136,9 +136,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Function Layer
  *
  *          ,----------------------------------------------------.                                       ,-----------------------------------------------------.
- *          |        |        | Flp MIN|        |        | MO AUX|                                       |In_br_o |        |  KC_F7 |  KC_F8 |  KC_F9 |  In_br |
+ *          |        |        | Flp MIN|        |        | MO AUX|                                       |In_br_s |        |  KC_F7 |  KC_F8 |  KC_F9 |  In_br |
  * +--------+--------+--------+--------+--------+--------+-------|                                       |--------+--------+--------+--------+--------+--------+--------.
- * |        | Qwerty |        |        |        |        |       |                                       |In_br_o |        |  KC_F1 |  KC_F2 |  KC_F3 | KC_F10 |        |
+ * |        | Qwerty |        |        |        |        |       |                                       |In_br_c |        |  KC_F1 |  KC_F2 |  KC_F3 | KC_F10 |        |
  * |--------+--------+--------+--------+--------+--------+-------+--------+--------.     ,---------------+--------+--------+--------+--------+--------+--------+--------|
  * |        |        |        | Colemak|FLP_DOT |        |       |        |        |     |        |      |        |        |  KC_F4 |  KC_F5 |  KC_F6 | KC_F11 |        |
  * |--------+--------+--------+--------+--------+--------+--.    |        +--------|     |--------+      |     ,--+--------+--------+--------+--------+--------+--------|
@@ -146,8 +146,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------'           `--------------------------'    '--------+--------'     `---------------'     '-------------------------'            '-----------------'
  */
    [_FUNX] = LAYOUT(
-             _______, _______, FLP_MIN, _______, _______, mo_AUX,                                        In_br_o, _______,  KC_F7,   KC_F8,   KC_F9,  In_br,
-    _______, DF(_QW), _______, _______, _______, _______, _______,                                       In_br_o, _______,  KC_F1,   KC_F2,   KC_F3,   KC_F10,  _______,
+             _______, _______, FLP_MIN, _______, _______, mo_AUX,                                        In_br_s, _______,  KC_F7,   KC_F8,   KC_F9,  In_br_o,
+    _______, DF(_QW), _______, _______, _______, _______, _______,                                       In_br_c, _______,  KC_F1,   KC_F2,   KC_F3,   KC_F10,  _______,
     _______, _______,  _______, DF(_COLEMAK), FLP_DOT_C, _______,  _______, _______,      _______, _______,       _______,  KC_F4,   KC_F5,   KC_F6,   KC_F11,  _______,
     _______,
     #ifdef SWAP_HANDS_ENABLE
@@ -265,14 +265,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return true;
 
 #ifdef POWER_BRACKETS_ENABLE
-        case In_br:
-            if (record->event.pressed) {
-                outside_cursor = outside_cursor ? false : true;
-            }
-            return true;
         case In_br_o:
             if (record->event.pressed) {
-                outside_cursor_other = outside_cursor_other ? false : true;
+                outside_cursor_op = outside_cursor_op ? false : true;
+            }
+            return true;
+        case In_br_c:
+            if (record->event.pressed) {
+                outside_cursor_cr = outside_cursor_cr ? false : true;
+            }
+            return true;
+        case In_br_s:
+            if (record->event.pressed) {
+                outside_cursor_sq = outside_cursor_sq ? false : true;
             }
             return true;
 #endif
