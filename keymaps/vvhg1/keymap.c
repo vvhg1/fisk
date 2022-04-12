@@ -35,7 +35,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * +--------+--------+--------+--------+--------+--------+-------|                                       |--------+--------+--------+--------+--------+--------+--------.
  * |   &    |    Q   |    R   |    S   |    T   |    G   |  \ |  |                                       |  {c} = |    M   |    N   |    E   |    I   |  ;  :  |   ' "  | wrap quote on ALT
  * |--------+--------+--------+--------+--------+--------+-------+--------+--------.     ,---------------+--------+--------+--------+--------+--------+--------+--------|
- * |   #    |    A   |   X    |    C   |    D   |    V   |       |  Space |   ALT  |     |  NUM   |RShift|        |    K   |    H   |  ,  <  |  . >   |    O   | Enter  |
+ * |   #    |    A   |   X    |    C   |    D   |    V   |       |  Space |   ALT  |     |  LCTL  |RShift|        |    K   |    H   |  ,  <  |  . >   |    O   | Enter  |
  * |--------+--------+--------+--------+--------+--------+--.    |        +--------|     |--------+      |     ,--+--------+--------+--------+--------+--------+--------|
  * |  TAB   |    Z   |           |  FUNC   | RShift |  LCTL |    |        |  NAV   |     |  LEAD  |      |     | BSPC  | DEL   |  ENC M  |            |  - _   |    @   |
  * `-----------------'           `--------------------------'    '--------+--------'     `---------------'     '-------------------------'            '-----------------'
@@ -44,7 +44,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_COLEMAK] = LAYOUT(
               KC_ESC,   KC_W,    KC_F  ,  KC_P ,   KC_B , KC_SLSH,                                      Sq_Br,   KC_J,    KC_L ,   KC_U ,   KC_Y ,   Op_Br,
     KC_AMPR , KC_Q,     KC_R,    KC_S ,   KC_T ,   KC_G,  KC_BSLS,                                      Cr_Br,   KC_M,    KC_N,    KC_E,    KC_I,    KC_SCLN,      QuotWrap,
-    KC_HASH,  KC_A,     KC_X,    KC_C,    KC_D,    KC_V,            KC_SPC, ML_alt,        go_NUM, MR_sft,       KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_O,         KC_ENT,
+    KC_HASH,  KC_A,     KC_X,    KC_C,    KC_D,    KC_V,            KC_SPC, ML_alt,        ML_ctl, MR_sft,       KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_O,         KC_ENT,
     KC_TAB,  KC_Z,           mo_FUNX,  MR_sft ,  ML_ctl,                    go_NAV,        LEADER,              KC_BSPC, KC_DEL, Enc_M,                 KC_MINS,  KC_AT
 
     ),
@@ -56,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * +--------+--------+--------+--------+--------+--------+-------|                                       |--------+--------+--------+--------+--------+--------+--------.
  * |   &    |    Q   |    S   |    D   |    F   |    G   |  \ |  |                                       |  {c} = |    H   |    J   |    K   |    L   |    P   |   ' "  |
  * |--------+--------+--------+--------+--------+--------+-------+--------+--------.     ,---------------+--------+--------+--------+--------+--------+--------+--------|
- * |   #    |    A   |    X   |    C   |    V   |    B   |       |  Space |  ALT   |     |  NUM   |RShift|        |    N   |    M   |  ,  <  |  . >   |  ;  :  | Enter  |
+ * |   #    |    A   |    X   |    C   |    V   |    B   |       |  Space |  ALT   |     |  LCTL  |RShift|        |    N   |    M   |  ,  <  |  . >   |  ;  :  | Enter  |
  * |--------+--------+--------+--------+--------+--------+--.    |        +--------|     |--------+      |     ,--+--------+--------+--------+--------+--------+--------|
  * |  TAB   |   Z    |           |  FUNC  | RShift |  LCTL  |    |        |  NAV   |     |  LEAD  |      |     | BSPC  |  DEL  |  ENC M  |            |  - _   |    @   |
  * `-----------------'           `--------------------------'    '--------+--------'     `---------------'     '-------------------------'            '-----------------'
@@ -65,7 +65,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QW] = LAYOUT(
               KC_ESC,   KC_W,    KC_E  ,  KC_R ,   KC_T , KC_SLSH,                                      Sq_Br,   KC_Y,    KC_U ,   KC_I ,   KC_O,   Op_Br,
     KC_AMPR , KC_Q,     KC_S,    KC_D ,   KC_F ,   KC_G,  KC_BSLS,                                      Cr_Br,   KC_H,    KC_J,    KC_K,    KC_L,    KC_P, QuotWrap,
-    KC_HASH,  KC_A,     KC_X,    KC_C,    KC_V,    KC_B,            KC_SPC, ML_alt,         go_NUM, MR_sft,          KC_N,   KC_M,    KC_COMM,    KC_DOT,  KC_SCLN, KC_ENT,
+    KC_HASH,  KC_A,     KC_X,    KC_C,    KC_V,    KC_B,            KC_SPC, ML_alt,         ML_ctl, MR_sft,          KC_N,   KC_M,    KC_COMM,    KC_DOT,  KC_SCLN, KC_ENT,
     KC_TAB,  KC_Z,           mo_FUNX,  MR_sft,  ML_ctl,                go_NAV,          LEADER,              KC_BSPC,  KC_DEL, Enc_M,                 KC_MINS,  KC_AT
 
     ),
