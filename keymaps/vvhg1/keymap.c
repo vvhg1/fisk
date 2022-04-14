@@ -25,7 +25,7 @@
 bool finished_logo = false;
 
 // these are the keymaps for the different layers
-//clang-format off
+/* clang-format off */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
  * Base Layer: Colemak
@@ -118,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *          ,----------------------------------------------------.                                       ,-----------------------------------------------------.
  *          |        | M WH dn| M up   | M WH up| M WH R | Cmmnt |                                       |   { +  | PG UP  |   Home |   ↑    |  End   |  ( !   |
  * +--------+--------+--------+--------+--------+--------+-------|                                       |--------+--------+--------+--------+--------+--------+--------.
- * |        | M WH L | M left | M down | M right| M btn1 |  Save |                                       |   [ =  | PG DN  |    ←   |   ↓    |    →   |SelLnUp |        |
+ * |        | M WH L | M left | M down | M right| M btn1 |  Save |                                       |   [ =  | PG DN  |    ←   |   ↓    |    →   |        |        |
  * |--------+--------+--------+--------+--------+--------+-------+--------+--------.     ,---------------+--------+--------+--------+--------+--------+--------+--------|
  * |        | M btn2 |  Cut   |  Copy  |  Redo  |  Paste |       |        |        |     |        |      |        |        | SelWrdL|  SelLn | SelWrdR|SelLnDn |        |
  * |--------+--------+--------+--------+--------+--------+--.    |        +--------|     |--------+      |     ,--+--------+--------+--------+--------+--------+--------|
@@ -127,7 +127,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_NAV] = LAYOUT(
              _______, KC_WH_D, KC_MS_U, KC_WH_U, KC_WH_R, Cmnt,                                        _______, KC_PGUP, KC_HOME, KC_UP, KC_END, Op_Br,
-    _______, KC_WH_L, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN1, C(KC_S),                                        _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RIGHT, SelLnUp, KC_QUOT,
+    _______, KC_WH_L, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN1, C(KC_S),                                        _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RIGHT, _______, KC_QUOT,
     _______, KC_BTN2,  Cut   ,    Copy,   Redo,   Paste,          _______, _______,      _______, _______,         C(KC_A), SelWrdL,   SelLn,  SelWrdR, SelLnDn, _______,
     _______,    Undo,           _______,  _______, _______,                _______,      _______,                _______, _______, _______,           _______,     KC_F2
 
@@ -199,7 +199,7 @@ _______
 //     ),
 };
 
-//clang-format on
+/* clang-format on */
 
 void matrix_init_user(void) {
 #ifdef ENCODER_ENABLE
@@ -257,7 +257,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case Cmnt:
             if (record->event.pressed) {
                 if (get_mods() & MOD_MASK_SHIFT) {
-                    tap_code16(LSA(KC_A));
+                    tap_code16(LALT(KC_A));
                 } else {
                     tap_code16(C(KC_SLASH));
                 }
@@ -316,7 +316,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 process_custom_layer(record, _NUM);
             } else {
                 // go to nav
-                    process_custom_layer(record, _NAV);
+                process_custom_layer(record, _NAV);
             }
             return true;
 
@@ -432,14 +432,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         // ------------------------------------------------------------------------ cut copy paste undo redo ----------------------------------------------------------------
         case Undo:
             if (record->event.pressed) {
-                tap_code16(C(KC_Z));
+                register_code16(C(KC_Z));
+            }else {
+                unregister_code16(C(KC_Z));
             }
             break;
         case Cut:
             if (record->event.pressed) {
-                tap_code16(C(KC_X));
+                register_code16(C(KC_X));
+            }else {
+                unregister_code16(C(KC_X));
             }
-            break;
+            // break;
+            return false;
         case Copy:
             if (record->event.pressed) {
                 tap_code16(C(KC_C));
@@ -452,7 +457,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
         case Redo:
             if (record->event.pressed) {
-                tap_code16(C(KC_Y));
+                register_code16(C(KC_Y));
+            }else {
+                unregister_code16(C(KC_Y));
             }
             break;
     }
@@ -515,5 +522,5 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 #ifdef SPLIT_TRANSPORT_MIRROR
 bool should_process_keypress(void) {
     return true;
-}
+    }
 #endif
