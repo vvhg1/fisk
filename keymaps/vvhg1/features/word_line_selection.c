@@ -22,65 +22,100 @@
 #include "keycodes.h"
 
 bool process_word_line_selection(uint16_t keycode, const keyrecord_t *record) {
-        if (record->event.pressed) {
-        prev_SelWrd_counter    = SelWrd_counter;
-        SelWrd_counter         = 0;
-        oldlineflag            = lineflag;
-        lineflag               = false;
-        }
+    if (record->event.pressed && keycode != MR_sft && keycode != KC_RSHIFT) {
+        oldlineflag = lineflag;
+        lineflag    = false;
+    }
 
-   switch (keycode) {
-        // ------------------------------------------------------------------------ wraps quotes around word ----------------------------------------------------------------
-                case SelLn:
-            if (record->event.pressed) {  // nees to set flag
+    switch (keycode) {
+        case SelLn:
+            if (record->event.pressed) {
+                uint8_t temp_mods = get_mods();
                 lineflag = true;
-                SEND_STRING(SS_TAP(X_HOME) SS_LSFT(SS_TAP(X_END)));
-                return false;
+                if (oldlineflag) {
+                    if (get_mods() & MOD_MASK_SHIFT) {
+                        register_code(KC_UP);
+                    } else {
+                        register_code16(S(KC_DOWN));
+                        return true;
+                    }
+                } else if (get_mods() & MOD_MASK_SHIFT) {
+                    clear_mods();
+                    tap_code(KC_DOWN);
+                    tap_code(KC_END);
+                    tap_code(KC_HOME);
+                    tap_code(KC_HOME);
+                    set_mods(temp_mods);
+                    register_code(KC_UP);
+                } else {
+                    tap_code(KC_END);
+                    tap_code(KC_HOME);
+                    tap_code(KC_HOME);
+                    register_code16(LSFT(KC_DOWN));
+                }
+                return true;
+            } else {
+                unregister_code16(S(KC_UP));
+                unregister_code16(LSFT(KC_DOWN));
+                break;
             }
+
         case SelLnDn:
             if (record->event.pressed) {
-                SEND_STRING(SS_LSFT(SS_TAP(X_DOWN)));
-                return false;
-            }
-
-        case SelLnUp:
-            if (record->event.pressed) {
+                lineflag = true;
                 if (oldlineflag) {
-                    SEND_STRING(SS_TAP(X_END) SS_LSFT(SS_TAP(X_HOME)) SS_LSFT(SS_TAP(X_UP)));
+                    if (get_mods() & MOD_MASK_SHIFT) {
+                        register_code(KC_UP);
+                    } else {
+                        register_code16(S(KC_DOWN));
+                        break;
+                    }
+                } else if (get_mods() & MOD_MASK_SHIFT) {
+                    tap_code(KC_DOWN);
+                    tap_code(KC_HOME);
+                    tap_code(KC_HOME);
+                    register_code(KC_UP);
                 } else {
-                    SEND_STRING(SS_LSFT(SS_TAP(X_UP)));
+                    tap_code16(S(KC_HOME));
+                    tap_code16(S(KC_HOME));
+                    register_code16(LSFT(KC_DOWN));
                 }
-                    return false;
+                break;
+            } else {
+                unregister_code16(S(KC_UP));
+                unregister_code16(LSFT(KC_DOWN));
+                break;
             }
 
         case SelWrdL:
             if (record->event.pressed) {
-                SelWrd_counter = prev_SelWrd_counter;
-                if (SelWrd_counter < 2) {
-                    SelWrd_counter++;
-                }
-                if (SelWrd_counter > 1) {
-                    SEND_STRING(SS_LCTL(SS_LSFT(SS_TAP(X_LEFT))));
+                lineflag = true;
+                if (oldlineflag) {
+                    register_code16(C(S(KC_LEFT)));
                 } else {
-                    SEND_STRING(SS_LCTL(SS_TAP(X_RIGHT) SS_LSFT(SS_TAP(X_LEFT))));
+                    tap_code16(LCTL(KC_RIGHT));
+                    register_code16(C(S(KC_LEFT)));
                 }
                 return false;
+            } else {
+                unregister_code16(LSFT(KC_LEFT));
+                break;
             }
 
         case SelWrdR:
             if (record->event.pressed) {
-                SelWrd_counter = prev_SelWrd_counter;
-                if (SelWrd_counter < 2) {
-                    SelWrd_counter++;
-                }
-                if (SelWrd_counter > 1) {
-                    SEND_STRING(SS_LCTL(SS_LSFT(SS_TAP(X_RIGHT))));
+                lineflag = true;
+                if (oldlineflag) {
+                    register_code16(C(S(KC_RIGHT)));
                 } else {
-                    SEND_STRING(SS_LCTL(SS_TAP(X_LEFT) SS_LSFT(SS_TAP(X_RIGHT))));
+                    tap_code16(LCTL(KC_LEFT));
+                    register_code16(C(S(KC_RIGHT)));
                 }
                 return false;
+            } else {
+                unregister_code16(LSFT(KC_RIGHT));
+                break;
             }
     }
     return true;
 }
-

@@ -21,12 +21,13 @@
 #include "quantum.h"
 
 typedef enum {
-    ENC_MODE_WORD_NAV = 0,
-    ENC_MODE_LEFT_RIGHT,
-    ENC_MODE_UP_DOWN,
-    ENC_MODE_PAGING,
-    ENC_MODE_NEXTEDITOR,
-    ENC_MODE_NEXTTAB,
+    ENC_MODE_NEXTTAB = 0,
+    // ENC_MODE_WORD_NAV,
+    // ENC_MODE_LEFT_RIGHT,
+    // ENC_MODE_UP_DOWN,
+    // ENC_MODE_PAGING,
+    // ENC_MODE_NEXTEDITOR,
+    ENC_MODE_EXPAND_SELECTION,
     _ENC_MODE_LAST  // Do not use, except for looping through enum values
 } encoder_mode_t;
 
@@ -40,16 +41,18 @@ encoder_mode_t get_encoder_mode(void);
 
 void cycle_encoder_mode(bool clockwise);
 
-void encoder_action_word_nav(uint8_t clockwise);
+// void encoder_action_word_nav(uint8_t clockwise);
 
-void encoder_action_left_right(uint8_t clockwise);
+// void encoder_action_left_right(uint8_t clockwise);
 
-void encoder_action_up_down(uint8_t clockwise);
+// void encoder_action_up_down(uint8_t clockwise);
 
-void encoder_action_paging(uint8_t clockwise);
+// void encoder_action_paging(uint8_t clockwise);
 
-void encoder_action_nexteditor(uint8_t clockwise);
+// void encoder_action_nexteditor(uint8_t clockwise);
 
 void encoder_action_nexttab(uint8_t clockwise);
+
+void encoder_action_expandselection(uint8_t clockwise);
 
 void encoder_action(encoder_mode_t mode, uint8_t clockwise);

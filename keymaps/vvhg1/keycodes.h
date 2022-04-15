@@ -76,7 +76,8 @@ enum custom_keycodes {
     Mir_spc,
 #endif
 #ifdef POWER_BRACKETS_ENABLE
-    In_br,
+    In_br_c,
+    In_br_s,
     In_br_o,
 #endif
     mo_AUX
