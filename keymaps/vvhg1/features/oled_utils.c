@@ -409,23 +409,26 @@ void render_encoder(encoder_mode_t mode) {
                 oled_set_cursor(4, 3);
 #endif
     switch (mode) {
-        case ENC_MODE_WORD_NAV:
-            oled_write_P(PSTR(" \x0B\x0E WORD \x7F\x02 "), false);
-            break;
-        case ENC_MODE_LEFT_RIGHT:
-            oled_write_P(PSTR("   \x0B\x0B\x0E\x7F\x02\x02 "), false);
-            break;
-        case ENC_MODE_UP_DOWN:
-            oled_write_P(PSTR("  \x1E\x1F" " U D " "\x1C\x1D "), false);
-            break;
-        case ENC_MODE_PAGING:
-            oled_write_P(PSTR("   \x1E\x1F" " PG " "\x1C\x1D "), false);
-            break;
-        case ENC_MODE_NEXTEDITOR:
-            oled_write_P(PSTR("\x0B\x0E EDITOR \x7F\x02 "), false);
-            break;
+        // case ENC_MODE_WORD_NAV:
+        //     oled_write_P(PSTR(" \x0B\x0E WORD \x7F\x02 "), false);
+        //     break;
+        // case ENC_MODE_LEFT_RIGHT:
+        //     oled_write_P(PSTR("   \x0B\x0B\x0E\x7F\x02\x02 "), false);
+        //     break;
+        // case ENC_MODE_UP_DOWN:
+        //     oled_write_P(PSTR("  \x1E\x1F" " U D " "\x1C\x1D "), false);
+        //     break;
+        // case ENC_MODE_PAGING:
+        //     oled_write_P(PSTR("   \x1E\x1F" " PG " "\x1C\x1D "), false);
+        //     break;
+        // case ENC_MODE_NEXTEDITOR:
+        //     oled_write_P(PSTR("\x0B\x0E EDITOR \x7F\x02 "), false);
+        //     break;
         case ENC_MODE_NEXTTAB:
             oled_write_P(PSTR("  \x0B\x0E TAB \x7F\x02 "), false);
+            break;
+        case ENC_MODE_EXPAND_SELECTION:
+            oled_write_P(PSTR("  \x1E\x1F" " SEL " "\x1C\x1D "), false);
             break;
         default:
             oled_write_P(PSTR("??? "), false);
