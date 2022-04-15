@@ -34,6 +34,9 @@ This is my personal keymap, main features include: one rotary encoder, Colemak-d
 
 **Note:** There is also a default keymap included, in case anyone wants to start with a clean slate.
 
+### Nav Layer Word and Line Selection
+The na layer has some dedicated keys for quick text selection. Select Line will select the whole line the cursor is on and with each additional key tap the line below, if shifted it will select up, or if lines already were selected down, it will deselect the bottom line of the current selection. Select Line Down will select the current line starting at the current cursor position. Shifted this will select the line up, again starting at the current cursor position.     
+Word selection left and right will select the word below the cursor and then with each tap one more word to the left/right. The selection can be shrunk again by tapping the other select word left/right key.
 ### Leader Key with repeatable sequence groups
 Custom leader key implementation, original author is [@andrewjrae](https://github.com/andrewjrae).  
 I made a few changes:   
