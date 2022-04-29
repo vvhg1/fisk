@@ -78,9 +78,17 @@ void cycle_encoder_mode(bool clockwise) {
 // }
 void encoder_action_nexttab(uint8_t clockwise) {
     if (clockwise) {
-        tap_code16(LCTL(KC_PGDN));
+        register_code(KC_LCTL);
+        wait_ms(100);
+        tap_code(KC_PGDN);
+        wait_ms(100);
+        unregister_code(KC_LCTL);
     } else {
-        tap_code16(LCTL(KC_PGUP));
+        register_code(KC_LCTL);
+        wait_ms(100);
+        tap_code(KC_PGUP);
+        wait_ms(100);
+        unregister_code(KC_LCTL);
     }
 }
 void encoder_action_expandselection(uint8_t clockwise) {
