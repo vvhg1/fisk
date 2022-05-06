@@ -136,7 +136,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Function Layer
  *
  *          ,----------------------------------------------------.                                       ,-----------------------------------------------------.
- *          |        |        | Flp MIN|        |        | MO AUX|                                       |In_br_s |        |  KC_F7 |  KC_F8 |  KC_F9 |  In_br |
+ *          |        |Lin/Win | Flp MIN|        |        | MO AUX|                                       |In_br_s |        |  KC_F7 |  KC_F8 |  KC_F9 |  In_br |
  * +--------+--------+--------+--------+--------+--------+-------|                                       |--------+--------+--------+--------+--------+--------+--------.
  * |        | Qwerty |        |        |        |        |       |                                       |In_br_c |        |  KC_F1 |  KC_F2 |  KC_F3 | KC_F10 |        |
  * |--------+--------+--------+--------+--------+--------+-------+--------+--------.     ,---------------+--------+--------+--------+--------+--------+--------+--------|
@@ -146,7 +146,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------'           `--------------------------'    '--------+--------'     `---------------'     '-------------------------'            '-----------------'
  */
    [_FUNX] = LAYOUT(
-             _______, _______, FLP_MIN, _______, _______, mo_AUX,                                        In_br_s, _______,  KC_F7,   KC_F8,   KC_F9,  In_br_o,
+             _______, Lin_Win, FLP_MIN, _______, _______, mo_AUX,                                        In_br_s, _______,  KC_F7,   KC_F8,   KC_F9,  In_br_o,
     _______, DF(_QW), _______, _______, _______, _______, _______,                                       In_br_c, _______,  KC_F1,   KC_F2,   KC_F3,   KC_F10,  _______,
     _______, _______,  _______, DF(_COLEMAK), FLP_DOT_C, _______,  _______, _______,      _______, _______,       _______,  KC_F4,   KC_F5,   KC_F6,   KC_F11,  _______,
     _______,
@@ -254,6 +254,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif
     }
     switch (keycode) {  //!#######################################################--switch(keycode)--#######################################################
+        case Lin_Win:
+            if (record->event.pressed) {
+                if (is_windows) {
+                    is_windows = false;
+                } else {
+                    is_windows = true;
+                }
+            }
+            return true;
         case Cmnt:
             if (record->event.pressed) {
                 if (get_mods() & MOD_MASK_SHIFT) {
@@ -283,7 +292,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif
         case EURO_SYM:
             if (record->event.pressed) {
+                if (is_windows)
+            {
+            // windows
                 SEND_STRING(SS_LALT(SS_TAP(X_P0) SS_TAP(X_P1) SS_TAP(X_P2) SS_TAP(X_P8)));  // send euro symbol
+            }else{
+            // linux
+            tap_code16(C(S(KC_U)));
+            SEND_STRING("20AC");  // here euro symbol
+            tap_code(KC_ENT);
+            }
             }
             return false;
 

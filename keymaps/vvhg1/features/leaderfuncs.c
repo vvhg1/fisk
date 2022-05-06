@@ -169,30 +169,94 @@ void *umlaut_stuff(uint16_t keycode) {
             if (get_mods() & MOD_MASK_SHIFT) {
                 del_mods(MOD_MASK_SHIFT);
             }
+            if (is_windows)
+            {
+            // windows
             SEND_STRING(SS_LALT(SS_TAP(X_P0) SS_TAP(X_P2) SS_TAP(X_P2) SS_TAP(X_P3)));  // here S ß
+            }else{
+            // linux
+            tap_code16(C(S(KC_U)));
+            SEND_STRING("00DF");  // here S ß
+            tap_code(KC_ENT);
+            }
             break;
         case KC_A:
             if (get_mods() & MOD_MASK_SHIFT) {
                 del_mods(MOD_MASK_SHIFT);
+                            if (is_windows)
+            {
+            // windows
                 SEND_STRING(SS_LALT(SS_TAP(X_P1) SS_TAP(X_P4) SS_TAP(X_P2)));  // here A Ä
+            }else{
+            // linux
+            tap_code16(C(S(KC_U)));
+            SEND_STRING("00E4");  // here a
+            tap_code(KC_ENT);
+            }
+
             } else {
+                if (is_windows)
+            {
+            // windows
                 SEND_STRING(SS_LALT(SS_TAP(X_P1) SS_TAP(X_P3) SS_TAP(X_P2)));  // here A Ä
+            }else{
+            // linux
+            tap_code16(C(S(KC_U)));
+            SEND_STRING("00C4");  // here A
+            tap_code(KC_ENT);
+            }
             }
             break;
         case KC_U:
             if (get_mods() & MOD_MASK_SHIFT) {
                 del_mods(MOD_MASK_SHIFT);
+                                if (is_windows)
+            {
+            // windows
                 SEND_STRING(SS_LALT(SS_TAP(X_P0) SS_TAP(X_P2) SS_TAP(X_P2) SS_TAP(X_P0)));  // here U Ü
+            }else{
+            // linux
+            tap_code16(C(S(KC_U)));
+            SEND_STRING("00DC");  // here U
+            tap_code(KC_ENT);
+            }
             } else {
+                 if (is_windows)
+            {
+            // windows
                 SEND_STRING(SS_LALT(SS_TAP(X_P1) SS_TAP(X_P2) SS_TAP(X_P9)));  //  here U Ü
+            }else{
+            // linux
+            tap_code16(C(S(KC_U)));
+            SEND_STRING("00FC");  // here u
+            tap_code(KC_ENT);
+            }
             }
             break;
         case KC_O:
             if (get_mods() & MOD_MASK_SHIFT) {
                 del_mods(MOD_MASK_SHIFT);
+                 if (is_windows)
+            {
+            // windows
                 SEND_STRING(SS_LALT(SS_TAP(X_P0) SS_TAP(X_P2) SS_TAP(X_P1) SS_TAP(X_P4)));  // here O Ö
+            }else{
+            // linux
+            tap_code16(C(S(KC_U)));
+            SEND_STRING("00D6");  // here O
+            tap_code(KC_ENT);
+            }
             } else {
+                 if (is_windows)
+            {
+            // windows
                 SEND_STRING(SS_LALT(SS_TAP(X_P1) SS_TAP(X_P4) SS_TAP(X_P8)));  // here O Ö
+            }else{
+            // linux
+            tap_code16(C(S(KC_U)));
+            SEND_STRING("00F6");  // here o
+            tap_code(KC_ENT);
+            }
             }
             break;
         case KC_LSHIFT:

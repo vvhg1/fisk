@@ -28,6 +28,7 @@ uint16_t startup_timer;
 uint16_t one_shot_timer;
 
 bool mns_flipped;
+bool is_windows;
 bool dot_flipped;
 bool layer_toggle_flag;
 bool prev_layer_toggle_flag;
@@ -80,6 +81,7 @@ enum custom_keycodes {
     In_br_s,
     In_br_o,
 #endif
+    Lin_Win,
     mo_AUX
 
 };

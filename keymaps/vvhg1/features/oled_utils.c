@@ -15,6 +15,7 @@
  */
 
 #include "oled_utils.h"
+#include "keycodes.h"
 #ifdef CUSTOM_LEADER_ENABLE
 #include "leader.h"
 #endif
@@ -446,6 +447,8 @@ void render_status(void) {
 #endif
     if (is_keyboard_left()) {
         render_layer();
+         oled_set_cursor(20,0);
+         oled_write_P(is_windows ? PSTR("W") : PSTR("L"), false);
 #ifdef CASEMODES_ENABLE
         render_case_modes();
 #endif
