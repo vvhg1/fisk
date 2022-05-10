@@ -343,7 +343,7 @@ void *vscode_stuff_ne(uint16_t keycode) {
 void *vscode_stuff_a(uint16_t keycode) {
     switch (keycode) {
         case KC_P:
-            tap_code16(LSA(KC_F));  // format document
+                tap_code16(LSA(KC_F));  // format document
             return NULL;
         default:
             return NULL;
