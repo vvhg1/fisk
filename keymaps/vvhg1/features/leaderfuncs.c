@@ -186,11 +186,11 @@ void *umlaut_stuff(uint16_t keycode) {
                             if (is_windows)
             {
             // windows
-                SEND_STRING(SS_LALT(SS_TAP(X_P1) SS_TAP(X_P4) SS_TAP(X_P2)));  // here A Ä
+                SEND_STRING(SS_LALT(SS_TAP(X_P1) SS_TAP(X_P4) SS_TAP(X_P2)));  // here Ä
             }else{
             // linux
             tap_code16(C(S(KC_U)));
-            SEND_STRING("00E4");  // here a
+            SEND_STRING("00C4");  // here Ä
             tap_code(KC_ENT);
             }
 
@@ -198,11 +198,11 @@ void *umlaut_stuff(uint16_t keycode) {
                 if (is_windows)
             {
             // windows
-                SEND_STRING(SS_LALT(SS_TAP(X_P1) SS_TAP(X_P3) SS_TAP(X_P2)));  // here A Ä
+                SEND_STRING(SS_LALT(SS_TAP(X_P1) SS_TAP(X_P3) SS_TAP(X_P2)));  // here ä
             }else{
             // linux
             tap_code16(C(S(KC_U)));
-            SEND_STRING("00C4");  // here A
+            SEND_STRING("00E4");  // here ä
             tap_code(KC_ENT);
             }
             }
