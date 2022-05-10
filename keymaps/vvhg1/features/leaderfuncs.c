@@ -288,16 +288,16 @@ void *macro_stuff(uint16_t keycode) {
 }
 #endif
 void *windows_stuff(uint16_t keycode) {
-    switch (keycode) {  // here WS is Start menu, WM is context menu
+    switch (keycode) {  
         case KC_S:
-            tap_code(KC_LGUI);  // here WS is Start menu, WM is context menu
+            tap_code(KC_LGUI);  // here WS is Start menu
             return NULL;
         case KC_M:
-            tap_code(KC_APP);  // here WS is Start menu, WM is context menu
+            tap_code(KC_APP);  // here  WM is context menu
             return NULL;
-        case KC_Q:
-            tap_code16(C(KC_F4));  // here WQ closes window
-            return windows_stuff;
+        // case KC_Q:
+        //     tap_code16(C(KC_F4));  // here WQ closes window
+        //     return windows_stuff;
         default:
             return NULL;
     }
@@ -309,10 +309,10 @@ void *vscode_stuff(uint16_t keycode) {
         case KC_F:
             return vscode_stuff_f;
         case KC_U:
-            tap_code16(LALT(KC_UP));  //  vu move line up
+            tap_code16(LALT(KC_UP));  //  vu move line up (redundant, same as nav layer alt u/d)
             return vscode_stuff_ml;
         case KC_E:
-            tap_code16(LALT(KC_DOWN));  //  ve move ln down
+            tap_code16(LALT(KC_DOWN));  //  ve move ln down (redundant, same as nav layer alt u/d)
             return vscode_stuff_ml;
         case KC_C:
             return vscode_stuff_cl;
