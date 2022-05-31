@@ -51,7 +51,16 @@ void process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
                     SEND_STRING(SS_TAP(X_ESC) SS_LCTL(SS_TAP(X_LEFT)) SS_LSFT(SS_TAP(X_9)) SS_LCTL(SS_TAP(X_RGHT)) SS_LSFT(SS_TAP(X_0)));
                 } else if (get_mods() & MOD_MASK_SHIFT) {
                     del_mods(MOD_MASK_SHIFT);
-                    SEND_STRING(SS_LALT(SS_TAP(X_P0) SS_TAP(X_P1) SS_TAP(X_P6) SS_TAP(X_P3)));
+                     if (is_windows)
+            {
+            // windows
+                    SEND_STRING(SS_LALT(SS_TAP(X_P0) SS_TAP(X_P1) SS_TAP(X_P6) SS_TAP(X_P3))); // pound symbol
+            }else{
+            // linux
+            tap_code16(C(S(KC_U)));
+            SEND_STRING("00A3");  // here pound symbol
+            tap_code(KC_ENT);
+            }
                 } else {
                     tap_code16(S(KC_9));
                     tap_code16(S(KC_0));
