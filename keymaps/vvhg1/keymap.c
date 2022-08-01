@@ -45,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
               KC_ESC,   KC_W,    KC_F  ,  KC_P ,   KC_B , KC_SLSH,                                      Sq_Br,   KC_J,    KC_L ,   KC_U ,   KC_Y ,   Op_Br,
     KC_AMPR , KC_Q,     KC_R,    KC_S ,   KC_T ,   KC_G,  KC_BSLS,                                      Cr_Br,   KC_M,    KC_N,    KC_E,    KC_I,    KC_SCLN,      QuotWrap,
     KC_HASH,  KC_A,     KC_X,    KC_C,    KC_D,    KC_V,            KC_SPC, ML_alt,        ML_ctl, MR_sft,       KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_O,         KC_ENT,
-    KC_TAB,  KC_Z,           mo_FUNX,  MR_sft ,  ML_ctl,                    go_NAV,        LEADER,              KC_BSPC, KC_DEL, Enc_M,                 KC_MINS,  KC_AT
+    KC_TAB,  KC_Z,           mo_FUNX,  MR_sft ,  go_NUM,                    go_NAV,        LEADER,              KC_BSPC, KC_DEL, Enc_M,                 KC_MINS,  KC_AT
 
     ),
 /*
@@ -66,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
               KC_ESC,   KC_W,    KC_E  ,  KC_R ,   KC_T , KC_SLSH,                                      Sq_Br,   KC_Y,    KC_U ,   KC_I ,   KC_O,   Op_Br,
     KC_AMPR , KC_Q,     KC_S,    KC_D ,   KC_F ,   KC_G,  KC_BSLS,                                      Cr_Br,   KC_H,    KC_J,    KC_K,    KC_L,    KC_P, QuotWrap,
     KC_HASH,  KC_A,     KC_X,    KC_C,    KC_V,    KC_B,            KC_SPC, ML_alt,         ML_ctl, MR_sft,          KC_N,   KC_M,    KC_COMM,    KC_DOT,  KC_SCLN, KC_ENT,
-    KC_TAB,  KC_Z,           mo_FUNX,  MR_sft,  ML_ctl,                go_NAV,          LEADER,              KC_BSPC,  KC_DEL, Enc_M,                 KC_MINS,  KC_AT
+    KC_TAB,  KC_Z,           mo_FUNX,  MR_sft,  go_NUM,                go_NAV,          LEADER,              KC_BSPC,  KC_DEL, Enc_M,                 KC_MINS,  KC_AT
 
     ),
 #ifdef SWAP_HANDS_ENABLE
@@ -128,8 +128,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NAV] = LAYOUT(
              _______, KC_WH_D, KC_MS_U, KC_WH_U,  KC_WH_R,  Cmnt,                                         _______, KC_NO, KC_HOME, KC_PGDN, KC_PGUP, Op_Br,
     _______, KC_WH_L, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN1, C(KC_S),                                        _______, KC_NO, KC_LEFT, KC_DOWN, KC_UP,  KC_END, KC_QUOT,
-    _______, C(KC_A),  Cut   ,    Copy,   Redo,   Paste,          _______, _______,      _______, _______,         KC_NO, SelWrdL,   SelLn,  SelLnUp, KC_RIGHT, _______,
-    _______,    Undo,           _______,  _______, _______,                _______,      _______,                _______, _______, _______,           SelWrdR,     KC_F2
+    _______, C(KC_A),  Cut   ,    Copy,   Redo,   Paste,          _______, _______,      _______, _______,         KC_NO, SelWrdL,   SelLnDn,  SelLnUp, KC_RIGHT, _______,
+    _______,    Undo,           _______,  _______, ML_ctl,                _______,      _______,                _______, _______, _______,           SelWrdR,     KC_F2
 
     ),
 /*
@@ -329,13 +329,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return true;
 
         case go_NAV:
-            if (get_mods() & MOD_MASK_SHIFT) {
-                // go to num
-                process_custom_layer(record, _NUM);
-            } else {
+            // if (get_mods() & MOD_MASK_SHIFT) {
+            //     // go to num
+            //     process_custom_layer(record, _NUM);
+            // } else {
                 // go to nav
                 process_custom_layer(record, _NAV);
-            }
+            // }
             return true;
 
         case go_NUM:

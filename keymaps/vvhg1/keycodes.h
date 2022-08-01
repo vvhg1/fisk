@@ -61,7 +61,7 @@ enum custom_keycodes {
     DotC,
     SelWrdL,
     SelWrdR,
-    SelLn,
+    // SelLn,
     SelLnUp,
     SelLnDn,
     FLP_MIN,

@@ -28,26 +28,14 @@ bool process_word_line_selection(uint16_t keycode, const keyrecord_t *record) {
     }
 
     switch (keycode) {
-        case SelLn:
+        case SelLnDn:
             if (record->event.pressed) {
-                uint8_t temp_mods = get_mods();
+                // uint8_t temp_mods = get_mods();
                 lineflag = true;
                 if (oldlineflag) {
-                    if (get_mods() & MOD_MASK_SHIFT) {
-                        register_code(KC_UP);
-                    } else {
-                        register_code16(S(KC_DOWN));
+                        register_code16(LSFT(KC_DOWN));
                         return true;
-                    }
-                } else if (get_mods() & MOD_MASK_SHIFT) {
-                    clear_mods();
-                    tap_code(KC_DOWN);
-                    tap_code(KC_END);
-                    tap_code(KC_HOME);
-                    tap_code(KC_HOME);
-                    set_mods(temp_mods);
-                    register_code(KC_UP);
-                } else {
+                }  else {
                     tap_code(KC_END);
                     tap_code(KC_HOME);
                     tap_code(KC_HOME);
@@ -55,35 +43,24 @@ bool process_word_line_selection(uint16_t keycode, const keyrecord_t *record) {
                 }
                 return true;
             } else {
-                unregister_code16(S(KC_UP));
-                unregister_code16(LSFT(KC_DOWN));
+                unregister_code16(S(KC_DOWN));
                 break;
             }
 
-        case SelLnDn:
+        case SelLnUp:
             if (record->event.pressed) {
                 lineflag = true;
                 if (oldlineflag) {
-                    if (get_mods() & MOD_MASK_SHIFT) {
-                        register_code(KC_UP);
-                    } else {
-                        register_code16(S(KC_DOWN));
-                        break;
-                    }
-                } else if (get_mods() & MOD_MASK_SHIFT) {
+                        register_code16(LSFT(KC_UP));
+                } else {
                     tap_code(KC_DOWN);
                     tap_code(KC_HOME);
                     tap_code(KC_HOME);
-                    register_code(KC_UP);
-                } else {
-                    tap_code16(S(KC_HOME));
-                    tap_code16(S(KC_HOME));
-                    register_code16(LSFT(KC_DOWN));
+                    register_code16(LSFT(KC_UP));
                 }
                 break;
             } else {
                 unregister_code16(S(KC_UP));
-                unregister_code16(LSFT(KC_DOWN));
                 break;
             }
 
