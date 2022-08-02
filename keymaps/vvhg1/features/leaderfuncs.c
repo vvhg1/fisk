@@ -26,13 +26,10 @@
 
 void *leader_start_func(uint16_t keycode) {
     switch (keycode) {
-        case KC_I:
-            tap_code16(C(KC_PGDN));  // i select editor right
-            return vscode_stuff_ne;
-        case KC_N:
-            tap_code16(C(KC_PGUP));  //  n select editor left
-            return vscode_stuff_ne;
 
+        case KC_A:
+            tap_code16(LCTL(KC_F2));  //  Ctrl+F2 Select all occurrences of word VSCode
+            return NULL;
         case KC_E:
             tap_code16(C(KC_K));  // show tool tip
             tap_code16(C(KC_I));
@@ -40,13 +37,6 @@ void *leader_start_func(uint16_t keycode) {
         case KC_G:
             tap_code16(C(S(KC_G)));  // open github sidebar
             tap_code((KC_G));
-            return NULL;
-        case KC_R:
-            if (get_mods() & MOD_MASK_SHIFT) {  // run w/o debugging, with shift stop debugging
-                tap_code(KC_F5);
-            } else {
-                tap_code16(C(KC_F5));
-            }
             return NULL;
         // case KC_L:
         //     if (get_mods() & MOD_MASK_SHIFT) {  // peek definition, with shift go to definition
@@ -60,9 +50,29 @@ void *leader_start_func(uint16_t keycode) {
         //         }
         //     }
         //     return NULL;
+        case KC_N:
+            tap_code16(C(KC_PGUP));  //  n select editor left
+            return vscode_stuff_ne;
         case KC_O:
-            tap_code16(LCTL(KC_F2));  //  Ctrl+F2 Select all occurrences of word VSCode
+            tap_code16(C(KC_PGDN));  // i select editor right
+            return vscode_stuff_ne;
+        case KC_Q:
+            tap_code16(C(KC_F4));  // WQ closes window
+            return windows_stuff;
+        case KC_R:
+            if (get_mods() & MOD_MASK_SHIFT) {  // run w/o debugging, with shift stop debugging
+                tap_code(KC_F5);
+            } else {
+                tap_code16(C(KC_F5));
+            }
             return NULL;
+        case KC_T:
+            tap_code16(LCTL(KC_GRV)); //  Ctrl+` Toggle terminal VSCode
+            return NULL;
+        case KC_W:
+            return windows_stuff;  // here W is the start for Win related actions
+        case KC_V:
+            return vscode_stuff;  // here V is the start for VSCode related actions
         case KC_Z:
             tap_code16(LCTL(KC_K));  //  Ctrl+K,Z VSCode Zen Mode
             tap_code16(KC_Z);        //  Ctrl+K,Z VSCode Zen Mode
@@ -70,9 +80,6 @@ void *leader_start_func(uint16_t keycode) {
         case KC_ENTER:
             tap_code16(LCTL(LSFT(KC_P)));  //  Ctrl+Shift+P Show command palette VSCode
             tap_code16(KC_F1);             //  Ctrl+Shift+P Show command palette VSCode
-            return NULL;
-        case KC_T:
-            tap_code16(LCTL(KC_GRV));
             return NULL;
         case Sq_Br:
             if (get_mods() & MOD_MASK_SHIFT) {  // single brackets, closing on shift
@@ -96,13 +103,6 @@ void *leader_start_func(uint16_t keycode) {
                 tap_code16(S(KC_9));
             }
             return bracket_repeat;
-        case KC_Q:
-            tap_code16(C(KC_F4));  // WQ closes window
-            return windows_stuff;
-        case KC_W:
-            return windows_stuff;  // here W is the start for Win related actions
-        case KC_V:
-            return vscode_stuff;  // here V is the start for VSCode related actions
 #ifdef DYNAMIC_MACRO_ENABLE
         case KC_M:
             return macro_stuff;  // here m is the start for Macro related actions
@@ -329,7 +329,7 @@ void *vscode_stuff_ne(uint16_t keycode) {
         case KC_N:
             tap_code16(C(KC_PGUP));  //  vi left
             return vscode_stuff_ne;
-        case KC_I:
+        case KC_O:
             tap_code16(C(KC_PGDN));  // vn select editor right
             return vscode_stuff_ne;
 
