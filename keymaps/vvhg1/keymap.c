@@ -116,19 +116,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Navigation Layer: Mouse Navigation
  *
  *          ,----------------------------------------------------.                                       ,-----------------------------------------------------.
- *          |        | M WH dn| M up   | M WH up| M WH R | Cmmnt |                                       |   { +  | XXXXX  |   Home |  PG DN |  PG UP |  ( !   |
+ *          |        | M WH dn| M up   | M WH up| M WH R | Cmmnt |                                       |   { +  | go def |   Home |  PG DN |  PG UP |  ( !   |
  * +--------+--------+--------+--------+--------+--------+-------|                                       |--------+--------+--------+--------+--------+--------+--------.
- * |        | M WH L | M left | M down | M right| M btn1 |  Save |                                       |   [ =  | XXXXX  |    ←   |    ↓   |    ↑   |  End   |        |
+ * |        | M WH L | M left | M down | M right| M btn1 |  Save |                                       |   [ =  | pk def |    ←   |    ↓   |    ↑   |  End   |        |
  * |--------+--------+--------+--------+--------+--------+-------+--------+--------.     ,---------------+--------+--------+--------+--------+--------+--------+--------|
- * |        | Sel All|  Cut   |  Copy  |  Redo  |  Paste |       |        |        |     |        |      |        | XXXXX  | SelWrdL| SelLn↓ | SelLn↑ |    →   |        |
+ * | back   | Sel All|  Cut   |  Copy  |  Redo  |  Paste |       |        |        |     |        |      |        | dbg log| SelWrdL| SelLn↓ | SelLn↑ |    →   |        |
  * |--------+--------+--------+--------+--------+--------+--.    |        +--------|     |--------+      |     ,--+--------+--------+--------+--------+--------+--------|
- * |        |  Undo  |           |        |        |     |       |        |        |     |        |      |     |        |      |         |            | SelWrdR|   F2   |
+ * |        |  Undo  |           |        |        |  LCTL  |    |        |        |     |        |      |     |        |      |         |            | SelWrdR|   F2   |
  * `-----------------'           `--------------------------'    '--------+--------'     `---------------'     '-------------------------'            '-----------------'
  */
     [_NAV] = LAYOUT(
-             _______, KC_WH_D, KC_MS_U, KC_WH_U,  KC_WH_R,  Cmnt,                                         _______, KC_NO, KC_HOME, KC_PGDN, KC_PGUP, Op_Br,
-    _______, KC_WH_L, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN1, C(KC_S),                                        _______, KC_NO, KC_LEFT, KC_DOWN, KC_UP,  KC_END, KC_QUOT,
-    _______, C(KC_A),  Cut   ,    Copy,   Redo,   Paste,          _______, _______,      _______, _______,         KC_NO, SelWrdL,   SelLnDn,  SelLnUp, KC_RIGHT, _______,
+             _______, KC_WH_D, KC_MS_U, KC_WH_U,  KC_WH_R,  Cmnt,                                         _______, Go_Def, KC_HOME, KC_PGDN, KC_PGUP, Op_Br,
+    _______, KC_WH_L, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN1, C(KC_S),                                        _______, Peek_Def, KC_LEFT, KC_DOWN, KC_UP,  KC_END, KC_QUOT,
+    KC_BTN5, C(KC_A),  Cut   ,    Copy,   Redo,   Paste,          _______, _______,      _______, _______,         Dbg, SelWrdL,   SelLnDn,  SelLnUp, KC_RIGHT, _______,
     _______,    Undo,           _______,  _______, ML_ctl,                _______,      _______,                _______, _______, _______,           SelWrdR,     KC_F2
 
     ),
@@ -136,19 +136,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Function Layer
  *
  *          ,----------------------------------------------------.                                       ,-----------------------------------------------------.
- *          |        |Lin/Win | Flp MIN|        |        | MO AUX|                                       |In_br_s |        |  KC_F7 |  KC_F8 |  KC_F9 |  In_br |
+ *          |        |Lin/Win | Flp MIN|        |        | MO AUX|                                       |In_br_s |  KC_NO |  KC_F7 |  KC_F8 |  KC_F9 |  In_br |
  * +--------+--------+--------+--------+--------+--------+-------|                                       |--------+--------+--------+--------+--------+--------+--------.
- * |        | Qwerty |        |        |        |        |       |                                       |In_br_c |        |  KC_F1 |  KC_F2 |  KC_F3 | KC_F10 |        |
+ * |        | Qwerty |        |        |        |        |       |                                       |In_br_c |  KC_NO |  KC_F1 |  KC_F2 |  KC_F3 | KC_F10 |        |
  * |--------+--------+--------+--------+--------+--------+-------+--------+--------.     ,---------------+--------+--------+--------+--------+--------+--------+--------|
- * |        |        |        | Colemak|FLP_DOT |        |       |        |        |     |        |      |        |        |  KC_F4 |  KC_F5 |  KC_F6 | KC_F11 |        |
+ * |        |        |        | Colemak|FLP_DOT |        |       |        |        |     |        |      |        |  KC_NO |  KC_F4 |  KC_F5 |  KC_F6 | KC_F11 |        |
  * |--------+--------+--------+--------+--------+--------+--.    |        +--------|     |--------+      |     ,--+--------+--------+--------+--------+--------+--------|
  * |        | Mirror |           |     |        |        |       |        |        |     |        |      |     |      |        |         |            | KC_F12 |        |
  * `-----------------'           `--------------------------'    '--------+--------'     `---------------'     '-------------------------'            '-----------------'
  */
    [_FUNX] = LAYOUT(
-             _______, Lin_Win, FLP_MIN, _______, _______, mo_AUX,                                        In_br_s, _______,  KC_F7,   KC_F8,   KC_F9,  In_br_o,
-    _______, DF(_QW), _______, _______, _______, _______, _______,                                       In_br_c, _______,  KC_F1,   KC_F2,   KC_F3,   KC_F10,  _______,
-    _______, _______,  _______, DF(_COLEMAK), FLP_DOT_C, _______,  _______, _______,      _______, _______,       _______,  KC_F4,   KC_F5,   KC_F6,   KC_F11,  _______,
+             _______, Lin_Win, FLP_MIN, _______, _______, mo_AUX,                                        In_br_s, KC_NO,  KC_F7,   KC_F8,   KC_F9,  In_br_o,
+    _______, DF(_QW), _______, _______, _______, _______, _______,                                       In_br_c, KC_NO,  KC_F1,   KC_F2,   KC_F3,   KC_F10,  _______,
+    _______, _______,  _______, DF(_COLEMAK), FLP_DOT_C, _______,  _______, _______,      _______, _______,       KC_NO,  KC_F4,   KC_F5,   KC_F6,   KC_F11,  _______,
     _______,
     #ifdef SWAP_HANDS_ENABLE
             TG(_MIR)
@@ -290,6 +290,31 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return true;
 #endif
+
+        case Go_Def:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    del_mods(MOD_MASK_SHIFT);
+                }
+                tap_code(KC_F12);
+            }
+            return true;
+
+        case Peek_Def:
+            if (record->event.pressed) {
+                if (is_windows) {
+                    tap_code16(LALT(KC_F12));
+                } else {
+                    tap_code16(LCTL(LSFT(KC_F10)));
+                }
+            }
+            return true;
+
+        case Dbg:
+            if (record->event.pressed) {
+                tap_code16(LCTL(LSFT(KC_L)));
+            }
+            return true;
         case EURO_SYM:
             if (record->event.pressed) {
                 if (is_windows)

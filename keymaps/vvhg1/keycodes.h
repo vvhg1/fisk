@@ -82,7 +82,10 @@ enum custom_keycodes {
     In_br_o,
 #endif
     Lin_Win,
-    mo_AUX
+    mo_AUX,
+    Go_Def,
+    Peek_Def,
+    Dbg
 
 };
 
