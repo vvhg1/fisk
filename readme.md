@@ -30,12 +30,12 @@ Some that deserve to be mentioned above all else are:
 ![image info](./images/keymap.png)
 This is my personal keymap, main features include: one rotary encoder, Colemak-dh and Qwerty (both have somewhat modified symbols), layers, custom leader key, custom layer logic, custom oneshot modifiers, end of sentence, case modes (CAPSWORD, x_case, NUMW0RD), power brackets and dynamic info on both OLED displays.
 
-**Note:** This keymap assumes US ANSI layout on Windows OS. I have not tested it on other OS and shortcuts are the Win ones, but it should not be overly complicated to adapt.
+**Note:** This keymap assumes US ANSI layout on Linux(default) or Windows OS. Switching between the OS modes is done on the Func Layer (W-Key). I have not tested it on other OS and shortcuts are the Linux/Win ones, but it should not be overly complicated to adapt. 
 
 **Note:** There is also a default keymap included, in case anyone wants to start with a clean slate.
 
 ### Nav Layer Word and Line Selection
-The navigation layer has some dedicated keys for quick text selection. Select Line will select the whole line the cursor is on and with each additional key tap the line below, if shifted it will select up, or if lines already were selected down, it will deselect the bottom line of the current selection. Select Line Down will select the current line starting at the current cursor position. Shifted, this will select the line up, again starting at the current cursor position.     
+The navigation layer has some dedicated keys for quick text selection. Select Line Up/Down will select the whole line the cursor is on and with each additional key tap the line above/below, selection can be shrunk with the opposite key.     
 Word selection left/right will select the word below the cursor and then with each tap one more word to the left/right. The selection can be shrunk again by tapping the other select word left/right key.      
 These keys can also be held down for quickly increasing the selection.
 ### Leader Key with repeatable sequence groups
@@ -57,11 +57,11 @@ I made a few changes:
 |        |         |                        |            |
 | ------ | ------- | ---------------------- | ---------- |
 |        | E       | Show Tooltip (C+K, C+I)|            |
-|        | I       | Prv Editor Tab         | Repeatable |
-|        | L       | Peek Def (Alt+F12)     |            |
-|        | SHIFT+L | Go to Def (F12)        |            |
+|        | O       | Prv Editor Tab         | Repeatable |
+|        | L       | Peek Def (Alt+F12)     | Disabled, now on nav layer  |
+|        | SHIFT+L | Go to Def (F12)        | Disabled, now on nav layer  |
 |        | N       | Nxt Editor Tab         | Repeatable |
-|        | O       | Select all occurrences |            |
+|        | A       | Select all occurrences |            |
 |        | R       | Run W/O Debug (ctrl + F5)|          |	
 |        | SHIFT+R | Stop Debugging (shift + F5)|        |
 |        | T       | Toggle Terminal        |            |
@@ -138,6 +138,7 @@ When toggled on and then off again without any key press in between or when disa
 
 ### End Of Sentence
 This makes the transition between sentences a little smoother. Instead of typing `.`-`SPACE`-`SHIFT`- typing -`..`- has the same effect, the next character will be shifted. The idea is not mine, I think I first saw it in [@precondition](https://github.com/precondition)'s [Dactyl manuform keymap](https://github.com/precondition/dactyl-manuform-keymap). The implementation however is my work and will work without making use of One Shot Shifts.
+Edit: `Enter` and `Space` both now disarm the EOS sequence.
 ### Case Modes
 Case modes are slightly adapted to account for NO_ACTION_TAPPING, NO_ACTION_ONESHOT and for my use case.
 Description is largely the original by [@andrewjrae](https://github.com/andrewjrae).
@@ -217,6 +218,9 @@ If mirroring is on, instead of cramming yet another icon into my very limited OL
     - S for _snake_case_
     - N for Numw0rd
     - X for _CAPS_AND_SNAKE_CASE
+- OS (not shown in image) in upper right corner 
+    - W for Windows
+    - L for Linux
     
 #### Right-side OLED displays dynamic data:  
 ![image info](./images/oled_mods.png)

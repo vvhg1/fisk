@@ -42,6 +42,11 @@ void process_eos(uint16_t keycode, const keyrecord_t *record) {
                 }
                 break;
 
+            case KC_ENT:
+            case KC_SPC:
+            dot_counter = 0;
+            break;
+
             default:
                 if (dot_counter == 2) {
                     tap_code(KC_BSPC);

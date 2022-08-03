@@ -15,6 +15,7 @@
  */
 
 #include "oled_utils.h"
+#include "keycodes.h"
 #ifdef CUSTOM_LEADER_ENABLE
 #include "leader.h"
 #endif
@@ -449,6 +450,8 @@ void render_status(void) {
 #ifdef CASEMODES_ENABLE
         render_case_modes();
 #endif
+         oled_set_cursor(20,0);
+         oled_write_P(is_windows ? PSTR("W") : PSTR("L"), false);
     } else {
         render_mod_status(get_mods());
 #ifdef ENCODER_ENABLE
