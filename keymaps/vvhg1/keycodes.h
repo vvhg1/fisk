@@ -34,6 +34,9 @@ bool layer_toggle_flag;
 bool prev_layer_toggle_flag;
 bool came_from_NAV;
 bool cleared_oled;
+bool turn_oled_on;
+bool space_pressed;
+bool wrd_del_mode;
 #ifdef SWAP_HANDS_ENABLE
 bool no_swap;
 #endif

@@ -246,6 +246,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif
     // -----------------------------------------------------------flags for line selection and a few other things----------------------------------------------------------------
     if (record->event.pressed) {
+#ifdef OLED_ENABLE
+        turn_oled_on = true;
+        startup_timer = timer_read();
+#endif
         prev_layer_toggle_flag = layer_toggle_flag;
         layer_toggle_flag      = false;
         finished_logo          = true;
@@ -254,6 +258,39 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif
     }
     switch (keycode) {  //!#######################################################--switch(keycode)--#######################################################
+        case KC_BSPC:
+            if (record->event.pressed) {
+                if (space_pressed) {
+                    tap_code16(LCTL(KC_BSPC));
+                    wrd_del_mode = true;
+                    return false;
+                }
+            }
+            return true;
+
+        case KC_DEL:
+            if (record->event.pressed) {
+                if (space_pressed) {
+                    tap_code16(LCTL(KC_Z));
+                    wrd_del_mode = true;
+                    return false;
+                }
+            }
+            return true;
+
+        case KC_SPC:
+            if (record->event.pressed) {
+                space_pressed = true;
+                return false;
+            } else {
+                if(!wrd_del_mode){
+                    tap_code(KC_SPC);
+                }
+                wrd_del_mode = false;
+                space_pressed = false;
+            }
+            return true;
+
         case Lin_Win:
             if (record->event.pressed) {
                 if (is_windows) {
@@ -354,13 +391,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return true;
 
         case go_NAV:
-            // if (get_mods() & MOD_MASK_SHIFT) {
-            //     // go to num
-            //     process_custom_layer(record, _NUM);
-            // } else {
+            if ((get_mods() & MOD_MASK_SHIFT) || (IS_LAYER_ON(_NUM))) {
+                // go to num
+                process_custom_layer(record, _NUM);
+            } else {
                 // go to nav
                 process_custom_layer(record, _NAV);
-            // }
+            }
             return true;
 
         case go_NUM:
@@ -521,6 +558,7 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
 #ifdef OLED_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     startup_timer = timer_read();
+    turn_oled_on = true;
     cleared_oled  = false;
     return rotation;
 }
@@ -539,8 +577,18 @@ bool oled_task_user(void) {
             cleared_oled = true;
         }
         finished_logo = true;
-        oled_clear();
-        render_status();
+        if (timer_elapsed(startup_timer) > 25000) {
+            oled_off();
+            turn_oled_on = false;
+        } else if(turn_oled_on){
+            oled_on();
+            oled_clear();
+            render_status();
+            if((timer_elapsed(startup_timer) > 400) && (space_pressed) && !wrd_del_mode){
+                register_code(KC_SPC);
+            }
+        }
+
     }
     return false;
 }
