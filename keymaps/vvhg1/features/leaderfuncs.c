@@ -13,7 +13,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 #include "leaderfuncs.h"
 #include "casemodes.h"
 #ifdef ENCODER_ENABLE
@@ -26,6 +25,9 @@
 
 void *leader_start_func(uint16_t keycode) {
     switch (keycode) {
+//TODO: add F keys with F followed by number
+        case KC_F:
+            return f_key_stuff;
 
         case KC_A:
             tap_code16(LCTL(KC_F2));  //  Ctrl+F2 Select all occurrences of word VSCode
@@ -402,6 +404,45 @@ void *vscode_stuff_f(uint16_t keycode) {
             tap_code16(LCTL(KC_K));  //  vfi focus right
             tap_code16(LCTL(KC_RIGHT));
             return vscode_stuff_f;
+        default:
+            return NULL;
+    }
+}
+void *f_key_stuff(uint16_t keycode) {
+    switch (keycode) {
+        case KC_N:
+            tap_code(KC_F1);  // here F1
+            return f_key_stuff;
+        case KC_E:
+            tap_code(KC_F2);  // here F2
+            return f_key_stuff;
+        case KC_I:  // here F3
+            tap_code(KC_F3);
+            return f_key_stuff;
+        case KC_H:
+            tap_code(KC_F4);  // here F4
+            return f_key_stuff;
+        case KC_COMM:
+            tap_code(KC_F5);  // here F5
+            return f_key_stuff;
+        case KC_DOT:
+            tap_code(KC_F6);  // here F6
+            return f_key_stuff;
+        case KC_L:
+            tap_code(KC_F7);  // here F7
+            return f_key_stuff;
+        case KC_U:
+            tap_code(KC_F8);  // here F8
+            return f_key_stuff;
+        case KC_Y:
+            tap_code(KC_F9);  // here F9
+            return f_key_stuff;
+        case KC_M:
+            tap_code(KC_F10);  // here F10
+            return f_key_stuff;
+        case KC_O:
+            tap_code(KC_F11);  // here F11
+            return f_key_stuff;
         default:
             return NULL;
     }

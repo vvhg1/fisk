@@ -35,3 +35,4 @@ void *macro_stuff(uint16_t keycode); // m records and plays macros
 void *umlaut_stuff(uint16_t keycode); // german umlaut
 void *xcase_stuff(uint16_t keycode); // snake case and caps
 void *bracket_repeat(uint16_t keycode); // snake case and caps
+void *f_key_stuff(uint16_t keycode); // F1-F11
