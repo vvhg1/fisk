@@ -28,7 +28,13 @@ __attribute__((weak)) bool process_custom_one_shot(uint16_t keycode, const keyre
     case MR_sft:
         if (record->event.pressed)
         {
-            if (!rshift_on)
+            if (space_pressed)
+            {
+                unregister_code16(MR_sft);
+                layer_on(_MOUSE);
+                custom_space_cadet = true;
+            }
+            else if (!rshift_on)
             {
                 rshift_on = true;
                 register_code(KC_RSHIFT);
@@ -42,7 +48,12 @@ __attribute__((weak)) bool process_custom_one_shot(uint16_t keycode, const keyre
         }
         else
         {
-            if ((rshift_on) && (!lshift_on) && (timer_elapsed(one_shot_timer) < 500))
+            if(layer_state_is(_MOUSE)){
+                layer_off(_MOUSE);
+                space_pressed = false;
+                custom_space_cadet = false;
+            }
+            else if ((rshift_on) && (!lshift_on) && (timer_elapsed(one_shot_timer) < 500))
             {
                 is_oneshot_rshift = true;
             }

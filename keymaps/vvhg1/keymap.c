@@ -45,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
               KC_ESC,   KC_W,    KC_F  ,  KC_P ,   KC_B , KC_SLSH,                                      Sq_Br,   KC_J,    KC_L ,   KC_U ,   KC_Y ,   Op_Br,
     KC_AMPR , KC_Q,     KC_R,    KC_S ,   KC_T ,   KC_G,  KC_BSLS,                                      Cr_Br,   KC_M,    KC_N,    KC_E,    KC_I,    KC_SCLN,      QuotWrap,
     KC_HASH,  KC_A,     KC_X,    KC_C,    KC_D,    KC_V,            KC_SPC, ML_alt,        ML_ctl, MR_sft,       KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_O,         KC_ENT,
-    KC_TAB,  KC_Z,           mo_FUNX,  MR_sft ,  go_NUM,                    go_NAV,        LEADER,              KC_BSPC, KC_DEL, Enc_M,                 KC_MINS,  KC_AT
+    KC_TAB,  KC_Z,           mo_FUNX,  MR_sft ,  ML_ctl,                    go_NAV,        LEADER,              KC_BSPC, KC_DEL, Enc_M,                 KC_MINS,  KC_AT
 
     ),
 /*
@@ -66,10 +66,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
               KC_ESC,   KC_W,    KC_E  ,  KC_R ,   KC_T , KC_SLSH,                                      Sq_Br,   KC_Y,    KC_U ,   KC_I ,   KC_O,   Op_Br,
     KC_AMPR , KC_Q,     KC_S,    KC_D ,   KC_F ,   KC_G,  KC_BSLS,                                      Cr_Br,   KC_H,    KC_J,    KC_K,    KC_L,    KC_P, QuotWrap,
     KC_HASH,  KC_A,     KC_X,    KC_C,    KC_V,    KC_B,            KC_SPC, ML_alt,         ML_ctl, MR_sft,          KC_N,   KC_M,    KC_COMM,    KC_DOT,  KC_SCLN, KC_ENT,
-    KC_TAB,  KC_Z,           mo_FUNX,  MR_sft,  go_NUM,                go_NAV,          LEADER,              KC_BSPC,  KC_DEL, Enc_M,                 KC_MINS,  KC_AT
+    KC_TAB,  KC_Z,                mo_FUNX,  MR_sft,  ML_ctl,                go_NAV,          LEADER,              KC_BSPC,  KC_DEL, Enc_M,                 KC_MINS,  KC_AT
 
     ),
-#ifdef SWAP_HANDS_ENABLE
+#ifdef x
 
 /*
  * Mirroring Layer, only gets included if the feature is enabled
@@ -96,40 +96,60 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Num Layer
  *
  *          ,----------------------------------------------------.                                       ,-----------------------------------------------------.
- *          |        |  ` ~   |    Up  |    %   |    (   |   )   |                                       |  {c} + |    *   |   7 &  |   8 *  |   9 (  | (e) £  |
+ *          |        |  `     |   ~    |    %   |    ^   |       |                                       |  {c} + |    *   |   7 &  |   8 *  |   9 (  | (e) £  |
  * +--------+--------+--------+--------+--------+--------+-------|                                       |--------+--------+--------+--------+--------+--------+--------.
- * |        |    €   |    ↑   |    ↓   |    →   |        |       |                                       |  [c] = |   0 )  |   1 !  |   2 @  |   3 #  |   . ,  |   $    |
+ * |        |    €   |  Cut   | Copy   | Paste  |  Redo  | Save  |                                       |  [c] = |   0 )  |   1 !  |   2 @  |   3 #  |   . ,  |   $    |
  * |--------+--------+--------+--------+--------+--------+-------+--------+--------.     ,---------------+--------+--------+--------+--------+--------+--------+--------|
- * |        |    ←   |  Cut   |  Copy  |  Redo  |  Paste |       |        |        |     |        |      |        |   /    |   4 $  |   5 %  |   6 ^  |   +    |        |
+ * |  Undo  | Sel All|    ↑   |    ↓   |    →   |        |       |        |        |     |        |      |        |   /    |   4 $  |   5 %  |   6 ^  |   +    | Enter  |
  * |--------+--------+--------+--------+--------+--------+--.    |        +--------|     |--------+      |     ,--+--------+--------+--------+--------+--------+--------|
- * |        |   Undo |           |      |          |        |    |        |        |     |        |      |     |      |        |         |            |        |    =   |
+ * |        |   ←    |           |      |          |        |    |        |        |     |        |      |     |      |        |         |            |        |    =   |
  * `-----------------'           `--------------------------'    '--------+--------'     `---------------'     '-------------------------'            '-----------------'
  */
     [_NUM] = LAYOUT(
-             _______,  KC_GRV,   KC_UP  , KC_PERC ,KC_LPRN , KC_RPRN,                                      _______,   KC_PAST,   KC_7 ,   KC_8 ,   KC_9 ,   Op_BrS,
-    _______, EURO_SYM, KC_UP,   KC_DOWN , KC_RIGHT,_______, _______,                                     _______,  KC_0,      KC_1,    KC_2,    KC_3,    DotC,   S(KC_4),
-    _______, KC_LEFT,     Cut,    Copy,  Redo,   Paste,               _______,_______,        _______, _______,    KC_PSLS,   KC_4,    KC_5,    KC_6,  KC_PLUS,   _______,
-    _______,    Undo,           _______,  _______,  _______,                  _______,        _______,            _______, _______, _______,                   _______,   KC_EQL
+             _______,  KC_GRV, S(KC_GRV), KC_PERC, S(KC_6), _______,                                      _______,   S(KC_8),   KC_7 ,   KC_8 ,   KC_9 ,   Op_BrS,
+    _______, EURO_SYM,    Cut,     Copy ,   Paste,    Redo, C(KC_S),                                     _______,    KC_0,      KC_1,    KC_2,    KC_3,    DotC,   S(KC_4),
+    C(KC_A),     Undo,  KC_UP,   KC_DOWN, KC_RIGHT, _______,        _______,_______,        _______, _______,       KC_PSLS,   KC_4,    KC_5,    KC_6,  KC_PLUS,   _______,
+    _______, KC_LEFT,             _______,  _______,  _______,              _______,        _______,            _______, _______, _______,             _______,   KC_EQL
 
     ),
 /*
- * Navigation Layer: Mouse Navigation
+ * Navigation Layer: Navigation
  *
  *          ,----------------------------------------------------.                                       ,-----------------------------------------------------.
- *          |        | M WH dn| M up   | M WH up| M WH R | Cmmnt |                                       |   { +  | go def |   Home |  PG DN |  PG UP |  ( !   |
+ *          |        |  `     |   ~    |    %   |    ^   | Cmmnt |                                       |   { +  | go def |   Home |  PG DN |  PG UP |  ( !   |
  * +--------+--------+--------+--------+--------+--------+-------|                                       |--------+--------+--------+--------+--------+--------+--------.
- * |        | M WH L | M left | M down | M right| M btn1 |  Save |                                       |   [ =  | pk def |    ←   |    ↓   |    ↑   |  End   |        |
+ * |        |   €    |  Cut   |  Copy  |  Paste |  Redo  |  Save |                                       |   [ =  | pk def |    ←   |    ↓   |    ↑   |  End   |   ' "  |
  * |--------+--------+--------+--------+--------+--------+-------+--------+--------.     ,---------------+--------+--------+--------+--------+--------+--------+--------|
- * | back   | Sel All|  Cut   |  Copy  |  Redo  |  Paste |       |        |        |     |        |      |        | dbg log| SelWrdL| SelLn↓ | SelLn↑ |    →   |        |
+ * |  Undo  | Sel All|    ↑   |    ↓   |    →   |        |       |        |        |     |        |      |        | dbg log| SelWrdL| SelLn↓ | SelLn↑ |    →   | Enter  |
  * |--------+--------+--------+--------+--------+--------+--.    |        +--------|     |--------+      |     ,--+--------+--------+--------+--------+--------+--------|
- * |        |  Undo  |           |        |        |  LCTL  |    |        |        |     |        |      |     |        |      |         |            | SelWrdR|   F2   |
+ * |        |   ←    |           |        |        |  LCTL  |    |        |        |     |        |      |     |        |      |         |            | SelWrdR|   F2   |
  * `-----------------'           `--------------------------'    '--------+--------'     `---------------'     '-------------------------'            '-----------------'
  */
     [_NAV] = LAYOUT(
-             _______, KC_WH_D, KC_MS_U, KC_WH_U,  KC_WH_R,  Cmnt,                                         _______, Go_Def, KC_HOME, KC_PGDN, KC_PGUP, Op_Br,
-    _______, KC_WH_L, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN1, C(KC_S),                                        _______, Peek_Def, KC_LEFT, KC_DOWN, KC_UP,  KC_END, KC_QUOT,
-    KC_BTN4, C(KC_A),  Cut   ,    Copy,   Redo,   Paste,          _______, _______,      _______, _______,         Dbg, SelWrdL,   SelLnDn,  SelLnUp, KC_RIGHT, _______,
-    _______,    Undo,           _______,  _______, ML_ctl,                _______,      _______,                _______, _______, _______,           SelWrdR,     KC_F2
+             _______, _______, _______, _______, _______,  Cmnt,                                         _______, Go_Def, KC_HOME, KC_PGDN, KC_PGUP, Op_Br,
+    _______, _______,  Cut   ,    Copy,  Paste,    Redo, C(KC_S),                                        _______, Peek_Def, KC_LEFT, KC_DOWN, KC_UP,  KC_END, KC_QUOT,
+    C(KC_A),   Undo,   KC_UP, KC_DOWN, KC_RIGHT, _______,          _______, _______,      _______, _______,         Dbg, SelWrdL,   SelLnDn,  SelLnUp, KC_RIGHT, _______,
+    _______, KC_LEFT,             _______,  _______, ML_ctl,                _______,      _______,                _______, _______, _______,           SelWrdR,     KC_F2
+
+    ),
+/*
+ * Mouse Layer
+ *
+ *          ,----------------------------------------------------.                                       ,-----------------------------------------------------.
+ *          |        |M WH dn | M WH up| M WH R |        |       |                                       |   { +  | go def |   Home |  PG DN |  PG UP |  ( !   |
+ * +--------+--------+--------+--------+--------+--------+-------|                                       |--------+--------+--------+--------+--------+--------+--------.
+ * | M btn5 | M WH L |  M up  | M down | M right| M btn1 |       |                                       |   [ =  | pk def |    ←   |    ↓   |    ↑   |  End   |   ' "  |
+ * |--------+--------+--------+--------+--------+--------+-------+--------+--------.     ,---------------+--------+--------+--------+--------+--------+--------+--------|
+ * | M btn2 | M left |        |        |        |        |       |        |        |     |        |      |        | dbg log| SelWrdL| SelLn↓ | SelLn↑ |    →   | Enter  |
+ * |--------+--------+--------+--------+--------+--------+--.    |        +--------|     |--------+      |     ,--+--------+--------+--------+--------+--------+--------|
+ * | M btn4 |        |           |      |          |        |    |        |        |     |        |      |     |        |      |         |            | SelWrdR|   F2   |
+ * `-----------------'           `--------------------------'    '--------+--------'     `---------------'     '-------------------------'            '-----------------'
+ */
+   [_MOUSE] = LAYOUT(
+             _______, KC_WH_U, KC_WH_D, KC_WH_R, _______, _______,                                        _______, _______, _______,   _______, _______, _______,
+    KC_BTN5, KC_WH_L, KC_MS_U, KC_MS_D, KC_MS_R, KC_BTN1, _______,                                        _______, _______,_______,_______,_______, _______, _______,
+    KC_BTN2, KC_MS_L, _______, _______, _______, _______,          _______, _______,      _______, _______,        _______, _______, _______, _______, _______, _______,
+    KC_BTN4, _______,            _______,  _______, _______,                _______,      _______,                _______, _______, _______,           _______, _______
 
     ),
 /*
@@ -140,7 +160,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * +--------+--------+--------+--------+--------+--------+-------|                                       |--------+--------+--------+--------+--------+--------+--------.
  * |        | Qwerty |        |        |        |        |       |                                       |In_br_c |  KC_NO |  KC_F1 |  KC_F2 |  KC_F3 | KC_F10 |        |
  * |--------+--------+--------+--------+--------+--------+-------+--------+--------.     ,---------------+--------+--------+--------+--------+--------+--------+--------|
- * |        |        |        | Colemak|FLP_DOT |        |       |        |        |     |        |      |        |  KC_NO |  KC_F4 |  KC_F5 |  KC_F6 | KC_F11 |        |
+ * |        |        |        | Colemak|FLP_DOT |        |       |        |        |     |        |      |        |  KC_NO |  KC_F4 |  KC_F5 |  KC_F6 | KC_F11 | Enter  |
  * |--------+--------+--------+--------+--------+--------+--.    |        +--------|     |--------+      |     ,--+--------+--------+--------+--------+--------+--------|
  * |        | Mirror |           |     |        |        |       |        |        |     |        |      |     |      |        |         |            | KC_F12 |        |
  * `-----------------'           `--------------------------'    '--------+--------'     `---------------'     '-------------------------'            '-----------------'
@@ -253,41 +273,53 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         prev_layer_toggle_flag = layer_toggle_flag;
         layer_toggle_flag      = false;
         finished_logo          = true;
+        custom_space_cadet     = true;
 #ifdef SWAP_HANDS_ENABLE
         no_swap = true;
 #endif
     }
     switch (keycode) {  //!#######################################################--switch(keycode)--#######################################################
         case KC_BSPC:
-            if (record->event.pressed) {
-                if (space_pressed) {
-                    tap_code16(LCTL(KC_BSPC));
-                    wrd_del_mode = true;
-                    return false;
-                }
+            if (record->event.pressed && space_pressed) {
+                tap_code16(LCTL(KC_BSPC));
+                return false;
             }
             return true;
 
         case KC_DEL:
-            if (record->event.pressed) {
-                if (space_pressed) {
-                    tap_code16(LCTL(KC_Z));
-                    wrd_del_mode = true;
-                    return false;
-                }
+            if (record->event.pressed && space_pressed) {
+                tap_code16(LCTL(KC_Z));
+                return false;
             }
             return true;
 
         case KC_SPC:
             if (record->event.pressed) {
                 space_pressed = true;
+                custom_space_cadet = false;
+                process_custom_layer(record, mo_NUM);
                 return false;
             } else {
-                if(!wrd_del_mode){
+                if(!custom_space_cadet){
+#ifdef CASEMODES_ENABLE
+                    keyrecord_t new_record;
+                    new_record.event.pressed = true;
+                    keyrecord_t *new_record_p = &new_record;
+                    if (!process_case_modes(KC_SPC, new_record_p)) {
+                        if (layer_state_is(_NUM)) {
+                            process_custom_layer(record, mo_NUM);
+                        }
+                        space_pressed = false;
+                        return false;
+                    }
+#endif
                     tap_code(KC_SPC);
                 }
-                wrd_del_mode = false;
-                space_pressed = false;
+                if (layer_state_is(_NUM)) {
+                    custom_space_cadet = false;
+                    space_pressed = false;
+                    process_custom_layer(record, mo_NUM);
+                }
             }
             return true;
 
@@ -584,7 +616,7 @@ bool oled_task_user(void) {
             oled_on();
             oled_clear();
             render_status();
-            if((timer_elapsed(startup_timer) > 400) && (space_pressed) && !wrd_del_mode){
+            if((timer_elapsed(startup_timer) > 400) && (space_pressed) && !custom_space_cadet){
                 register_code(KC_SPC);
             }
         }

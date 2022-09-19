@@ -29,5 +29,7 @@ enum layers {
     _NAV,
     _NUM,
     _FUNX,
-    _AUX
+    _AUX,
+    _MOUSE,
+    mo_NUM
 };

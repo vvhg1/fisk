@@ -36,7 +36,7 @@ bool came_from_NAV;
 bool cleared_oled;
 bool turn_oled_on;
 bool space_pressed;
-bool wrd_del_mode;
+bool custom_space_cadet;
 #ifdef SWAP_HANDS_ENABLE
 bool no_swap;
 #endif
@@ -89,7 +89,6 @@ enum custom_keycodes {
     Go_Def,
     Peek_Def,
     Dbg
-
 };
 
 #ifdef CONSOLE_ENABLE
