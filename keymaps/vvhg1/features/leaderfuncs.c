@@ -95,9 +95,9 @@ void *leader_start_func(uint16_t keycode) {
             if (get_mods() & MOD_MASK_SHIFT) {  // single brackets, closing on shift
                 tap_code16((LSFT(KC_RBRC)));
             } else {
-                tap_code16((LSFT(KC_LBRC)));
+                tap_code16((LSFT(KC_1)));
             }
-            return bracket_repeat;
+            return NULL;
         case Op_Br:
             if (get_mods() & MOD_MASK_SHIFT) {  // single brackets, closing on shift
                 tap_code16(S(KC_0));
