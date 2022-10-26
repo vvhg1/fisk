@@ -96,20 +96,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Num Layer
  *
  *          ,----------------------------------------------------.                                       ,-----------------------------------------------------.
- *          |        |  `     |   ~    |    %   |    ^   |       |                                       |  {c} + |    *   |   7 &  |   8 *  |   9 (  | (e) £  |
+ *          |        |  `     |   ~    |    %   |    ^   |       |                                       |  {c} + |    *   |   7 &  |   8 *  |   9 (  | (c) !  |
  * +--------+--------+--------+--------+--------+--------+-------|                                       |--------+--------+--------+--------+--------+--------+--------.
- * |        |    €   |  Cut   | Copy   | Paste  |  Redo  | Save  |                                       |  [c] = |   0 )  |   1 !  |   2 @  |   3 #  |   . ,  |   $    |
+ * |        |    €   |  Cut   | Copy   | Paste  |  Redo  | Save  |                                       |  [c] = |   . ,  |   1 !  |   2 @  |   3 #  |   +    |   $    |
  * |--------+--------+--------+--------+--------+--------+-------+--------+--------.     ,---------------+--------+--------+--------+--------+--------+--------+--------|
- * |  Undo  | Sel All|    ↑   |    ↓   |    →   |        |       |        |        |     |        |      |        |   /    |   4 $  |   5 %  |   6 ^  |   +    | Enter  |
- * |--------+--------+--------+--------+--------+--------+--.    |        +--------|     |--------+      |     ,--+--------+--------+--------+--------+--------+--------|
- * |        |   ←    |           |      |          |        |    |        |        |     |        |      |     |      |        |         |            |        |    =   |
+ * | Sel All|  Undo  |    ↑   |    ↓   |    →   |        |       |        |        |     |        |      |        |   /    |   4 $  |   5 %  |   6 ^  |   =    | Enter  |
+ * |--------+--------+--------+--------+--------+--------+--.    |        +--------|     |--------+  0   |     ,--+--------+--------+--------+--------+--------+--------|
+ * |        |   ←    |           |      |          |        |    |        |        |     |        |      |     |      |        |         |            |   -    |   ,    |
  * `-----------------'           `--------------------------'    '--------+--------'     `---------------'     '-------------------------'            '-----------------'
  */
     [_NUM] = LAYOUT(
-             _______,  KC_GRV, S(KC_GRV), KC_PERC, S(KC_6), _______,                                      _______,   S(KC_8),   KC_7 ,   KC_8 ,   KC_9 ,   Op_BrS,
-    _______, EURO_SYM,    Cut,     Copy ,   Paste,    Redo, C(KC_S),                                     _______,    KC_0,      KC_1,    KC_2,    KC_3,    DotC,   S(KC_4),
-    C(KC_A),     Undo,  KC_UP,   KC_DOWN, KC_RIGHT, _______,        _______,_______,        _______, _______,       KC_PSLS,   KC_4,    KC_5,    KC_6,  KC_PLUS,   _______,
-    _______, KC_LEFT,             _______,  _______,  _______,              _______,        _______,            _______, _______, _______,             _______,   KC_EQL
+             _______,  KC_GRV, S(KC_GRV), S(KC_5), S(KC_6), _______,                                      _______,   S(KC_8),   KC_7 ,   KC_8 ,   KC_9 ,   Op_BrS,
+    _______, EURO_SYM,    Cut,     Copy ,   Paste,    Redo, C(KC_S),                                     _______,    KC_DOT,      KC_1,    KC_2,    KC_3,    KC_PLUS,   S(KC_4),
+    C(KC_A),     Undo,  KC_UP,   KC_DOWN, KC_RIGHT, _______,        _______,_______,        _______, KC_0,       KC_PSLS,   KC_4,    KC_5,    KC_6,  KC_EQL,   _______,
+    _______, KC_LEFT,             _______,  _______,  _______,              _______,        _______,            _______, _______, _______,             _______,   KC_COMM
 
     ),
 /*
@@ -120,15 +120,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * +--------+--------+--------+--------+--------+--------+-------|                                       |--------+--------+--------+--------+--------+--------+--------.
  * |        |   €    |  Cut   |  Copy  |  Paste |  Redo  |  Save |                                       |   [ =  | pk def |    ←   |    ↓   |    ↑   |  End   |   ' "  |
  * |--------+--------+--------+--------+--------+--------+-------+--------+--------.     ,---------------+--------+--------+--------+--------+--------+--------+--------|
- * |  Undo  | Sel All|    ↑   |    ↓   |    →   |        |       |        |        |     |        |      |        | dbg log| SelWrdL| SelLn↓ | SelLn↑ |    →   | Enter  |
- * |--------+--------+--------+--------+--------+--------+--.    |        +--------|     |--------+      |     ,--+--------+--------+--------+--------+--------+--------|
+ * | Sel All|  Undo  |    ↑   |    ↓   |    →   |        |       |        |        |     |        |      |        | dbg log| SelWrdL| SelLn↓ | SelLn↑ |    →   | Enter  |
+ * |--------+--------+--------+--------+--------+--------+--.    |        +--------|     |--------+ R_sft|     ,--+--------+--------+--------+--------+--------+--------|
  * |        |   ←    |           |        |        |  LCTL  |    |        |        |     |        |      |     |        |      |         |            | SelWrdR|   F2   |
  * `-----------------'           `--------------------------'    '--------+--------'     `---------------'     '-------------------------'            '-----------------'
  */
     [_NAV] = LAYOUT(
              _______, _______, _______, _______, _______,  Cmnt,                                         _______, Go_Def, KC_HOME, KC_PGDN, KC_PGUP, Op_Br,
     _______, _______,  Cut   ,    Copy,  Paste,    Redo, C(KC_S),                                        _______, Peek_Def, KC_LEFT, KC_DOWN, KC_UP,  KC_END, KC_QUOT,
-    C(KC_A),   Undo,   KC_UP, KC_DOWN, KC_RIGHT, _______,          _______, _______,      _______, _______,         Dbg, SelWrdL,   SelLnDn,  SelLnUp, KC_RIGHT, _______,
+    C(KC_A),   Undo,   KC_UP, KC_DOWN, KC_RIGHT, _______,          _______, _______,      _______, MR_sft,         Dbg, SelWrdL,   SelLnDn,  SelLnUp, KC_RIGHT, _______,
     _______, KC_LEFT,             _______,  _______, ML_ctl,                _______,      _______,                _______, _______, _______,           SelWrdR,     KC_F2
 
     ),
@@ -146,10 +146,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------'           `--------------------------'    '--------+--------'     `---------------'     '-------------------------'            '-----------------'
  */
    [_MOUSE] = LAYOUT(
-             _______, KC_WH_U, KC_WH_D, KC_WH_R, _______, _______,                                        _______, _______, _______,   _______, _______, _______,
-    KC_BTN5, KC_WH_L, KC_MS_U, KC_MS_D, KC_MS_R, KC_BTN1, _______,                                        _______, _______,_______,_______,_______, _______, _______,
-    KC_BTN2, KC_MS_L, _______, _______, _______, _______,          _______, _______,      _______, _______,        _______, _______, _______, _______, _______, _______,
-    KC_BTN4, _______,            _______,  _______, _______,                _______,      _______,                _______, _______, _______,           _______, _______
+             _______, KC_WH_U, KC_WH_D, KC_WH_R, _______, _______,                                        _______, Go_Def, KC_HOME, KC_PGDN, KC_PGUP, Op_Br,
+    KC_BTN5, KC_WH_L, KC_MS_U, KC_MS_D, KC_MS_R, KC_BTN1, _______,                                        _______, Peek_Def, KC_LEFT, KC_DOWN, KC_UP,  KC_END, KC_QUOT,
+    KC_BTN2, KC_MS_L, _______, _______, _______, _______,          _______, _______,      _______, _______,         Dbg, SelWrdL,   SelLnDn,  SelLnUp, KC_RIGHT, _______,
+    KC_BTN4, _______,            _______,  _______, _______,                _______,      _______,                 _______, _______, _______,           SelWrdR,     KC_F2
 
     ),
 /*
@@ -274,11 +274,38 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_toggle_flag      = false;
         finished_logo          = true;
         custom_space_cadet     = true;
+        if (keycode != KC_BSPC && keycode != KC_DEL && keycode != KC_0) {
+            space_pressed = false;
+        }
+
+
 #ifdef SWAP_HANDS_ENABLE
         no_swap = true;
 #endif
     }
     switch (keycode) {  //!#######################################################--switch(keycode)--#######################################################
+        case KC_0:
+        if (record->event.pressed)
+        {
+            if (space_pressed)
+            {
+                unregister_code(KC_0);
+                layer_on(_MOUSE);
+                // custom_space_cadet = true;
+                space_pressed = false;
+                return false;
+            }
+        }
+        else
+        {
+            if(layer_state_is(_MOUSE)){
+                layer_off(_MOUSE);
+                space_pressed = false;
+                // custom_space_cadet = false;
+            }
+        }
+        return true;
+
         case KC_BSPC:
             if (record->event.pressed && space_pressed) {
                 tap_code16(LCTL(KC_BSPC));
@@ -522,25 +549,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
 #endif
-        // ------------------------------------------------------------------------ custom key on num layer with dot and comma when shifted ----------------------------------------------------------------
-        case DotC:
-            if (record->event.pressed) {
-                if (get_mods() & MOD_MASK_SHIFT) {
-                    del_mods(MOD_MASK_SHIFT);
-                    if (dot_flipped) {
-                        tap_code(KC_DOT);
-                    } else {
-                        tap_code(KC_COMM);
-                    }
-                } else {
-                    if (dot_flipped) {
-                        tap_code(KC_COMM);
-                    } else {
-                        tap_code(KC_DOT);
-                    }
-                }
-                return false;
-            }
+        // // ------------------------------------------------------------------------ custom key on num layer with dot and comma when shifted ----------------------------------------------------------------
+        // case DotC:
+        //     if (record->event.pressed) {
+        //         if (get_mods() & MOD_MASK_SHIFT) {
+        //             del_mods(MOD_MASK_SHIFT);
+        //             if (dot_flipped) {
+        //                 tap_code(KC_DOT);
+        //             } else {
+        //                 tap_code(KC_COMM);
+        //             }
+        //         } else {
+        //             if (dot_flipped) {
+        //                 tap_code(KC_COMM);
+        //             } else {
+        //                 tap_code(KC_DOT);
+        //             }
+        //         }
+        //         return false;
+        //     }
         // ------------------------------------------------------------------------ cut copy paste undo redo ----------------------------------------------------------------
         case Undo:
             if (record->event.pressed) {
