@@ -28,6 +28,9 @@ void *leader_start_func(uint16_t keycode) {
 //TODO: add F keys with F followed by number
         case KC_F:
             return f_key_stuff;
+        case KC_M:
+            tap_code16(KC_F22);
+            return NULL;
 
         case KC_A:
             tap_code16(LCTL(KC_F2));  //  Ctrl+F2 Select all occurrences of word VSCode
