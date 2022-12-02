@@ -246,6 +246,8 @@ void render_layer(void) {
     static const char PROGMEM AUX_QW3[]     = {0xCD, 0xC9, 0xC2, 0x8C, 0xD1, 0xD2, 0x00};
     static const char PROGMEM EMPTY1[]      = {0xA0, 0x85, 0x88, 0x91, 0x00};
     static const char PROGMEM EMPTY2[]      = {0xAD, 0x20, 0x20, 0x20, 0xB1, 0xB2, 0x00};
+    static const char PROGMEM BRACKETS2[]      = {0xAD, 0x42, 0x52, 0x43, 0xB1, 0xB2, 0x00};
+    static const char PROGMEM MOUSE2[]      = {0xAD, 0x52, 0x41, 0x54, 0xB1, 0xB2, 0x00};
     // static const char PROGMEM EMPTY_QW3[]   = {0xCD, 0xA8, 0xC3, 0xC8, 0xD1, 0xD2, 0x00};
     static const char PROGMEM COLE2[]       = {0xB3, 0xB4, 0xB5, 0xB6, 0xB7, 0xB2, 0x00};
     static const char PROGMEM COLE3[]       = {0xD3, 0xD4, 0xD5, 0xD6, 0xD7, 0xD2, 0x00};
@@ -320,6 +322,12 @@ void render_layer(void) {
             break;
         case _AUX:
             oled_write_P(AUX2, false);
+            break;
+        case _BRACKETS:
+            oled_write_P(BRACKETS2, false);
+            break;
+        case _MOUSE:
+            oled_write_P(MOUSE2, false);
             break;
         default:
             oled_write_P(EMPTY2, false);
@@ -430,6 +438,9 @@ void render_encoder(encoder_mode_t mode) {
             break;
         case ENC_MODE_EXPAND_SELECTION:
             oled_write_P(PSTR("  \x1E\x1F" " SEL " "\x1C\x1D "), false);
+            break;
+        case ENC_MODE_CODE_CHANGES:
+            oled_write_P(PSTR("  \x1E\x1F" " CHG " "\x1C\x1D "), false);
             break;
         default:
             oled_write_P(PSTR("??? "), false);

@@ -98,11 +98,21 @@ void encoder_action_expandselection(uint8_t clockwise) {
         tap_code16(LSA(KC_LEFT));
     }
 }
+void encoder_action_code_changes(uint8_t clockwise) {
+    if (clockwise) {
+        tap_code16(LALT(KC_F5));
+    } else {
+        tap_code16(LSFT(LALT(KC_F5)));
+    }
+}
 
 void encoder_action(encoder_mode_t mode, uint8_t clockwise) {
     switch (mode) {
         case ENC_MODE_NEXTTAB:
             encoder_action_nexttab(clockwise);
+            break;
+        case ENC_MODE_CODE_CHANGES:
+            encoder_action_code_changes(clockwise);
             break;
         // case ENC_MODE_WORD_NAV:
         //     encoder_action_word_nav(clockwise);

@@ -23,16 +23,17 @@
 // void *reset_keyboard2(uint16_t keycode); //
 void *windows_stuff(uint16_t keycode); // here WS is Start menu, WM is context menu WQ  close tab
 void *vscode_stuff(uint16_t keycode);
-void *vscode_stuff_ne(uint16_t keycode); // here vn select editor right/ vi left
+void *vscode_stuff_no(uint16_t keycode); // here vn select editor right/ vi left
 void *vscode_stuff_m(uint16_t keycode); // vmn moves editor to right group / vmi to left
 void *vscode_stuff_f(uint16_t keycode); // vfn vfi focus on group left right
-void *vscode_stuff_cl(uint16_t keycode); // vcu vce copy line up down
-void *vscode_stuff_ml(uint16_t keycode); // vu ve move ln up dn
 void *vscode_stuff_p(uint16_t keycode); // vu ve move ln up dn
 void *vscode_stuff_a(uint16_t keycode); // vu ve move ln up dn
-void *encoder_stuff(uint16_t keycode); // h horizontal scroll / v vertical scroll / e editor / t tab / p paging / w word
+void *vscode_stuff_brackets(uint16_t keycode); // bracket selection
+// void *encoder_stuff(uint16_t keycode); // h horizontal scroll / v vertical scroll / e editor / t tab / p paging / w word
 void *macro_stuff(uint16_t keycode); // m records and plays macros
 void *umlaut_stuff(uint16_t keycode); // german umlaut
 void *xcase_stuff(uint16_t keycode); // snake case and caps
-void *bracket_repeat(uint16_t keycode); // snake case and caps
 void *f_key_stuff(uint16_t keycode); // F1-F11
+void *operator_stuff(uint16_t keycode); // operators
+void *operator_stuff_larger(uint16_t keycode); // larger operators
+void *operator_stuff_smaller(uint16_t keycode); // smaller operators

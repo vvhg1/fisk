@@ -25,45 +25,45 @@
 
 void *leader_start_func(uint16_t keycode) {
     switch (keycode) {
-//TODO: add F keys with F followed by number
-        case KC_F:
-            return f_key_stuff;
-        case KC_M:
-            tap_code16(KC_F22);
-            return NULL;
 
         case KC_A:
             tap_code16(LCTL(KC_F2));  //  Ctrl+F2 Select all occurrences of word VSCode
             return NULL;
+       case KC_B:
+            return vscode_stuff_brackets;
         case KC_E:
-            tap_code16(C(KC_K));  // show tool tip
-            tap_code16(C(KC_I));
+            tap_code16(LCTL(LSFT(KC_P)));  //  Ctrl+Shift+P Show command palette VSCode
+            // tap_code16(KC_F1);             //  Ctrl+Shift+P Show command palette VSCode
             return NULL;
+        case KC_F:
+            return f_key_stuff; // Function keys
         case KC_G:
             tap_code16(C(S(KC_G)));  // open github sidebar
             tap_code((KC_G));
             return NULL;
-        // case KC_L:
-        //     if (get_mods() & MOD_MASK_SHIFT) {  // peek definition, with shift go to definition
-        //         del_mods(MOD_MASK_SHIFT);
-        //         tap_code(KC_F12);
-        //     } else {
-        //         if (is_windows) {
-        //             tap_code16(LALT(KC_F12));
-        //         } else {
-        //             tap_code16(LCTL(LSFT(KC_F12)));
-        //         }
-        //     }
-        //     return NULL;
+        case KC_H:
+            tap_code16(C(KC_K));  // show tool tip
+            tap_code16(C(KC_I));
+            return NULL;
+        case KC_I:
+            return operator_stuff; // Operators
+#ifdef DYNAMIC_MACRO_ENABLE
+        case KC_M:
+            return macro_stuff;  // here m is the start for Macro related actions
+#else
+        case KC_M:
+            tap_code16(KC_F20); // Mute
+            return NULL;
+#endif
         case KC_N:
             tap_code16(C(KC_PGUP));  //  n select editor left
-            return vscode_stuff_ne;
+            return vscode_stuff_no;
         case KC_O:
             tap_code16(C(KC_PGDN));  // i select editor right
-            return vscode_stuff_ne;
+            return vscode_stuff_no;
         case KC_Q:
-            tap_code16(C(KC_F4));  // WQ closes window
-            return windows_stuff;
+            tap_code16(C(KC_F4));  // Q closes window
+            return NULL;
         case KC_R:
             if (get_mods() & MOD_MASK_SHIFT) {  // run w/o debugging, with shift stop debugging
                 tap_code(KC_F5);
@@ -74,46 +74,25 @@ void *leader_start_func(uint16_t keycode) {
         case KC_T:
             tap_code16(LCTL(KC_GRV)); //  Ctrl+` Toggle terminal VSCode
             return NULL;
-        case KC_W:
-            return windows_stuff;  // here W is the start for Win related actions
+        case KC_U:
+            return umlaut_stuff;  // here U is the start for Umlaut related actions
         case KC_V:
             return vscode_stuff;  // here V is the start for VSCode related actions
+        case KC_W:
+            return windows_stuff;  // here W is the start for Win related actions
         case KC_Z:
             tap_code16(LCTL(KC_K));  //  Ctrl+K,Z VSCode Zen Mode
             tap_code16(KC_Z);        //  Ctrl+K,Z VSCode Zen Mode
             return NULL;
         case KC_ENTER:
+            // tap_code16(KC_ESC);  // escape
             tap_code16(LCTL(LSFT(KC_P)));  //  Ctrl+Shift+P Show command palette VSCode
             tap_code16(KC_F1);             //  Ctrl+Shift+P Show command palette VSCode
             return NULL;
-        case Sq_Br:
-            if (get_mods() & MOD_MASK_SHIFT) {  // single brackets, closing on shift
-                del_mods(MOD_MASK_SHIFT);
-                tap_code(KC_RBRC);
-            } else {
-                tap_code(KC_LBRC);
-            }
-            return bracket_repeat;
-        case Cr_Br:
-            if (get_mods() & MOD_MASK_SHIFT) {  // single brackets, closing on shift
-                tap_code16((LSFT(KC_RBRC)));
-            } else {
-                tap_code16((LSFT(KC_1)));
-            }
+        case KC_AT:
+            send_string("victor.hobe.gelting@gmail.com");
             return NULL;
-        case Op_Br:
-            if (get_mods() & MOD_MASK_SHIFT) {  // single brackets, closing on shift
-                tap_code16(S(KC_0));
-            } else {
-                tap_code16(S(KC_9));
-            }
-            return bracket_repeat;
-#ifdef DYNAMIC_MACRO_ENABLE
-        case KC_M:
-            return macro_stuff;  // here m is the start for Macro related actions
-#endif
-        case KC_U:
-            return umlaut_stuff;  // here U is the start for Umlaut related actions
+
 #ifdef CASEMODES_ENABLE
         case KC_C:
             toggle_caps_word();
@@ -125,9 +104,9 @@ void *leader_start_func(uint16_t keycode) {
             toggle_xcase();
             toggle_caps_word();
             break;
-        case KC_M:
-            toggle_num_word();
-            break;
+        // case KC_M:
+        //     toggle_num_word();
+        //     break;
         case KC_D:
             enable_xcase_with(MR_sft);
             break;
@@ -143,35 +122,56 @@ void *leader_start_func(uint16_t keycode) {
     return NULL;
 }
 
-void *bracket_repeat(uint16_t keycode) {
+void *operator_stuff(uint16_t keycode) {
     switch (keycode) {
-        case Sq_Br:
-            if (get_mods() & MOD_MASK_SHIFT) {  // single brackets, closing on shift
-                del_mods(MOD_MASK_SHIFT);
-                tap_code(KC_RBRC);
-            } else {
-                tap_code(KC_LBRC);
-            }
-            return bracket_repeat;
-        case Cr_Br:
-            if (get_mods() & MOD_MASK_SHIFT) {  // single brackets, closing on shift
-                tap_code16((LSFT(KC_RBRC)));
-            } else {
-                tap_code16((LSFT(KC_LBRC)));
-            }
-            return bracket_repeat;
-        case Op_Br:
-            if (get_mods() & MOD_MASK_SHIFT) {  // single brackets, closing on shift
-                tap_code16(S(KC_0));
-            } else {
-                tap_code16(S(KC_9));
-            }
-            return bracket_repeat;
-        default:
+        case KC_L: // larger or larger equal
+            return operator_stuff_larger;
+        case KC_S: // smaller or smaller equal
+            return operator_stuff_smaller;
+        case KC_N: // !=
+            tap_code16(S(KC_1));
+            tap_code16(KC_EQL);
+            return NULL;
+        case KC_E: // ==
+            tap_code16(KC_EQL);
+            tap_code16(KC_EQL);
+            return NULL;
+        case KC_O: // ||
+            tap_code16(S(KC_BSLS));
+            tap_code16(S(KC_BSLS));
+            return NULL;
+        case KC_A: // &&
+            tap_code16(KC_AMPR);
+            tap_code16(KC_AMPR);
             return NULL;
     }
     return NULL;
 }
+void *operator_stuff_larger(uint16_t keycode) {
+    switch (keycode) {
+        case KC_E: // >=
+            tap_code16(S(KC_DOT));
+            tap_code16(KC_EQL);
+            return NULL;
+        case KC_L: // >
+            tap_code16(S(KC_DOT));
+            return NULL;
+    }
+    return NULL;
+}
+void *operator_stuff_smaller(uint16_t keycode) {
+    switch (keycode) {
+        case KC_E: // <=
+            tap_code16(S(KC_COMM));
+            tap_code16(KC_EQL);
+            return NULL;
+        case KC_S: // <
+            tap_code16(S(KC_COMM));
+            return NULL;
+    }
+    return NULL;
+}
+
 void *umlaut_stuff(uint16_t keycode) {
     switch (keycode) {
         case KC_S:
@@ -310,14 +310,6 @@ void *vscode_stuff(uint16_t keycode) {
             return vscode_stuff_m;
         case KC_F:
             return vscode_stuff_f;
-        case KC_U:
-            tap_code16(LALT(KC_UP));  //  vu move line up
-            return vscode_stuff_ml;
-        case KC_E:
-            tap_code16(LALT(KC_DOWN));  //  ve move ln down
-            return vscode_stuff_ml;
-        case KC_C:
-            return vscode_stuff_cl;
         case KC_A:
             return vscode_stuff_a;
         case KC_P:
@@ -329,14 +321,36 @@ void *vscode_stuff(uint16_t keycode) {
             return NULL;
     }
 }
-void *vscode_stuff_ne(uint16_t keycode) {
+void *vscode_stuff_brackets(uint16_t keycode){
+switch (keycode) {
+        case KC_G:
+            tap_code16(C(S(KC_BSLS)));  //  vg
+            return NULL;
+        case KC_S:
+            tap_code16(KC_END);  //  vs
+            tap_code16(KC_HOME);  //  vs
+            tap_code16(KC_HOME);  //  vs
+            tap_code16(LSA(KC_RIGHT));
+            return NULL;
+        case KC_D:
+            tap_code16(KC_END);  //  vs
+            tap_code16(KC_HOME);  //  vs
+            tap_code16(KC_HOME);  //  vs
+            tap_code16(LSA(KC_RIGHT));
+            tap_code16(KC_DEL);  //  vs
+            return NULL;
+        default:
+            return NULL;
+    }
+}
+void *vscode_stuff_no(uint16_t keycode) {
     switch (keycode) {
         case KC_N:
             tap_code16(C(KC_PGUP));  //  vi left
-            return vscode_stuff_ne;
+            return vscode_stuff_no;
         case KC_O:
             tap_code16(C(KC_PGDN));  // vn select editor right
-            return vscode_stuff_ne;
+            return vscode_stuff_no;
 
         default:
             return NULL;
@@ -366,33 +380,9 @@ void *vscode_stuff_m(uint16_t keycode) {
         case KC_N:
             tap_code16(LCA(KC_LEFT));  // vmn editor left
             return vscode_stuff_m;
-        case KC_I:
+        case KC_O:
             tap_code16(LCA(KC_RIGHT));  //  vmi right
             return vscode_stuff_m;
-        default:
-            return NULL;
-    }
-}
-void *vscode_stuff_cl(uint16_t keycode) {
-    switch (keycode) {
-        case KC_U:
-            tap_code16(LSA(KC_UP));  //  vcu copy line up
-            return vscode_stuff_cl;
-        case KC_E:
-            tap_code16(LSA(KC_DOWN));  //  vce copy ln down
-            return vscode_stuff_cl;
-        default:
-            return NULL;
-    }
-}
-void *vscode_stuff_ml(uint16_t keycode) {
-    switch (keycode) {
-        case KC_U:
-            tap_code16(LALT(KC_UP));  //  vu move line up
-            return vscode_stuff_ml;
-        case KC_E:
-            tap_code16(LALT(KC_DOWN));  //  ve move ln down
-            return vscode_stuff_ml;
         default:
             return NULL;
     }
@@ -403,8 +393,8 @@ void *vscode_stuff_f(uint16_t keycode) {
             tap_code16(LCTL(KC_K));  // vfn focus left
             tap_code16(LCTL(KC_LEFT));
             return vscode_stuff_f;
-        case KC_I:
-            tap_code16(LCTL(KC_K));  //  vfi focus right
+        case KC_O:
+            tap_code16(LCTL(KC_K));  //  vfo focus right
             tap_code16(LCTL(KC_RIGHT));
             return vscode_stuff_f;
         default:

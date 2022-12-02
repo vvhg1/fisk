@@ -27,6 +27,7 @@ Some that deserve to be mentioned above all else are:
    
 **Note:** In case I have forgotten to mention someone or a reference to an author's work, please let me know and I will happily correct it.
 ## Keymap
+**Keymap is not up to date.**
 ![image info](./images/keymap.png)
 This is my personal keymap, main features include: one rotary encoder, Colemak-dh and Qwerty (both have somewhat modified symbols), layers, custom leader key, custom layer logic, custom oneshot modifiers, end of sentence, case modes (CAPSWORD, x_case, NUMW0RD), power brackets and dynamic info on both OLED displays.
 
@@ -56,23 +57,22 @@ I made a few changes:
 ##### Vscode stuff
 |        |         |                        |            |
 | ------ | ------- | ---------------------- | ---------- |
-|        | E       | Show Tooltip (C+K, C+I)|            |
+|        | E       | Show Tooltip (C+K, C+I)| Repeatable |
 |        | O       | Prv Editor Tab         | Repeatable |
-|        | L       | Peek Def (Alt+F12)     | Disabled, now on nav layer  |
-|        | SHIFT+L | Go to Def (F12)        | Disabled, now on nav layer  |
+<!-- |        | L       | Peek Def (Alt+F12)     | Disabled, now on nav layer  | -->
+<!-- |        | SHIFT+L | Go to Def (F12)        | Disabled, now on nav layer  | -->
 |        | N       | Nxt Editor Tab         | Repeatable |
 |        | A       | Select all occurrences |            |
+|        | BG       | Jump to bracket       |            |
+|        | BS       | Select inside brackets|            |
+|        | BD       | Delete inside brackets|            |
 |        | R       | Run W/O Debug (ctrl + F5)|          |	
 |        | SHIFT+R | Stop Debugging (shift + F5)|        |
 |        | T       | Toggle Terminal        |            |
-|        | VU      | Move Line Up           | Repeatable |
-| Leader | VE      | Move Line Dn           | Repeatable |
-|        | VMN     | Move Editor Left       | Repeatable |
+| Leader | VMN     | Move Editor Left       | Repeatable |
 |        | VMI     | Move Editor Right      | Repeatable |
 |        | VFN     | Focus Left             | Repeatable |
 |        | VFI     | Focus Right            | Repeatable |
-|        | VCU     | Copy Line Up           | Repeatable |
-|        | VCE     | Copy Line Dn           | Repeatable |
 |        | VP      | Format selection       | Repeatable |
 |        | VAP     | Format all             |            |
 |        | Z       | Zen Mode toggle        |            |
@@ -86,7 +86,18 @@ I made a few changes:
 |        | X | Caps and Snake |
 |        | N | Num Word       |
 |        | D | XCase w. Shift |
-##### Brackets
+##### Operators
+|        |              |                    |
+| ------ | ------------ | ------------------ |
+|        | ie           | ==                 |
+|        | in           | !=                 |
+|        | ile          | >=                 |
+|        | ill          | >                  |
+| Leader | ise          | <=                 |
+|        | iss          | <                  |
+|        | io           | ||                 |
+|        | ia           | &&                 |
+<!-- ##### Brackets
 |        |              |                    |            |
 | ------ | ------------ | ------------------ | ---------- |
 |        | {}           | {                  | Repeatable |
@@ -96,7 +107,7 @@ I made a few changes:
 |        | ()           | (                  | Repeatable |
 |        | SHIFT + ()   | )                  | Repeatable |
 |        | '            | Power Brackets on  |            |
-|        | SHIFT+'      | Power Brackets off |            |
+|        | SHIFT+'      | Power Brackets off |            | -->
 ##### Encoder Mode
 Disabled by default, can be enabled by uncommenting the corresponding block in `leaderfuncs.c` (at the very end).
 |        |    |                      |
@@ -180,13 +191,13 @@ NUMWORD is a similar concept by Joshua T. aka [@replicaJunction](https://github.
 
 **Note:** The implementation of NUMWORD requires that the keyboard's layer definitions be accessible in a header file. In this case, the layer definitions are in enumlayers.h, so I make them accessible by adding `#include enumlayers.h` in casemodes.c.
 
-### Power Brackets
+<!-- ### Power Brackets
 These are bracket pairs of different types, single- and double-quote pairs. On a simple key press an empty pair with the cursor placed inside the brackets like `(I)`, `{I}`, `[I]` is produced. This does not conflict with the way Vscode handles empty brackets. The behaviour can be toggled to bracket pairs with the cursor to the right of the pair by setting the flags `outside_cursor_op = true;` for opening brackets, `outside_cursor_sq = true;` for square brackets and `outside_cursor_cr = true;` for curly brackets. There is a keybinding on the Function layer for this.    
 When modified with ALT they `(wrap)` `{the}` `[previous]` `"word"` without having to select the word first.  
 
 **Note:** I mapped left brackets to `Leader`, `corresponding bracket key` and right brackets when modified with `SHIFT`.
 
-**Note:** Due to the ALT modifier, ESC is sent to neutralise the  ALT keypress  focus change.
+**Note:** Due to the ALT modifier, ESC is sent to neutralise the  ALT keypress  focus change. -->
 <!-- ### Other
 I made the Grave key, which is a dead key in the US Intl. layout, active again as I don't need the dead key behaviour of it and I find it annoying. To revert to the standard behaviour, simply comment out the `case KC_GRAVE:` switch case in keymap.c. -->
 

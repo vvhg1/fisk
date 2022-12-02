@@ -31,5 +31,6 @@ enum layers {
     _FUNX,
     _AUX,
     _MOUSE,
+    _BRACKETS,
     mo_NUM
 };

@@ -25,6 +25,46 @@ __attribute__((weak)) bool process_custom_one_shot(uint16_t keycode, const keyre
 {
     switch (keycode)
     {
+        //if ML_sc is pressed, it will be registered as MR_sft and if pressed again add ML_ctl, if pressed again remove MR_sft, if pressed again remove ML_ctl
+        case ML_sc:
+        if (record->event.pressed)
+        {
+            if (get_mods() & MOD_BIT(KC_LCTL))
+            {
+                if (get_mods() & MOD_BIT(KC_LSFT) || get_mods() & MOD_BIT(KC_RSFT))
+                {
+                    combo_flag = 1;
+                    process_custom_one_shot(ML_ctl, record);
+                }
+                else
+                {
+                        combo_flag = 2;
+                        process_custom_one_shot(ML_sft, record);
+                }
+            }
+            else if (get_mods() & MOD_BIT(KC_LSFT) || get_mods() & MOD_BIT(KC_RSFT))
+            {
+                    combo_flag = 2;
+                    process_custom_one_shot(ML_sft, record);
+            }
+            else
+            {
+                combo_flag = 1;
+                process_custom_one_shot(ML_ctl, record);
+            }
+        }
+        else
+        {
+            if(combo_flag == 1)
+            {
+                process_custom_one_shot(ML_ctl, record);
+            }
+            else if(combo_flag == 2)
+            {
+                process_custom_one_shot(ML_sft, record);
+            }
+        }
+        return true;
     case MR_sft:
         if (record->event.pressed)
         {
@@ -182,6 +222,7 @@ void release_custom_one_shot(uint16_t keycode, const keyrecord_t *record)
         case ML_ctl:
         case ML_sft:
         case MR_sft:
+        case ML_sc:
 #ifdef SWAP_HANDS_ENABLE
         case Mir_spc:
 #endif

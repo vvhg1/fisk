@@ -27,6 +27,7 @@ typedef enum {
     // ENC_MODE_UP_DOWN,
     // ENC_MODE_PAGING,
     // ENC_MODE_NEXTEDITOR,
+    ENC_MODE_CODE_CHANGES,
     ENC_MODE_EXPAND_SELECTION,
     _ENC_MODE_LAST  // Do not use, except for looping through enum values
 } encoder_mode_t;
