@@ -332,7 +332,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 if(!custom_space_cadet){
 #ifdef CASEMODES_ENABLE
                     keyrecord_t new_record;
-                    new_record.event.pressed = true;""
+                    new_record.event.pressed = true;
                     keyrecord_t *new_record_p = &new_record;
                     if (!process_case_modes(KC_SPC, new_record_p)) {
                         if (layer_state_is(_NUM)) {

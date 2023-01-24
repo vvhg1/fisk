@@ -183,7 +183,6 @@ void *leader_start_func(uint16_t keycode) {
         case KC_RSHIFT:
         case ML_sft:
         case MR_sft:
-        case KC_SPC:
             return leader_start_func; // escape
         default:
             return NULL;
