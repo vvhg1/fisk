@@ -160,6 +160,9 @@ bool process_leader(uint16_t keycode, const keyrecord_t *record) {
                 stop_leading();
             }
         }
+            if (keycode == KC_SPC) {
+            return true;
+            }
         return false;
     }
     return true;

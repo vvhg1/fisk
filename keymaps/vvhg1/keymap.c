@@ -332,7 +332,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 if(!custom_space_cadet){
 #ifdef CASEMODES_ENABLE
                     keyrecord_t new_record;
-                    new_record.event.pressed = true;
+                    new_record.event.pressed = true;""
                     keyrecord_t *new_record_p = &new_record;
                     if (!process_case_modes(KC_SPC, new_record_p)) {
                         if (layer_state_is(_NUM)) {
@@ -417,10 +417,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 if (is_windows)
             {
-            // windows
                 SEND_STRING(SS_LALT(SS_TAP(X_P0) SS_TAP(X_P1) SS_TAP(X_P2) SS_TAP(X_P8)));  // send euro symbol
             }else{
-            // linux
             tap_code16(C(S(KC_U)));
             SEND_STRING("20AC");  // here euro symbol
             tap_code(KC_ENT);

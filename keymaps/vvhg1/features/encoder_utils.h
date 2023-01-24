@@ -28,8 +28,8 @@ typedef enum {
     // ENC_MODE_PAGING,
     // ENC_MODE_NEXTEDITOR,
     ENC_MODE_CODE_CHANGES,
-    ENC_MODE_EXPAND_SELECTION,
-    _ENC_MODE_LAST  // Do not use, except for looping through enum values
+    // ENC_MODE_EXPAND_SELECTION,
+    _ENC_MODE_LAST // Do not use, except for looping through enum values
 } encoder_mode_t;
 
 encoder_mode_t enc_mode;
@@ -54,6 +54,7 @@ void cycle_encoder_mode(bool clockwise);
 
 void encoder_action_nexttab(uint8_t clockwise);
 
-void encoder_action_expandselection(uint8_t clockwise);
+// void encoder_action_expandselection(uint8_t clockwise);
+void encoder_action_code_changes(uint8_t clockwise);
 
 void encoder_action(encoder_mode_t mode, uint8_t clockwise);

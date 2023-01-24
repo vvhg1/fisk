@@ -17,7 +17,12 @@
 #pragma once
 
 #include QMK_KEYBOARD_H
+// int variable to store the number
+int numberofiterationsforleader;
+int myint;
 
+//string to store the sequence
+char sequence[10];
 // Leader functions
 // void *reset_keyboard1(uint16_t keycode); // here LDR qrk will reset the keyboard
 // void *reset_keyboard2(uint16_t keycode); //
@@ -35,5 +40,6 @@ void *umlaut_stuff(uint16_t keycode); // german umlaut
 void *xcase_stuff(uint16_t keycode); // snake case and caps
 void *f_key_stuff(uint16_t keycode); // F1-F11
 void *operator_stuff(uint16_t keycode); // operators
-void *operator_stuff_larger(uint16_t keycode); // larger operators
-void *operator_stuff_smaller(uint16_t keycode); // smaller operators
+void *numbers_game(uint16_t keycode); // numbers
+void  select_in_bracets(void);
+void *vscode_markers(uint16_t keycode);

@@ -55,12 +55,12 @@ I made a few changes:
 | Leader | WM | Context Menu |            |
 |        | Q  | Close Tab    | Repeatable |
 ##### Vscode stuff
+<!-- |        | L       | Peek Def (Alt+F12)     | Disabled, now on nav layer  | -->
+<!-- |        | SHIFT+L | Go to Def (F12)        | Disabled, now on nav layer  | -->
 |        |         |                        |            |
 | ------ | ------- | ---------------------- | ---------- |
 |        | E       | Show Tooltip (C+K, C+I)| Repeatable |
 |        | O       | Prv Editor Tab         | Repeatable |
-<!-- |        | L       | Peek Def (Alt+F12)     | Disabled, now on nav layer  | -->
-<!-- |        | SHIFT+L | Go to Def (F12)        | Disabled, now on nav layer  | -->
 |        | N       | Nxt Editor Tab         | Repeatable |
 |        | A       | Select all occurrences |            |
 |        | BG       | Jump to bracket       |            |
@@ -78,6 +78,20 @@ I made a few changes:
 |        | Z       | Zen Mode toggle        |            |
 |        | Enter   | Command Palette        |            |
 
+##### Markers
+|        |     |                         |
+| ------ | --- | ----------------------- |
+|        | MA  | Set Marker              |
+| Leader | MO  | Select Marker to Cursor |
+|        | MM  | Move to Marker          |
+
+##### Bracket Manipulation
+|        |     |                        |
+| ------ | --- | ---------------------- |
+|        | BG  | Go to Bracket          |
+| Leader | BS  | Select inside Brackets |
+|        | BD  | Delete inside Brackets |
+
 ##### CaseModes
 |        |   |                |
 | ------ | - | -------------- |
@@ -89,14 +103,12 @@ I made a few changes:
 ##### Operators
 |        |              |                    |
 | ------ | ------------ | ------------------ |
-|        | ie           | ==                 |
-|        | in           | !=                 |
-|        | ile          | >=                 |
-|        | ill          | >                  |
-| Leader | ise          | <=                 |
-|        | iss          | <                  |
-|        | io           | ||                 |
-|        | ia           | &&                 |
+|        | IE           | ==                 |
+|        | IN           | !=                 |
+|        | IL           | >=                 |
+| Leader | IS           | <=                 |
+|        | IO           | ||                 |
+|        | IA           | &&                 |
 <!-- ##### Brackets
 |        |              |                    |            |
 | ------ | ------------ | ------------------ | ---------- |
@@ -257,8 +269,9 @@ Is supported for one hand typing, can be disabled in rules.mk (SWAP_HANDS_ENABLE
 
 Press the encoder to cycle between:
 - Next / Previous Tab
-- Vscode Shrink / Expand Selection
-- Word Nav (Ctrl + Left / Right)(disabled by default, can be enabled by uncommenting the corresponding blocks in `encoder_utils.c`, `encoder_utils.c` and `oled_utils.c`)
+- Vscode Next / Previous Change
+- Vscode Shrink / Expand Selection (disabled by default, can be enabled by uncommenting the corresponding blocks in `encoder_utils.c`, `encoder_utils.c` and `oled_utils.c`)
+- Word Nav (Ctrl + Left / Right)(disabled by default, see above)
 - Left / Right (disabled by default, see above)
 - Up / Down (disabled by default, see above)
 - Page Up / Page Down (disabled by default, see above)

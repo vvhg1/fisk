@@ -21,19 +21,19 @@ void encoder_utils_init(void) {
 }
 
 void set_encoder_mode(encoder_mode_t mode) {
-     enc_mode = mode;
+    enc_mode = mode;
 }
 
 encoder_mode_t get_encoder_mode(void) {
-     return enc_mode;
+    return enc_mode;
 }
 
 void cycle_encoder_mode(bool clockwise) {
     encoder_mode_t mode = get_encoder_mode();
-    if(clockwise){
-    mode = (mode == (_ENC_MODE_LAST - 1)) ? 0 : (mode + 1);
+    if (clockwise) {
+        mode = (mode == (_ENC_MODE_LAST - 1)) ? 0 : (mode + 1);
     } else {
-    mode = (mode == (ENC_MODE_NEXTTAB)) ? (_ENC_MODE_LAST - 1) : (mode - 1);
+        mode = (mode == (ENC_MODE_NEXTTAB)) ? (_ENC_MODE_LAST - 1) : (mode - 1);
     }
     set_encoder_mode(mode);
 }
@@ -91,13 +91,13 @@ void encoder_action_nexttab(uint8_t clockwise) {
         unregister_code(KC_LCTL);
     }
 }
-void encoder_action_expandselection(uint8_t clockwise) {
-    if (clockwise) {
-        tap_code16(LSA(KC_RIGHT));
-    } else {
-        tap_code16(LSA(KC_LEFT));
-    }
-}
+// void encoder_action_expandselection(uint8_t clockwise) {
+//     if (clockwise) {
+//         tap_code16(LSA(KC_RIGHT));
+//     } else {
+//         tap_code16(LSA(KC_LEFT));
+//     }
+// }
 void encoder_action_code_changes(uint8_t clockwise) {
     if (clockwise) {
         tap_code16(LALT(KC_F5));
@@ -129,9 +129,9 @@ void encoder_action(encoder_mode_t mode, uint8_t clockwise) {
         // case ENC_MODE_NEXTEDITOR:
         //     encoder_action_nexteditor(clockwise);
         //     break;
-        case ENC_MODE_EXPAND_SELECTION:
-            encoder_action_expandselection(clockwise);
-            break;
+        // case ENC_MODE_EXPAND_SELECTION:
+        //     encoder_action_expandselection(clockwise);
+        //     break;
         default:
             encoder_action_nexttab(clockwise);
     }

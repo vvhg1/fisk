@@ -5,8 +5,7 @@ MCU = atmega32u4
 BOOTLOADER = atmel-dfu
 
 # Build Options
-#   change yes to no to disable
-#
+
 BOOTMAGIC_ENABLE = yes      # Enable Bootmagic Lite (adds 40 b)
 OLED_ENABLE = yes
 OLED_DRIVER = SSD1306      # Enables the use of OLED displays
@@ -21,8 +20,6 @@ BACKLIGHT_ENABLE = no      # Enable keyboard backlight functionality
 AUDIO_ENABLE = no          # Audio output
 SPLIT_KEYBOARD = yes       # Split common
 LTO_ENABLE = yes
-
-# DEFAULT_FOLDER = fisk
 
 RGBLIGHT_ENABLE = no       # Enable keyboard RGB underglow
 RGB_MATRIX_ENABLE = no     # Enable keyboard RGB matrix (do not use together with RGBLIGHT_ENABLE)
