@@ -43,7 +43,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_COLEMAK] = LAYOUT(
               KC_ESC,   KC_W,    KC_F  ,  KC_P ,   KC_B , KC_SLSH,                                      KC_DQT,   KC_J,    KC_L ,   KC_U ,   KC_Y ,   C(KC_P),
-    KC_AMPR , KC_Q,     KC_R,    KC_S ,   KC_T ,   KC_G,  KC_BSLS,                                      S(KC_1),   KC_M,    KC_N,    KC_E,    KC_I,    KC_SCLN,      KC_QUOT,
+    KC_AMPR , KC_Q,     KC_R,    KC_S ,   KC_T ,   KC_G,  KC_BSLS,                                      KC_EXLM,   KC_M,    KC_N,    KC_E,    KC_I,    KC_SCLN,      KC_QUOT,
     KC_HASH,  KC_A,     KC_X,    KC_C,    KC_D,    KC_V,            KC_SPC, ML_alt,        ML_ctl, MR_sft,       KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_O,         KC_ENT,
     KC_TAB,  KC_Z,           mo_FUNX,  ML_sc ,  mo_BR,                    go_NAV,        LEADER,              KC_BSPC, KC_DEL, Enc_M,                 KC_MINS,  KC_AT
 
@@ -64,7 +64,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_QW] = LAYOUT(
               KC_ESC,   KC_W,    KC_E  ,  KC_R ,   KC_T , KC_SLSH,                                      KC_DQT,   KC_Y,    KC_U ,   KC_I ,   KC_O,   C(KC_P),
-    KC_AMPR , KC_Q,     KC_S,    KC_D ,   KC_F ,   KC_G,  KC_BSLS,                                      S(KC_1),   KC_H,    KC_J,    KC_K,    KC_L,    KC_P, KC_QUOT,
+    KC_AMPR , KC_Q,     KC_S,    KC_D ,   KC_F ,   KC_G,  KC_BSLS,                                      KC_EXLM,   KC_H,    KC_J,    KC_K,    KC_L,    KC_P, KC_QUOT,
     KC_HASH,  KC_A,     KC_X,    KC_C,    KC_V,    KC_B,            KC_SPC, ML_alt,         ML_ctl, MR_sft,          KC_N,   KC_M,    KC_COMM,    KC_DOT,  KC_SCLN, KC_ENT,
     KC_TAB,  KC_Z,                mo_FUNX,  ML_sc,  mo_BR,                go_NAV,          LEADER,              KC_BSPC,  KC_DEL, Enc_M,                 KC_MINS,  KC_AT
 
@@ -294,7 +294,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_toggle_flag      = false;
         finished_logo          = true;
         custom_space_cadet     = true;
-        if (keycode != KC_BSPC && keycode != KC_DEL && keycode != KC_0) {
+        if (keycode != KC_BSPC && keycode != KC_DEL) {
             space_pressed = false;
         }
 
@@ -321,8 +321,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
         case KC_SPC:
             if (record->event.pressed) {
-                space_pressed = true;
-                custom_space_cadet = false;
+                if(!is_leading())
+                {
+                    space_pressed = true;
+                    custom_space_cadet = false;
+                }
                 process_custom_layer(record, mo_NUM);
                 return false;
             } else {
@@ -475,9 +478,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 if (IS_LAYER_ON(_NAV)) {
                     layer_off(_NAV);
                 }
-                if (IS_LAYER_ON(_NUM)) {
-                    layer_off(_NUM);
-                }
+                // if (IS_LAYER_ON(_NUM)) {
+                //     layer_off(_NUM);
+                // }
 #    endif
                 //switch to mouse layer only while pressed
                 layer_on(_MOUSE);
