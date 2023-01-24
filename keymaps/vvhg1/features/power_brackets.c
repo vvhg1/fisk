@@ -76,13 +76,15 @@ void process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
                     del_mods(MOD_MASK_ALT);
                     SEND_STRING(SS_TAP(X_ESC) SS_LCTL(SS_TAP(X_LEFT)) SS_TAP(X_LBRC) SS_LCTL(SS_TAP(X_RGHT)) SS_TAP(X_RBRC));
                 } else if (get_mods() & MOD_MASK_SHIFT) {
-                    tap_code16(KC_PLUS);
+                    // tap_code16(KC_PLUS);
+                    del_mods(MOD_MASK_SHIFT);
+                    tap_code(KC_RBRC);
                 } else {
                     tap_code(KC_LBRC);
-                    tap_code(KC_RBRC);
-                    if (!outside_cursor_sq) {
-                        tap_code(KC_LEFT);
-                    }
+                    // tap_code(KC_RBRC);
+                    // if (!outside_cursor_sq) {
+                        // tap_code(KC_LEFT);
+                    // }
                 }
             }
             break;
@@ -92,16 +94,16 @@ void process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
                     del_mods(MOD_MASK_ALT);
                     SEND_STRING(SS_TAP(X_ESC) SS_LCTL(SS_TAP(X_LEFT)) SS_LSFT(SS_TAP(X_LBRC)) SS_LCTL(SS_TAP(X_RGHT)) SS_LSFT(SS_TAP(X_RBRC)));
                 } else if (get_mods() & MOD_MASK_SHIFT) {
-                    current_mod_state = get_mods();
-                    del_mods(MOD_MASK_SHIFT);
-                    tap_code(KC_EQL);
-                    set_mods(current_mod_state);
+                    // current_mod_state = get_mods();
+                    // del_mods(MOD_MASK_SHIFT);
+                    // tap_code(KC_EQL);
+                    // set_mods(current_mod_state);
+                    tap_code16(S(KC_RBRC));
                 } else {
                     tap_code16(S(KC_LBRC));
-                    tap_code16(S(KC_RBRC));
-                    if (!outside_cursor_cr) {
-                        tap_code(KC_LEFT);
-                    }
+                    // if (!outside_cursor_cr) {
+                    //     tap_code(KC_LEFT);
+                    // }
                 }
             }
             break;
@@ -111,13 +113,14 @@ void process_power_brackets(uint16_t keycode, const keyrecord_t *record) {
                     del_mods(MOD_MASK_ALT);
                     SEND_STRING(SS_TAP(X_ESC) SS_LCTL(SS_TAP(X_LEFT)) SS_LSFT(SS_TAP(X_9)) SS_LCTL(SS_TAP(X_RGHT)) SS_LSFT(SS_TAP(X_0)));
                 } else if (get_mods() & MOD_MASK_SHIFT) {
-                    tap_code(KC_1);
+                    // tap_code(KC_1);
+                    tap_code16(S(KC_0));
                 } else {
                     tap_code16(S(KC_9));
-                    tap_code16(S(KC_0));
-                    if (!outside_cursor_op) {
-                        tap_code(KC_LEFT);
-                    }
+                    // tap_code16(S(KC_0));
+                    // if (!outside_cursor_op) {
+                    //     tap_code(KC_LEFT);
+                    // }
                 }
             }
             break;

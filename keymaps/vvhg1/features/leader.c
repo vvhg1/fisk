@@ -133,11 +133,13 @@ bool process_leader(uint16_t keycode, const keyrecord_t *record) {
         if (keycode > QK_MODS_MAX || IS_MOD(keycode)) {
             switch (keycode) {
                 // special keycodes used in leader funcs
+#ifdef POWER_BRACKETS_ENABLE
                 case Op_Br:
                 case Sq_Br:
                 case Cr_Br:
                 case QuotWrap:
                     break;
+#endif
                 case LEADER_ESC_KEY:
                     // early exit if the esc key was hit
                     if (record->event.pressed) {
@@ -158,6 +160,9 @@ bool process_leader(uint16_t keycode, const keyrecord_t *record) {
                 stop_leading();
             }
         }
+            if (keycode == KC_SPC) {
+            return true;
+            }
         return false;
     }
     return true;

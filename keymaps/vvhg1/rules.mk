@@ -9,7 +9,7 @@ CUSTOM_LEADER_ENABLE = yes       # ENables custom leader function
 CUSTOM_LEADER_TO_DL = yes       # makes leader key activate default layer
 CUSTOM_ONE_SHOT_ENABLE = yes  # ENables custom one shot modifiers function
 CUSTOM_WORD_LINE_SELECTION_ENABLE = yes  # ENables custom one shot modifiers function
-POWER_BRACKETS_ENABLE = yes #enables empty or wrapping quote and bracket pairs
+POWER_BRACKETS_ENABLE = no #enables empty or wrapping quote and bracket pairs (adds 310 b)
 EOS_ENABLE = yes #end of sentence
 
 CONSOLE_ENABLE = no        # Console for debug (adds 1152 b)

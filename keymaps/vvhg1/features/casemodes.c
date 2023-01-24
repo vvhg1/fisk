@@ -296,6 +296,7 @@ bool process_case_modes(uint16_t keycode, const keyrecord_t *record) {
                     case MR_sft:
                     case ML_alt:
                     case go_NUM:
+                    case mo_NUM:
                         return true;
 
                     default:

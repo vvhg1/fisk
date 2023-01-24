@@ -19,6 +19,7 @@
 #include QMK_KEYBOARD_H
 
 bool rshift_on;
+int combo_flag;
 bool is_oneshot_rshift;
 bool lshift_on;
 bool is_oneshot_lshift;
