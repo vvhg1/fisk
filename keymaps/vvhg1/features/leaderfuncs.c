@@ -26,6 +26,8 @@
 // Sequences:
 // A: Select all occurrences of the word under the cursor
 
+// Space: Trigger suggestion
+
 // C: Capsword
 // S: Snake case
 // X: X case
@@ -87,6 +89,9 @@ void *leader_start_func(uint16_t keycode) {
         //     myint = keycode - KC_1 + 1;
         //     numberofiterationsforleader = myint;
         //     return numbers_game;
+        case KC_SPC:
+            tap_code16(LCTL(KC_SPACE)); //  Ctrl+Space Trigger suggestion VSCode
+            return NULL;
         case KC_A:
             tap_code16(LCTL(KC_F2)); //  Ctrl+F2 Select all occurrences of word VSCode
             return NULL;

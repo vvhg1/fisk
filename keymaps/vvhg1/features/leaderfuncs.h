@@ -18,11 +18,11 @@
 
 #include QMK_KEYBOARD_H
 // int variable to store the number
-int numberofiterationsforleader;
-int myint;
+// int numberofiterationsforleader;
+// int myint;
 
 //string to store the sequence
-char sequence[10];
+// char sequence[10];
 // Leader functions
 // void *reset_keyboard1(uint16_t keycode); // here LDR qrk will reset the keyboard
 // void *reset_keyboard2(uint16_t keycode); //

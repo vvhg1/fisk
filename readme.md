@@ -27,9 +27,8 @@ Some that deserve to be mentioned above all else are:
    
 **Note:** In case I have forgotten to mention someone or a reference to an author's work, please let me know and I will happily correct it.
 ## Keymap
-**Keymap is not up to date.**
 ![image info](./images/keymap.png)
-This is my personal keymap, main features include: one rotary encoder, Colemak-dh and Qwerty (both have somewhat modified symbols), layers, custom leader key, custom layer logic, custom oneshot modifiers, end of sentence, case modes (CAPSWORD, x_case, NUMW0RD), power brackets and dynamic info on both OLED displays.
+This is my personal keymap, main features include: one rotary encoder, Colemak-dh and Qwerty (both have somewhat modified symbols), layers, custom leader key, custom layer logic, custom oneshot modifiers, end of sentence, case modes (CAPSWORD, x_case, NUMW0RD) and dynamic info on both OLED displays.
 
 **Note:** This keymap assumes US ANSI layout on Linux(default) or Windows OS. Switching between the OS modes is done on the Func Layer (W-Key). I have not tested it on other OS and shortcuts are the Linux/Win ones, but it should not be overly complicated to adapt. 
 
@@ -59,13 +58,10 @@ I made a few changes:
 <!-- |        | SHIFT+L | Go to Def (F12)        | Disabled, now on nav layer  | -->
 |        |         |                        |            |
 | ------ | ------- | ---------------------- | ---------- |
-|        | E       | Show Tooltip (C+K, C+I)| Repeatable |
+|        | E       | Show Command Palette   |            |
 |        | O       | Prv Editor Tab         | Repeatable |
 |        | N       | Nxt Editor Tab         | Repeatable |
 |        | A       | Select all occurrences |            |
-|        | BG       | Jump to bracket       |            |
-|        | BS       | Select inside brackets|            |
-|        | BD       | Delete inside brackets|            |
 |        | R       | Run W/O Debug (ctrl + F5)|          |	
 |        | SHIFT+R | Stop Debugging (shift + F5)|        |
 |        | T       | Toggle Terminal        |            |
@@ -85,7 +81,7 @@ I made a few changes:
 | Leader | MO  | Select Marker to Cursor |
 |        | MM  | Move to Marker          |
 
-##### Bracket Manipulation
+##### VSCode Bracket Manipulation
 |        |     |                        |
 | ------ | --- | ---------------------- |
 |        | BG  | Go to Bracket          |
