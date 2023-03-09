@@ -134,42 +134,44 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 /*
  * Navigation Layer: Navigation
- *
+ * Left bottom row with shift is tiling windows to corners
+ * shift+alt+mod4 and arrow keys are for moving windows to corners
+ * mod4+arrow keys are for moving windows
  *          ,----------------------------------------------------.                                       ,-----------------------------------------------------.
  *          |        |  `     |  Find  |        | SdeBar | Cmmnt |                                       |        | go def |   Home |  PG DN |  PG UP |        |
  * +--------+--------+--------+--------+--------+--------+-------|                                       |--------+--------+--------+--------+--------+--------+--------.
  * |        |   €    |  Cut   |  Copy  |  Paste |  Redo  |  Save |                                       |        | pk def |    ←   |    ↓   |    ↑   |  End   |   ' "  |
  * |--------+--------+--------+--------+--------+--------+-------+--------+--------.     ,---------------+--------+--------+--------+--------+--------+--------+--------|
- * | Sel All|  Undo  |  Xplor |  R_sft |  LCTL  |        |       |        |        |     |        |      |        | dbg log| SelWrdL| SelLn↓ | SelLn↑ |    →   | Enter  |
+ * | Sel All|  Undo  |   TWN  |  TWS   |  TWR   |  TWM   |       |        |        |     |        |      |        | dbg log| SelWrdL| SelLn↓ | SelLn↑ |    →   | Enter  |
  * |--------+--------+--------+--------+--------+--------+--.    |        +--------|     |--------+ R_sft|     ,--+--------+--------+--------+--------+--------+--------|
- * |        |   ←    |           |        |        |        |    |        |        |     |        |      |     |        |      |         |            | SelWrdR|   F2   |
+ * |        |  TWL   |           |        |        |        |    |        |        |     | rofiwin|      |     |        |      |         |            | SelWrdR|   F2   |
  * `-----------------'           `--------------------------'    '--------+--------'     `---------------'     '-------------------------'            '-----------------'
  */
     [_NAV] = LAYOUT(
              _______, _______, C(KC_F), _______, C(KC_B),  Cmnt,                                         _______, Go_Def, KC_HOME, KC_PGDN, KC_PGUP, _______,
     _______, _______,  Cut   ,    Copy,  Paste,    Redo, C(KC_S),                                        _______, Peek_Def, KC_LEFT, KC_DOWN, KC_UP,  KC_END, KC_QUOT,
-    C(KC_A),   Undo,   C(S(KC_Q)), MR_sft, ML_ctl, _______,          _______, _______,      _______, MR_sft,         Dbg, SelWrdL,   SelLnDn,  SelLnUp, KC_RIGHT, _______,
-    _______, KC_LEFT,             _______,  _______, _______,                _______,      _______,                _______, _______, _______,           SelWrdR,     KC_F2
+    C(KC_A),   Undo,   TWN   ,   TWS  ,  TWR  , TWM,          _______, _______,      _______, MR_sft,         Dbg, SelWrdL,   SelLnDn,  SelLnUp, KC_RIGHT, _______,
+    _______,  TWL   ,      _______,  _______, _______,                _______,      LGUI(KC_0),                _______, _______, _______,           SelWrdR,     KC_F2
 
     ),
 /*
- * Mouse Layer
+ * Mouse Layer LGUI 01234 89 F1-F5
  *
  *          ,----------------------------------------------------.                                       ,-----------------------------------------------------.
- *          |        |M WH dn | M WH up| M WH R |        |       |                                       |        | go def |   Home |  PG DN |  PG UP |        |
+ *          |        |M WH dn | M WH up| M WH R |        |       |                                       |        | go def |   HMMM |  PG DN |  PG UP |        |
  * +--------+--------+--------+--------+--------+--------+-------|                                       |--------+--------+--------+--------+--------+--------+--------.
- * | M btn5 | M WH L |  M up  | M down | M right| M btn1 |       |                                       |        | pk def |  Enter |  ESC   |    ↑   |  End   |   ' "  |
+ * | M btn5 | M WH L |  M up  | M down | M right| M btn1 |       |                                       |        | pk def |  GoT1  |  GoT2  |prev win|  End   |   ' "  |
  * |--------+--------+--------+--------+--------+--------+-------+--------+--------.     ,---------------+--------+--------+--------+--------+--------+--------+--------|
- * | M btn2 | M left |        |        |        |        |       |        |        |     |        |      |        | dbg log| SelWrdL| SelLn↓ | SelLn↑ |    →   | Enter  |
+ * | M btn2 | M left |  Mon4  |  Mon3  |  Mon1  |  Mon2  |       |        |        |     |        |      |        | xxxxxx | LSA <- | MEH <- | MEH -> |   Drun | xxxxx  |
  * |--------+--------+--------+--------+--------+--------+--.    |        +--------|     |--------+      |     ,--+--------+--------+--------+--------+--------+--------|
- * | M btn4 |        |           |      |          |        |    |        |        |     |        |      |     |        |      |         |            | SelWrdR|   F2   |
+ * | M btn4 | Mon 5  |           |      |          |        |    |        |        |     |        |      |     |        |      |         |            | LSA -> |   F2   |
  * `-----------------'           `--------------------------'    '--------+--------'     `---------------'     '-------------------------'            '-----------------'
  */
    [_MOUSE] = LAYOUT(
-             _______, KC_WH_U, KC_WH_D, KC_WH_R, _______, _______,                                        _______, Go_Def, KC_HOME, KC_PGDN, KC_PGUP, _______,
-    KC_BTN5, KC_WH_L, KC_MS_U, KC_MS_D, KC_MS_R, KC_BTN1, _______,                                        _______, Peek_Def, KC_ENT, KC_ESC, KC_UP,  KC_END, KC_QUOT,
-    KC_BTN2, KC_MS_L, _______, _______, KC_NO, _______,          _______, _______,      _______, _______,         Dbg, SelWrdL,   SelLnDn,  SelLnUp, KC_RIGHT, _______,
-    KC_BTN4, _______,            _______,  _______, _______,                _______,      _______,                 _______, _______, _______,           SelWrdR,     KC_F2
+             _______, KC_WH_U, KC_WH_D, KC_WH_R, _______, _______,                                        _______, Go_Def, LGUI(KC_4), KC_PGDN, KC_PGUP, _______,
+    KC_BTN5, KC_WH_L, KC_MS_U, KC_MS_D, KC_MS_R, KC_BTN1, _______,                                        _______, Peek_Def, LGUI(KC_1), LGUI(KC_2), LALT(KC_ESC),  KC_END, KC_QUOT,
+    KC_BTN2, KC_MS_L,LGUI(KC_F2),LGUI(KC_F3),LGUI(KC_F4), LGUI(KC_F5),_______, _______,   _______, _______,      XXXXXXX,LSA(KC_LEFT),MEH(KC_LEFT),MEH(KC_RIGHT),LGUI(KC_3),KC_NO ,
+    KC_BTN4,LGUI(KC_F1),            _______,  _______, _______,                _______,   _______,                 _______, _______, _______,        LSA(KC_RIGHT),KC_F2
 
     ),
 /*
@@ -305,6 +307,56 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     switch (keycode) {  //!#######################################################--switch(keycode)--#######################################################
 
+        case TWL:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    tap_code16(LGUI(LALT(KC_LEFT)));
+                    return false;
+                }
+                    //tile window left
+                    tap_code16(LGUI(KC_LEFT));
+                    return false;
+            }
+        case TWR:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    tap_code16(LGUI(LALT(KC_RIGHT)));
+                    return false;
+                }
+                //tile window right
+                tap_code16(LGUI(KC_RIGHT));
+                return false;
+            }
+        case TWM:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                tap_code16(LGUI(KC_DOWN));
+                    return false;
+                }
+                //tile window maximized
+                tap_code16(LGUI(KC_UP));
+                return false;
+            }
+        case TWN:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    tap_code16(LGUI(LALT(KC_UP)));
+                    return false;
+                }
+                //tile window north
+                tap_code16(LGUI(KC_9));
+                return false;
+            }
+        case TWS:
+            if (record->event.pressed) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    tap_code16(LGUI(LALT(KC_DOWN)));
+                    return false;
+                }
+                //tile window south
+                tap_code16(LGUI(KC_8));
+                return false;
+            }
         case KC_BSPC:
             if (record->event.pressed && space_pressed) {
                 tap_code16(LCTL(KC_BSPC));
@@ -580,28 +632,28 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 
 #    ifndef CONSOLE_ENABLE
 bool oled_task_user(void) {
-    if ((timer_elapsed(startup_timer) < 6000) && !finished_logo) {
+    if (!finished_logo && (timer_elapsed(startup_timer) < 6000)) {
         if (is_keyboard_left()) {
             render_logo_l();
         } else {
             render_logo_r();
         }
     } else {
-        if (!cleared_oled) {
-            oled_clear();
-            cleared_oled = true;
-        }
         finished_logo = true;
-        if (timer_elapsed(startup_timer) > 25000) {
-            oled_off();
+        if(!turn_oled_on){
+            return false;
+        }
+        if (timer_elapsed(startup_timer) > 18000) {
             turn_oled_on = false;
-        } else if(turn_oled_on){
+            return false;
+        }
+        if(!is_oled_on()){
             oled_on();
-            oled_clear();
-            render_status();
-            if((timer_elapsed(startup_timer) > 800) && (space_pressed) && !custom_space_cadet){
-                register_code(KC_SPC);
-            }
+        }
+        oled_clear();
+        render_status();
+        if(( !custom_space_cadet && (space_pressed) && timer_elapsed(startup_timer) > 800)){
+            register_code(KC_SPC);
         }
 
     }

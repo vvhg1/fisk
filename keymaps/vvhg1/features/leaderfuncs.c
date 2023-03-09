@@ -36,6 +36,7 @@
 // BG: Go to the enclosing brackets
 // BS: Select the contents of the enclosing brackets
 // BD: Delete the contents of the enclosing brackets
+// BY: Copy the contents of the enclosing brackets
 
 // E: Show command palette
 // F+<number>: F-key
@@ -72,6 +73,9 @@
 // VP:  Format selection
 // VAP: Format document
 
+// .: Insert line above
+// ,: Insert line below
+
 // WS: Start menu
 // WQ: Close window
 // WM: Context menu
@@ -89,6 +93,12 @@ void *leader_start_func(uint16_t keycode) {
         //     myint = keycode - KC_1 + 1;
         //     numberofiterationsforleader = myint;
         //     return numbers_game;
+        case KC_DOT:
+            tap_code16(C(S(KC_ENTER))); // . insert line above
+            return NULL;
+        case KC_COMMA:
+            tap_code16(C(KC_ENTER)); // , insert line below
+            return NULL;
         case KC_SPC:
             tap_code16(LCTL(KC_SPACE)); //  Ctrl+Space Trigger suggestion VSCode
             return NULL;
