@@ -580,28 +580,28 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 
 #    ifndef CONSOLE_ENABLE
 bool oled_task_user(void) {
-    if ((timer_elapsed(startup_timer) < 6000) && !finished_logo) {
+    if (!finished_logo && (timer_elapsed(startup_timer) < 6000)) {
         if (is_keyboard_left()) {
             render_logo_l();
         } else {
             render_logo_r();
         }
     } else {
-        if (!cleared_oled) {
-            oled_clear();
-            cleared_oled = true;
-        }
         finished_logo = true;
-        if (timer_elapsed(startup_timer) > 25000) {
-            oled_off();
+        if(!turn_oled_on){
+            return false;
+        }
+        if (timer_elapsed(startup_timer) > 18000) {
             turn_oled_on = false;
-        } else if(turn_oled_on){
+            return false;
+        }
+        if(!is_oled_on()){
             oled_on();
-            oled_clear();
-            render_status();
-            if((timer_elapsed(startup_timer) > 800) && (space_pressed) && !custom_space_cadet){
-                register_code(KC_SPC);
-            }
+        }
+        oled_clear();
+        render_status();
+        if(( !custom_space_cadet && (space_pressed) && timer_elapsed(startup_timer) > 800)){
+            register_code(KC_SPC);
         }
 
     }
