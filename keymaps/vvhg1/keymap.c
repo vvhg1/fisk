@@ -323,16 +323,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     tap_code16(LGUI(LALT(KC_RIGHT)));
                     return false;
                 }
+                //tile window right
                 tap_code16(LGUI(KC_RIGHT));
                 return false;
             }
         case TWM:
             if (record->event.pressed) {
                 if (get_mods() & MOD_MASK_SHIFT) {
-                //     tap_code16(LGUI(LALT(KC_UP)));
                 tap_code16(LGUI(KC_DOWN));
                     return false;
                 }
+                //tile window maximized
                 tap_code16(LGUI(KC_UP));
                 return false;
             }
