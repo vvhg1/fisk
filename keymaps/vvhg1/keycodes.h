@@ -84,7 +84,14 @@ enum custom_keycodes {
     mo_AUX,
     Go_Def,
     Peek_Def,
-    Dbg
+    Dbg,
+    TWL,
+    TWR,
+    TWM,
+    TWB,
+    TWN,
+    TWS
+
 };
 
 #ifdef CONSOLE_ENABLE
