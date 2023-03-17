@@ -63,7 +63,7 @@
 
 // UA: ä
 // UO: ö
-//  UU: ü
+// UU: ü
 // US: ß
 
 // VMN: Move tab to the left

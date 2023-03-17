@@ -170,7 +170,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    [_MOUSE] = LAYOUT(
              _______, KC_WH_U, KC_WH_D, KC_WH_R, _______, _______,                                        _______, Go_Def, LGUI(KC_4), KC_PGDN, KC_PGUP, _______,
     KC_BTN5, KC_WH_L, KC_MS_U, KC_MS_D, KC_MS_R, KC_BTN1, _______,                                        _______, Peek_Def, LGUI(KC_1), LGUI(KC_2), LALT(KC_ESC),  KC_END, KC_QUOT,
-    KC_BTN2, KC_MS_L,LGUI(KC_F2),LGUI(KC_F3),LGUI(KC_F4), LGUI(KC_F5),_______, _______,   _______, _______,      XXXXXXX,LSA(KC_LEFT),MEH(KC_LEFT),MEH(KC_RIGHT),LGUI(KC_3),KC_NO ,
+    KC_BTN2, KC_MS_L,LGUI(KC_F2),LGUI(KC_F3),LGUI(KC_F4), LGUI(KC_F5),_______, _______,   _______, _______,      XXXXXXX,LSA(KC_LEFT),MEH(KC_LEFT),MEH(KC_RIGHT),LGUI(KC_5),LGUI(KC_3),
     KC_BTN4,LGUI(KC_F1),            _______,  _______, _______,                _______,   _______,                 _______, _______, _______,        LSA(KC_RIGHT),KC_F2
 
     ),
@@ -528,9 +528,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 if (IS_LAYER_ON(_NAV)) {
                     layer_off(_NAV);
                 }
-                // if (IS_LAYER_ON(_NUM)) {
-                //     layer_off(_NUM);
-                // }
+                one_shot_timer    = timer_read();
+                if (is_leading()) {
+                    // substract from timer to make sure we don't call leader twice
+                    one_shot_timer -= 250;
+                    start_leading();
+                }
 #    endif
                 //switch to mouse layer only while pressed
                 layer_on(_MOUSE);
@@ -538,9 +541,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }else{
                 layer_off(_MOUSE);
                 //if no other keys were pressed, call leader
-                if (layer_toggle_flag) {
+                if (layer_toggle_flag){
                     layer_toggle_flag = false;
-                    start_leading();
+                    if(timer_elapsed(one_shot_timer) < 250 || is_leading()) {
+                        start_leading();
+                    }
                 }
             }
             return false;

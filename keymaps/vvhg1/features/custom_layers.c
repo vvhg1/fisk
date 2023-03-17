@@ -70,7 +70,7 @@ void process_custom_layer(const keyrecord_t *record, uint8_t targetlayer) {
     } else {
         switch (targetlayer) {
             case _NAV:
-                if (!layer_toggle_flag || (timer_elapsed(one_shot_timer) > 500)) {
+                if (!layer_toggle_flag || (timer_elapsed(one_shot_timer) > 250)) {
                     if (IS_LAYER_ON(_NUM)) {
                         layer_off(_NUM);
                         if (came_from_NAV) {
@@ -87,7 +87,7 @@ void process_custom_layer(const keyrecord_t *record, uint8_t targetlayer) {
                 }
                 break;
             case _NUM:
-                if (!layer_toggle_flag || (timer_elapsed(one_shot_timer) > 500)) {
+                if (!layer_toggle_flag || (timer_elapsed(one_shot_timer) > 250)) {
                     if (IS_LAYER_ON(_NUM)) {
                         layer_off(_NUM);
                         if (came_from_NAV) {
