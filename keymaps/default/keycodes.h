@@ -20,8 +20,3 @@
 
 #include "quantum.h"
 #include "enumlayers.h"
-
-
-
-
-

@@ -19,4 +19,3 @@
 #include QMK_KEYBOARD_H
 
 void process_custom_layer(const keyrecord_t *record, uint8_t targetlayer);
-

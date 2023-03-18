@@ -61,7 +61,9 @@ static uint16_t xcase_delimiter;
 static int8_t distance_to_last_delim = -1;
 
 // Check whether caps word is on
-bool caps_word_enabled(void) { return caps_word_on; }
+bool caps_word_enabled(void) {
+    return caps_word_on;
+}
 bool x_case_enabled(void) {
     if (xcase_state != XCASE_OFF) {
         return true;
@@ -69,7 +71,9 @@ bool x_case_enabled(void) {
         return false;
     }
 }
-bool num_word_enabled(void) { return num_word_on; }
+bool num_word_enabled(void) {
+    return num_word_on;
+}
 
 // Enable caps word
 void enable_caps_word(void) {
@@ -111,10 +115,14 @@ void toggle_xcase(void) {
     }
 }
 // Get xcase state
-enum xcase_state get_xcase_state(void) { return xcase_state; }
+enum xcase_state get_xcase_state(void) {
+    return xcase_state;
+}
 
 // Enable xcase and pickup the next keystroke as the delimiter
-void enable_xcase(void) { xcase_state = XCASE_WAIT; }
+void enable_xcase(void) {
+    xcase_state = XCASE_WAIT;
+}
 
 // Enable xcase with the specified delimiter
 void enable_xcase_with(uint16_t delimiter) {
@@ -124,7 +132,9 @@ void enable_xcase_with(uint16_t delimiter) {
 }
 
 // Disable xcase
-void disable_xcase(void) { xcase_state = XCASE_OFF; }
+void disable_xcase(void) {
+    xcase_state = XCASE_OFF;
+}
 
 // Place the current xcase delimiter
 static void place_delimiter(void) {
@@ -150,9 +160,10 @@ static void remove_delimiter(void) {
         tap_code(KC_BSPC);
     }
 #else
-    if(xcase_delimiter == MR_sft){
+    if (xcase_delimiter == MR_sft) {
         return;
-    }tap_code(KC_BSPC);
+    }
+    tap_code(KC_BSPC);
 #endif
 }
 
@@ -203,8 +214,8 @@ __attribute__((weak)) bool terminate_case_modes(uint16_t keycode, const keyrecor
             case KC_MINS:
             case KC_UNDS:
             case KC_BSPC:
-            case KC_LSHIFT:
-            case KC_RSHIFT:
+            case KC_LSFT:
+            case KC_RSFT:
             case KC_LALT:
             case KC_RALT:
                 return false;
@@ -285,11 +296,11 @@ bool process_case_modes(uint16_t keycode, const keyrecord_t *record) {
         if (xcase_state == XCASE_WAIT) {
             // grab the next input to be the delimiter
             if ((use_default_xcase_separator(keycode, record)) && (record->event.pressed)) {
-                enable_xcase_with(DEFAULT_XCASE_SEPARATOR);  //-------------------------------------------------------could be set based on last separator
+                enable_xcase_with(DEFAULT_XCASE_SEPARATOR); //-------------------------------------------------------could be set based on last separator
             } else if (record->event.pressed) {
                 switch (keycode) {
-                    case KC_LSHIFT:
-                    case KC_RSHIFT:
+                    case KC_LSFT:
+                    case KC_RSFT:
                     case KC_LALT:
                     case KC_RALT:
                     case ML_sft:
@@ -360,16 +371,16 @@ bool process_case_modes(uint16_t keycode, const keyrecord_t *record) {
                     default:
                         if (distance_to_last_delim >= 0) {
                             // puts back a one shot delimiter if you we're back to the delimiter pos
-                            if (distance_to_last_delim == 0 && ((IS_OSM(xcase_delimiter))||(xcase_delimiter == MR_sft))) {
+                            if (distance_to_last_delim == 0 && ((IS_OSM(xcase_delimiter)) || (xcase_delimiter == MR_sft))) {
                                 tap_code16(LSFT(keycode));
-                            ++distance_to_last_delim;
-                            return false;
+                                ++distance_to_last_delim;
+                                return false;
                             }
                             ++distance_to_last_delim;
                         }
                         break;
                 }
-            }  // end XCASE_ON
+            } // end XCASE_ON
             if (caps_word_on) {
                 // check if the case modes have been terminated
                 if (terminate_case_modes(keycode, record)) {
