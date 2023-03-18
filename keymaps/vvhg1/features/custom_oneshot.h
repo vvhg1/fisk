@@ -19,7 +19,7 @@
 #include QMK_KEYBOARD_H
 
 bool rshift_on;
-int combo_flag;
+int  combo_flag;
 bool is_oneshot_rshift;
 bool lshift_on;
 bool is_oneshot_lshift;
@@ -30,4 +30,3 @@ bool is_oneshot_lalt;
 
 bool process_custom_one_shot(uint16_t keycode, const keyrecord_t *record);
 void release_custom_one_shot(uint16_t keycode, const keyrecord_t *record);
-

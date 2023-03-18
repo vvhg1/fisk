@@ -42,9 +42,9 @@ void toggle_num_word(void);
 
 // enum for the xcase states
 enum xcase_state {
-    XCASE_OFF = 0,  // xcase is off
-    XCASE_ON,       // xcase is actively on
-    XCASE_WAIT,     // xcase is waiting for the delimiter input
+    XCASE_OFF = 0, // xcase is off
+    XCASE_ON,      // xcase is actively on
+    XCASE_WAIT,    // xcase is waiting for the delimiter input
 };
 
 // Get xcase state

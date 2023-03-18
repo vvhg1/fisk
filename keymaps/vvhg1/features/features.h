@@ -17,15 +17,15 @@
 #pragma once
 
 #ifdef CASEMODES_ENABLE
-#include "features/casemodes.h"
+#    include "features/casemodes.h"
 #endif
 
 #ifdef CUSTOM_LEADER_ENABLE
-#include "features/leader.h"
-#include "features/leaderfuncs.h"
+#    include "features/leader.h"
+#    include "features/leaderfuncs.h"
 #endif
 #ifdef CUSTOM_ONE_SHOT_ENABLE
-#include "features/custom_oneshot.h"
+#    include "features/custom_oneshot.h"
 #endif
 
 #include "features/custom_layers.h"
@@ -37,10 +37,10 @@
 #ifdef OLED_ENABLE
 #    include "features/oled_utils.h"
 #endif
-#ifdef   EOS_ENABLE
+#ifdef EOS_ENABLE
 #    include "features/eos_util.h"
 #endif
-#ifdef   POWER_BRACKETS_ENABLE
+#ifdef POWER_BRACKETS_ENABLE
 #    include "features/power_brackets.h"
 #endif
 #ifdef CUSTOM_WORD_LINE_SELECTION_ENABLE

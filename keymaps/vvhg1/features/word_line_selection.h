@@ -14,15 +14,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #pragma once
 
 #include QMK_KEYBOARD_H
 
-bool oldlineflag;
-bool lineflag;
+bool    oldlineflag;
+bool    lineflag;
 uint8_t SelWrd_counter;
 uint8_t prev_SelWrd_counter;
-
 
 bool process_word_line_selection(uint16_t keycode, const keyrecord_t *record);

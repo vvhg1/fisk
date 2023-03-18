@@ -44,8 +44,8 @@ void process_eos(uint16_t keycode, const keyrecord_t *record) {
 
             case KC_ENT:
             case KC_SPC:
-            dot_counter = 0;
-            break;
+                dot_counter = 0;
+                break;
 
             default:
                 if (dot_counter == 2) {

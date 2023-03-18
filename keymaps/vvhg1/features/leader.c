@@ -22,25 +22,25 @@
 #include "keycodes.h"
 #include <string.h>
 #ifdef CUSTOM_ONE_SHOT_ENABLE
-#include "features/custom_oneshot.h"
+#    include "features/custom_oneshot.h"
 #endif
 #ifndef LEADER_ESC_KEY
-#define LEADER_ESC_KEY KC_ESC
+#    define LEADER_ESC_KEY KC_ESC
 #endif
 
-static bool leading = false;
+static bool          leading     = false;
 static leader_func_t leader_func = NULL;
 
 #ifdef LEADER_DISPLAY_STR
 
-#ifndef LEADER_DISPLAY_LEN
-#define LEADER_DISPLAY_LEN 7 //change this value to display a longer or shorter string
-#endif
+#    ifndef LEADER_DISPLAY_LEN
+#        define LEADER_DISPLAY_LEN 7 // change this value to display a longer or shorter string
+#    endif
 
 static const char keycode_to_ascii_lut[58] = {0, 0, 0, 0, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 0, 0, 0, '\t', ' ', '-', '=', '[', ']', '\\', 0, ';', '\'', '`', ',', '.', '/'};
 static uint8_t    leader_display_size;
 // static const char space_ascii[] = "SPC";
-static char leader_display[LEADER_DISPLAY_LEN + 1];  // add space for null terminator
+static char leader_display[LEADER_DISPLAY_LEN + 1]; // add space for null terminator
 
 static void update_leader_display(uint16_t keycode) {
     if (leader_display_size < LEADER_DISPLAY_LEN - 2) {
@@ -63,14 +63,20 @@ static void update_leader_display(uint16_t keycode) {
     }
 }
 
-char *leader_display_str(void) { return leader_display; }
+char *leader_display_str(void) {
+    return leader_display;
+}
 #endif
 
 // The entry point for leader sequenc functions
-__attribute__((weak)) void *leader_start_func(uint16_t keycode) { return NULL; }
+__attribute__((weak)) void *leader_start_func(uint16_t keycode) {
+    return NULL;
+}
 
 // Check to see if we are leading
-bool is_leading(void) { return leading; }
+bool is_leading(void) {
+    return leading;
+}
 // Start leader sequence
 void start_leading(void) {
     if (is_leading()) {
@@ -90,22 +96,22 @@ void start_leading(void) {
 void stop_leading(void) {
     leading     = false;
     leader_func = NULL;
-    #ifdef CUSTOM_ONE_SHOT_ENABLE
-                    if (is_oneshot_rshift) {
-                    unregister_code(KC_RSHIFT);
-                    is_oneshot_rshift = false;
-                }
-                if (rshift_on) {
-                    rshift_on = false;
-                }
+#ifdef CUSTOM_ONE_SHOT_ENABLE
+    if (is_oneshot_rshift) {
+        unregister_code(KC_RSFT);
+        is_oneshot_rshift = false;
+    }
+    if (rshift_on) {
+        rshift_on = false;
+    }
 
-                if (is_oneshot_lshift) {
-                    unregister_code(KC_LSHIFT);
-                    is_oneshot_lshift = false;
-                }
-                if (lshift_on) {
-                    lshift_on = false;
-                }
+    if (is_oneshot_lshift) {
+        unregister_code(KC_LSFT);
+        is_oneshot_lshift = false;
+    }
+    if (lshift_on) {
+        lshift_on = false;
+    }
 #endif
 #ifdef LEADER_DISPLAY_STR
     leader_display[leader_display_size] = ' ';
@@ -130,7 +136,7 @@ bool process_leader(uint16_t keycode, const keyrecord_t *record) {
         }
 #endif
         // let through anything above that's normal keyboard keycode or a mod
-        if (keycode > QK_MODS_MAX || IS_MOD(keycode)) {
+        if (keycode > QK_MODS_MAX || IS_MODIFIER_KEYCODE(keycode)) {
             switch (keycode) {
                 // special keycodes used in leader funcs
 #ifdef POWER_BRACKETS_ENABLE
@@ -160,9 +166,9 @@ bool process_leader(uint16_t keycode, const keyrecord_t *record) {
                 stop_leading();
             }
         }
-            if (keycode == KC_SPC) {
+        if (keycode == KC_SPC) {
             return true;
-            }
+        }
         return false;
     }
     return true;

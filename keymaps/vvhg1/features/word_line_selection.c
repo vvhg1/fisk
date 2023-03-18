@@ -22,7 +22,7 @@
 #include "keycodes.h"
 
 bool process_word_line_selection(uint16_t keycode, const keyrecord_t *record) {
-    if (record->event.pressed && keycode != MR_sft && keycode != KC_RSHIFT) {
+    if (record->event.pressed && keycode != MR_sft && keycode != KC_RSFT) {
         oldlineflag = lineflag;
         lineflag    = false;
     }
@@ -33,9 +33,9 @@ bool process_word_line_selection(uint16_t keycode, const keyrecord_t *record) {
                 // uint8_t temp_mods = get_mods();
                 lineflag = true;
                 if (oldlineflag) {
-                        register_code16(LSFT(KC_DOWN));
-                        return true;
-                }  else {
+                    register_code16(LSFT(KC_DOWN));
+                    return true;
+                } else {
                     tap_code(KC_END);
                     tap_code(KC_HOME);
                     tap_code(KC_HOME);
@@ -51,7 +51,7 @@ bool process_word_line_selection(uint16_t keycode, const keyrecord_t *record) {
             if (record->event.pressed) {
                 lineflag = true;
                 if (oldlineflag) {
-                        register_code16(LSFT(KC_UP));
+                    register_code16(LSFT(KC_UP));
                 } else {
                     tap_code(KC_DOWN);
                     tap_code(KC_HOME);

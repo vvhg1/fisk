@@ -49,9 +49,6 @@ enum custom_keycodes {
     Enc_M,
     go_NAV,
     go_NUM,
-    CAPS_WORD,
-    SNAKE_CASE,
-    NUM_WORD,
     EURO_SYM,
     SelWrdL,
     SelWrdR,
@@ -95,7 +92,7 @@ enum custom_keycodes {
 };
 
 #ifdef CONSOLE_ENABLE
-# define DEBUGg DEBUG
+#    define DEBUGg DEBUG
 #else
-# define DEBUGg _______
+#    define DEBUGg _______
 #endif

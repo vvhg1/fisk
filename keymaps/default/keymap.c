@@ -17,12 +17,11 @@
 #include "keycodes.h"
 
 #ifdef CONSOLE_ENABLE
-#include "print.h"
+#    include "print.h"
 #endif
 
-
-
-//these are the keymaps for the different layers
+// these are the keymaps for the different layers
+/* clang-format off */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /*
@@ -67,6 +66,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 //     ),
 };
+
+/* clang-format on */
 
 #ifdef CONSOLE_ENABLE
 void keyboard_post_init_user(void) {

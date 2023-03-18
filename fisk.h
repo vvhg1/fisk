@@ -17,7 +17,6 @@
 
 #include "quantum.h"
 
-
 /* This a shortcut to help you visually see your layout.
  *
  * The first section contains all of the arguments representing the physical
@@ -26,6 +25,9 @@
  * The second converts the arguments into a two-dimensional array which
  * represents the switch matrix.
  */
+
+/* clang-format off */
+
 #define LAYOUT( \
          L01, L02, L03, L04, L05, L06,                                    R05, R06, R07, R08, R09, R10, \
     L12, L13, L14, L15, L16, L17, L18,                                    R17, R18, R19, R20, R21, R22, R23, \
@@ -42,3 +44,5 @@
     { R32,   R34,   R35,   R36,   R37,   R38,   R39   }, \
     { R31,   R44,   R45,   R46,   R47,   R48,   R49 }, \
 }
+
+/* clang-format off */

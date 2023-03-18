@@ -17,29 +17,21 @@
 #pragma once
 
 #include QMK_KEYBOARD_H
-// int variable to store the number
-// int numberofiterationsforleader;
-// int myint;
-
-//string to store the sequence
-// char sequence[10];
 // Leader functions
-// void *reset_keyboard1(uint16_t keycode); // here LDR qrk will reset the keyboard
-// void *reset_keyboard2(uint16_t keycode); //
 void *windows_stuff(uint16_t keycode); // here WS is Start menu, WM is context menu WQ  close tab
 void *vscode_stuff(uint16_t keycode);
-void *vscode_stuff_no(uint16_t keycode); // here vn select editor right/ vi left
-void *vscode_stuff_m(uint16_t keycode); // vmn moves editor to right group / vmi to left
-void *vscode_stuff_f(uint16_t keycode); // vfn vfi focus on group left right
-void *vscode_stuff_p(uint16_t keycode); // vu ve move ln up dn
-void *vscode_stuff_a(uint16_t keycode); // vu ve move ln up dn
+void *vscode_stuff_no(uint16_t keycode);       // here vn select editor right/ vi left
+void *vscode_stuff_m(uint16_t keycode);        // vmn moves editor to right group / vmi to left
+void *vscode_stuff_f(uint16_t keycode);        // vfn vfi focus on group left right
+void *vscode_stuff_p(uint16_t keycode);        // vu ve move ln up dn
+void *vscode_stuff_a(uint16_t keycode);        // vu ve move ln up dn
 void *vscode_stuff_brackets(uint16_t keycode); // bracket selection
 // void *encoder_stuff(uint16_t keycode); // h horizontal scroll / v vertical scroll / e editor / t tab / p paging / w word
-void *macro_stuff(uint16_t keycode); // m records and plays macros
-void *umlaut_stuff(uint16_t keycode); // german umlaut
-void *xcase_stuff(uint16_t keycode); // snake case and caps
-void *f_key_stuff(uint16_t keycode); // F1-F11
+void *macro_stuff(uint16_t keycode);    // m records and plays macros
+void *umlaut_stuff(uint16_t keycode);   // german umlaut
+void *xcase_stuff(uint16_t keycode);    // snake case and caps
+void *f_key_stuff(uint16_t keycode);    // F1-F11
 void *operator_stuff(uint16_t keycode); // operators
-void *numbers_game(uint16_t keycode); // numbers
+void *numbers_game(uint16_t keycode);   // numbers
 void  select_in_bracets(void);
 void *vscode_markers(uint16_t keycode);

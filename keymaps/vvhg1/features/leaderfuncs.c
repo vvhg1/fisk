@@ -109,7 +109,6 @@ void *leader_start_func(uint16_t keycode) {
             return vscode_stuff_brackets;
         case KC_E:
             tap_code16(LCTL(LSFT(KC_P))); //  Ctrl+Shift+P Show command palette VSCode
-            // tap_code16(KC_F1);             //  Ctrl+Shift+P Show command palette VSCode
             return NULL;
         case KC_F:
             return f_key_stuff; // Function keys
@@ -189,8 +188,8 @@ void *leader_start_func(uint16_t keycode) {
             enable_xcase_with(MR_sft);
             break;
 #endif
-        case KC_LSHIFT:
-        case KC_RSHIFT:
+        case KC_LSFT:
+        case KC_RSFT:
         case ML_sft:
         case MR_sft:
             return leader_start_func; // escape
@@ -376,8 +375,8 @@ void *umlaut_stuff(uint16_t keycode) {
                 }
             }
             break;
-        case KC_LSHIFT:
-        case KC_RSHIFT:
+        case KC_LSFT:
+        case KC_RSFT:
         case ML_sft:
         case MR_sft:
             return umlaut_stuff;

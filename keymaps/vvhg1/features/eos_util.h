@@ -1,4 +1,4 @@
-   /* Copyright 2021 @vvhg1
+/* Copyright 2021 @vvhg1
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,15 +14,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #pragma once
 
 #include QMK_KEYBOARD_H
 
- uint16_t lastkeypressed;
- uint16_t thiskeypressed;
+uint16_t lastkeypressed;
+uint16_t thiskeypressed;
 
- int8_t dot_counter;
+int8_t dot_counter;
 
 void process_eos(uint16_t keycode, const keyrecord_t *record);
 void release_eos(uint16_t keycode, const keyrecord_t *record);

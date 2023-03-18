@@ -203,7 +203,7 @@ _______
 /* * Aux Layer
  *
  *          ,----------------------------------------------------.                                       ,-----------------------------------------------------.
- *          | RESET  | DEBUG  |        |        |        |       |                                       |        |        |        |        |        | RESET  |
+ *          | QK_BOOT  | DEBUG  |        |        |        |       |                                       |        |        |        |        |        | QK_BOOT  |
  * +--------+--------+--------+--------+--------+--------+-------|                                       |--------+--------+--------+--------+--------+--------+--------.
  * |        |        |        |        |        |        |       |                                       |        |        |        |        |        |        |        |
  * |--------+--------+--------+--------+--------+--------+-------+--------+--------.     ,---------------+--------+--------+--------+--------+--------+--------+--------|
@@ -213,7 +213,7 @@ _______
  * `-----------------'           `--------------------------'    '--------+--------'     `---------------'     '-------------------------'            '-----------------'
  */
    [_AUX] = LAYOUT(
-             RESET, DEBUGg, _______, _______, _______, _______,                                        _______, _______, _______, _______, _______, RESET,
+             QK_BOOT, DEBUGg, _______, _______, _______, _______,                                        _______, _______, _______, _______, _______, QK_BOOT,
     _______, _______, _______, _______, _______, _______, _______,                                        _______, _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______,          _______, _______,      _______, _______,        _______, _______, _______, _______, _______, _______,
     _______, _______,            _______,  _______, _______,                _______,      _______,                _______, _______, _______,           _______, _______
@@ -289,7 +289,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // -----------------------------------------------------------flags for line selection and a few other things----------------------------------------------------------------
     if (record->event.pressed) {
 #ifdef OLED_ENABLE
-        turn_oled_on = true;
+        turn_oled_on  = true;
         startup_timer = timer_read();
 #endif
         prev_layer_toggle_flag = layer_toggle_flag;
@@ -300,12 +300,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             space_pressed = false;
         }
 
-
 #ifdef SWAP_HANDS_ENABLE
         no_swap = true;
 #endif
     }
-    switch (keycode) {  //!#######################################################--switch(keycode)--#######################################################
+    switch (keycode) { //!#######################################################--switch(keycode)--#######################################################
 
         case TWL:
             if (record->event.pressed) {
@@ -313,9 +312,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     tap_code16(LGUI(LALT(KC_LEFT)));
                     return false;
                 }
-                    //tile window left
-                    tap_code16(LGUI(KC_LEFT));
-                    return false;
+                // tile window left
+                tap_code16(LGUI(KC_LEFT));
+                return false;
             }
         case TWR:
             if (record->event.pressed) {
@@ -323,17 +322,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     tap_code16(LGUI(LALT(KC_RIGHT)));
                     return false;
                 }
-                //tile window right
+                // tile window right
                 tap_code16(LGUI(KC_RIGHT));
                 return false;
             }
         case TWM:
             if (record->event.pressed) {
                 if (get_mods() & MOD_MASK_SHIFT) {
-                tap_code16(LGUI(KC_DOWN));
+                    tap_code16(LGUI(KC_DOWN));
                     return false;
                 }
-                //tile window maximized
+                // tile window maximized
                 tap_code16(LGUI(KC_UP));
                 return false;
             }
@@ -343,7 +342,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     tap_code16(LGUI(LALT(KC_UP)));
                     return false;
                 }
-                //tile window north
+                // tile window north
                 tap_code16(LGUI(KC_9));
                 return false;
             }
@@ -353,7 +352,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     tap_code16(LGUI(LALT(KC_DOWN)));
                     return false;
                 }
-                //tile window south
+                // tile window south
                 tap_code16(LGUI(KC_8));
                 return false;
             }
@@ -373,18 +372,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
         case KC_SPC:
             if (record->event.pressed) {
-                if(!is_leading())
-                {
-                    space_pressed = true;
+                if (!is_leading()) {
+                    space_pressed      = true;
                     custom_space_cadet = false;
                 }
                 process_custom_layer(record, mo_NUM);
                 return false;
             } else {
-                if(!custom_space_cadet){
+                if (!custom_space_cadet) {
 #ifdef CASEMODES_ENABLE
                     keyrecord_t new_record;
-                    new_record.event.pressed = true;
+                    new_record.event.pressed  = true;
                     keyrecord_t *new_record_p = &new_record;
                     if (!process_case_modes(KC_SPC, new_record_p)) {
                         if (layer_state_is(_NUM)) {
@@ -398,7 +396,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
                 if (layer_state_is(_NUM)) {
                     custom_space_cadet = false;
-                    space_pressed = false;
+                    space_pressed      = false;
                     process_custom_layer(record, mo_NUM);
                 }
             }
@@ -467,14 +465,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return true;
         case EURO_SYM:
             if (record->event.pressed) {
-                if (is_windows)
-            {
-                SEND_STRING(SS_LALT(SS_TAP(X_P0) SS_TAP(X_P1) SS_TAP(X_P2) SS_TAP(X_P8)));  // send euro symbol
-            }else{
-            tap_code16(C(S(KC_U)));
-            SEND_STRING("20AC");  // here euro symbol
-            tap_code(KC_ENT);
-            }
+                if (is_windows) {
+                    SEND_STRING(SS_LALT(SS_TAP(X_P0) SS_TAP(X_P1) SS_TAP(X_P2) SS_TAP(X_P8))); // send euro symbol
+                } else {
+                    tap_code16(C(S(KC_U)));
+                    SEND_STRING("20AC"); // here euro symbol
+                    tap_code(KC_ENT);
+                }
             }
             return false;
 
@@ -524,26 +521,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case LEADER:
             if (record->event.pressed) {
 #    ifdef CUSTOM_LEADER_TO_DL
-                //switch to default layer
+                // switch to default layer
                 if (IS_LAYER_ON(_NAV)) {
                     layer_off(_NAV);
                 }
-                one_shot_timer    = timer_read();
+                one_shot_timer = timer_read();
                 if (is_leading()) {
                     // substract from timer to make sure we don't call leader twice
                     one_shot_timer -= 250;
                     start_leading();
                 }
 #    endif
-                //switch to mouse layer only while pressed
+                // switch to mouse layer only while pressed
                 layer_on(_MOUSE);
                 layer_toggle_flag = true;
-            }else{
+            } else {
                 layer_off(_MOUSE);
-                //if no other keys were pressed, call leader
-                if (layer_toggle_flag){
+                // if no other keys were pressed, call leader
+                if (layer_toggle_flag) {
                     layer_toggle_flag = false;
-                    if(timer_elapsed(one_shot_timer) < 250 || is_leading()) {
+                    if (timer_elapsed(one_shot_timer) < 250 || is_leading()) {
                         start_leading();
                     }
                 }
@@ -562,37 +559,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             break;
 #endif
-#ifdef CASEMODES_ENABLE
-        case CAPS_WORD:
-            if (record->event.pressed) {
-                toggle_caps_word();
-            }
-            return false;
-
-        case SNAKE_CASE:
-            if (record->event.pressed) {
-                toggle_xcase();
-            }
-            return false;
-
-        case NUM_WORD:
-            if (record->event.pressed) {
-                toggle_num_word();
-            }
-            return false;
-#endif
         // ------------------------------------------------------------------------ cut copy paste undo redo ----------------------------------------------------------------
         case Undo:
             if (record->event.pressed) {
                 register_code16(C(KC_Z));
-            }else {
+            } else {
                 unregister_code16(C(KC_Z));
             }
             break;
         case Cut:
             if (record->event.pressed) {
                 register_code16(C(KC_X));
-            }else {
+            } else {
                 unregister_code16(C(KC_X));
             }
             // break;
@@ -610,7 +588,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case Redo:
             if (record->event.pressed) {
                 register_code16(C(KC_Y));
-            }else {
+            } else {
                 unregister_code16(C(KC_Y));
             }
             break;
@@ -622,7 +600,7 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
 #ifdef CUSTOM_ONE_SHOT_ENABLE
     release_custom_one_shot(keycode, record);
 #endif
-#ifdef EOS_ENABLE  //----------------------------------------------------------process_eos_logic----------------------------------------------------------------
+#ifdef EOS_ENABLE //----------------------------------------------------------process_eos_logic----------------------------------------------------------------
     release_eos(keycode, record);
 #endif
 }
@@ -630,7 +608,7 @@ void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
 #ifdef OLED_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     startup_timer = timer_read();
-    turn_oled_on = true;
+    turn_oled_on  = true;
     cleared_oled  = false;
     return rotation;
 }
@@ -645,22 +623,21 @@ bool oled_task_user(void) {
         }
     } else {
         finished_logo = true;
-        if(!turn_oled_on){
+        if (!turn_oled_on) {
             return false;
         }
         if (timer_elapsed(startup_timer) > 18000) {
             turn_oled_on = false;
             return false;
         }
-        if(!is_oled_on()){
+        if (!is_oled_on()) {
             oled_on();
         }
         oled_clear();
         render_status();
-        if(( !custom_space_cadet && (space_pressed) && timer_elapsed(startup_timer) > 800)){
+        if ((!custom_space_cadet && (space_pressed) && timer_elapsed(startup_timer) > 800)) {
             register_code(KC_SPC);
         }
-
     }
     return false;
 }
@@ -685,5 +662,5 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 #ifdef SPLIT_TRANSPORT_MIRROR
 bool should_process_keypress(void) {
     return true;
-    }
+}
 #endif
