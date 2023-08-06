@@ -16,7 +16,17 @@
 
 #pragma once
 
-
+#define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
+#define SERIAL_USART_FULL_DUPLEX
+// #define SERIAL_USART_PIN_SWAP
+/* SPI config for display/touchpad */
+// #define SPI_DRIVER SPID1
+// #define SPI_SCK_PIN GP10
+// #define SPI_MOSI_PIN GP11
+// #define SPI_MISO_PIN GP12
+#define I2C1_SCL_PIN GP11
+#define I2C1_SDA_PIN GP10
+#define I2C_DRIVER I2CD1
 /* key matrix size */
 /* Rows are doubled up-------------------------------------------------------------- */
 #define MATRIX_ROWS 8
@@ -24,14 +34,14 @@
 
 // wiring-----------------------------------------------------------------------
 #define MATRIX_ROW_PINS \
-    { B4, E6, D7, D4 }
+    { GP14, GP15, GP26, GP27 }
 #define MATRIX_COL_PINS \
-    { B6, B2, B3, B1, F7, F6, F5 }
+    { GP3, GP4, GP5, GP6, GP7, GP8 }
 
 #define ENCODERS_PAD_A \
-    { C6 }
+    { GP12 }
 #define ENCODERS_PAD_B \
-    { B5 }
+    { GP13 }
 // second encoder
 /*#define ENCODERS_PAD_A_RIGHT \
     { B5 }

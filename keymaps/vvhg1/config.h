@@ -47,8 +47,12 @@
 
 #ifndef IS_LEFT
 #define OLED_FONT_H "keyboards/handwired/fisk/fonts/glcdfont_fisk_right.c"
+#define SERIAL_USART_TX_PIN GP0
+#define SERIAL_USART_RX_PIN GP1
 #else
 #define OLED_FONT_H "keyboards/handwired/fisk/fonts/glcdfont_fisk_left.c"
+#define SERIAL_USART_TX_PIN GP1
+#define SERIAL_USART_RX_PIN GP0
 #endif
 
 

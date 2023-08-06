@@ -1,69 +1,291 @@
 {
-"keyboard_name": "fisk",
-"url": "https://github.com/vvhg1/fisk",
-"manufacturer": "vvhg1",
-"maintainer": "vvhg1",
-"usb": {
-    "vid": "0x6767",
-    "pid": "0x0054",
-    "device_version": "0.0.1"
-},
+    "keyboard_name": "fisk",
+    "url": "https://github.com/vvhg1/fisk",
+    "manufacturer": "vvhg1",
+    "maintainer": "vvhg1",
+    "processor": "RP2040",
+    "bootloader": "rp2040",
+    "usb": {
+        "vid": "0x6767",
+        "pid": "0x0054",
+        "device_version": "0.0.1"
+    },
     "layouts": {
         "LAYOUT": {
-            "layout": [{"label":"F", "x":4, "y":0},
-                {"label":"U", "x":13.75, "y":0},
-                {"label":"P", "x":5, "y":0.5},
-                {"label":"L", "x":12.75, "y":0.5},
-                {"label":"B", "x":6, "y":0.75},
-                {"label":"J", "x":11.75, "y":0.75},
-                {"label":"S", "x":4, "y":1},
-                {"label":"/", "x":7, "y":1},
-                {"label":"[I]", "x":10.75, "y":1},
-                {"label":"E", "x":13.75, "y":1},
-                {"label":"T", "x":5, "y":1.5},
-                {"label":"N", "x":12.75, "y":1.5},
-                {"label":"G", "x":6, "y":1.75},
-                {"label":"M", "x":11.75, "y":1.75},
-                {"label":"C", "x":4, "y":2},
-                {"label":"\\", "x":7, "y":2},
-                {"label":"{I}", "x":10.75, "y":2},
-                {"label":",", "x":13.75, "y":2},
-                {"label":"D", "x":5, "y":2.5},
-                {"label":"H", "x":12.75, "y":2.5},
-                {"label":"V", "x":6, "y":2.75},
-                {"label":"K", "x":11.75, "y":2.75},
-                {"label":"FUNC", "x":3.5, "y":4},
-                {"label":"LEAD", "x":4.5, "y":4},
-                {"label":"<i class='mss mss-Unicode-DeleteRight-Big-2'></i>", "x":13.25, "y":4},
-                {"label":"Enc", "x":14.25, "y":4},
-                {"label":"Y", "x":-4.4, "y":6},
-                {"label":"(I)", "x":-3.4000000000000004, "y":6},
-                {"label":"I", "x":-4.4, "y":7},
-                {"label":".", "x":-4.4, "y":8},
-                {"label":"<i class='mss mss-Unicode-Command-3'></i>", "x":6.25, "y":12.25},
-                {"label":";", "x":-3.0, "y":15.9},
-                {"label":"'", "x":-2, "y":15.9},
-                {"label":"O", "x":-3.0, "y":16.9},
-                {"label":"Enter", "x":-2, "y":16.9},
-                {"label":"-", "x":-3.0, "y":17.9},
-                {"label":"@", "x":-2, "y":17.9},
-                {"label":"Spc", "x":8, "y":19.4, "h":2},
-                {"label":"NAV", "x":9, "y":20.4},
-                {"label":"<i class='mss mss-Unicode-Option-3'></i>", "x":0.25, "y":17.65},
-                {"label":"NUM", "x":-2.5, "y":21.9},
-                {"label":"Shft", "x":-1.5, "y":21.9, "h":2},
-                {"label":"<i class='mss mss-Unicode-Command-3'></i>", "x":-2.5, "y":22.9},
-                {"label":"&", "x":0.1, "y":26.4},
-                {"label":"Q", "x":1.1, "y":26.4},
-                {"label":"#", "x":0.1, "y":27.4},
-                {"label":"A", "x":1.1, "y":27.4},
-                {"label":"<i class='kb kb-Line-Start-End'></i>", "x":0.1, "y":28.4},
-                {"label":"Z", "x":1.1, "y":28.4},
-                {"label":"<i class='mss mss-Unicode-BackSpace-DeleteLeft-Big-2'></i>", "x":11.4, "y":29.45},
-                {"label":"ESC", "x":1.65, "y":24.9},
-                {"label":"W", "x":2.65, "y":24.9},
-                {"label":"R", "x":2.65, "y":25.9},
-                {"label":"X", "x":2.65, "y":26.9}]
+            "layout": [
+                {
+                    "label": "F",
+                    "x": 4,
+                    "y": 0
+                },
+                {
+                    "label": "U",
+                    "x": 13.75,
+                    "y": 0
+                },
+                {
+                    "label": "P",
+                    "x": 5,
+                    "y": 0.5
+                },
+                {
+                    "label": "L",
+                    "x": 12.75,
+                    "y": 0.5
+                },
+                {
+                    "label": "B",
+                    "x": 6,
+                    "y": 0.75
+                },
+                {
+                    "label": "J",
+                    "x": 11.75,
+                    "y": 0.75
+                },
+                {
+                    "label": "S",
+                    "x": 4,
+                    "y": 1
+                },
+                {
+                    "label": "/",
+                    "x": 7,
+                    "y": 1
+                },
+                {
+                    "label": "[I]",
+                    "x": 10.75,
+                    "y": 1
+                },
+                {
+                    "label": "E",
+                    "x": 13.75,
+                    "y": 1
+                },
+                {
+                    "label": "T",
+                    "x": 5,
+                    "y": 1.5
+                },
+                {
+                    "label": "N",
+                    "x": 12.75,
+                    "y": 1.5
+                },
+                {
+                    "label": "G",
+                    "x": 6,
+                    "y": 1.75
+                },
+                {
+                    "label": "M",
+                    "x": 11.75,
+                    "y": 1.75
+                },
+                {
+                    "label": "C",
+                    "x": 4,
+                    "y": 2
+                },
+                {
+                    "label": "\\",
+                    "x": 7,
+                    "y": 2
+                },
+                {
+                    "label": "{I}",
+                    "x": 10.75,
+                    "y": 2
+                },
+                {
+                    "label": ",",
+                    "x": 13.75,
+                    "y": 2
+                },
+                {
+                    "label": "D",
+                    "x": 5,
+                    "y": 2.5
+                },
+                {
+                    "label": "H",
+                    "x": 12.75,
+                    "y": 2.5
+                },
+                {
+                    "label": "V",
+                    "x": 6,
+                    "y": 2.75
+                },
+                {
+                    "label": "K",
+                    "x": 11.75,
+                    "y": 2.75
+                },
+                {
+                    "label": "FUNC",
+                    "x": 3.5,
+                    "y": 4
+                },
+                {
+                    "label": "LEAD",
+                    "x": 4.5,
+                    "y": 4
+                },
+                {
+                    "label": "<i class='mss mss-Unicode-DeleteRight-Big-2'></i>",
+                    "x": 13.25,
+                    "y": 4
+                },
+                {
+                    "label": "Enc",
+                    "x": 14.25,
+                    "y": 4
+                },
+                {
+                    "label": "Y",
+                    "x": -4.4,
+                    "y": 6
+                },
+                {
+                    "label": "(I)",
+                    "x": -3.4000000000000004,
+                    "y": 6
+                },
+                {
+                    "label": "I",
+                    "x": -4.4,
+                    "y": 7
+                },
+                {
+                    "label": ".",
+                    "x": -4.4,
+                    "y": 8
+                },
+                {
+                    "label": "<i class='mss mss-Unicode-Command-3'></i>",
+                    "x": 6.25,
+                    "y": 12.25
+                },
+                {
+                    "label": ";",
+                    "x": -3.0,
+                    "y": 15.9
+                },
+                {
+                    "label": "'",
+                    "x": -2,
+                    "y": 15.9
+                },
+                {
+                    "label": "O",
+                    "x": -3.0,
+                    "y": 16.9
+                },
+                {
+                    "label": "Enter",
+                    "x": -2,
+                    "y": 16.9
+                },
+                {
+                    "label": "-",
+                    "x": -3.0,
+                    "y": 17.9
+                },
+                {
+                    "label": "@",
+                    "x": -2,
+                    "y": 17.9
+                },
+                {
+                    "label": "Spc",
+                    "x": 8,
+                    "y": 19.4,
+                    "h": 2
+                },
+                {
+                    "label": "NAV",
+                    "x": 9,
+                    "y": 20.4
+                },
+                {
+                    "label": "<i class='mss mss-Unicode-Option-3'></i>",
+                    "x": 0.25,
+                    "y": 17.65
+                },
+                {
+                    "label": "NUM",
+                    "x": -2.5,
+                    "y": 21.9
+                },
+                {
+                    "label": "Shft",
+                    "x": -1.5,
+                    "y": 21.9,
+                    "h": 2
+                },
+                {
+                    "label": "<i class='mss mss-Unicode-Command-3'></i>",
+                    "x": -2.5,
+                    "y": 22.9
+                },
+                {
+                    "label": "&",
+                    "x": 0.1,
+                    "y": 26.4
+                },
+                {
+                    "label": "Q",
+                    "x": 1.1,
+                    "y": 26.4
+                },
+                {
+                    "label": "#",
+                    "x": 0.1,
+                    "y": 27.4
+                },
+                {
+                    "label": "A",
+                    "x": 1.1,
+                    "y": 27.4
+                },
+                {
+                    "label": "<i class='kb kb-Line-Start-End'></i>",
+                    "x": 0.1,
+                    "y": 28.4
+                },
+                {
+                    "label": "Z",
+                    "x": 1.1,
+                    "y": 28.4
+                },
+                {
+                    "label": "<i class='mss mss-Unicode-BackSpace-DeleteLeft-Big-2'></i>",
+                    "x": 11.4,
+                    "y": 29.45
+                },
+                {
+                    "label": "ESC",
+                    "x": 1.65,
+                    "y": 24.9
+                },
+                {
+                    "label": "W",
+                    "x": 2.65,
+                    "y": 24.9
+                },
+                {
+                    "label": "R",
+                    "x": 2.65,
+                    "y": 25.9
+                },
+                {
+                    "label": "X",
+                    "x": 2.65,
+                    "y": 26.9
+                }
+            ]
         }
     }
 }
