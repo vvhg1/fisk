@@ -16,8 +16,8 @@
  *  - @vvhg1 changed leader key to toggle on off
  */
 
-#pragma once
-
+// #pragma once
+#include "customkeycodes.h"
 #include QMK_KEYBOARD_H
 
 typedef void *(*leader_func_t)(uint16_t);

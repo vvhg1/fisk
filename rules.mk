@@ -1,7 +1,7 @@
 # This version is for rp2040 zero
 
 # Bootloader selection
-BOOTLOADER = vendor
+BOOTLOADER = rp2040
 SERIAL_DRIVER = vendor
 # Build Options
 

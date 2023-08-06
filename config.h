@@ -19,14 +19,18 @@
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
 #define SERIAL_USART_FULL_DUPLEX
 // #define SERIAL_USART_PIN_SWAP
+#    define SERIAL_USART_TX_PIN GP0
+#    define SERIAL_USART_RX_PIN GP1
+
+
 /* SPI config for display/touchpad */
 // #define SPI_DRIVER SPID1
 // #define SPI_SCK_PIN GP10
 // #define SPI_MOSI_PIN GP11
 // #define SPI_MISO_PIN GP12
+#define I2C_DRIVER I2CD1
 #define I2C1_SCL_PIN GP11
 #define I2C1_SDA_PIN GP10
-#define I2C_DRIVER I2CD1
 /* key matrix size */
 /* Rows are doubled up-------------------------------------------------------------- */
 #define MATRIX_ROWS 8
@@ -36,7 +40,7 @@
 #define MATRIX_ROW_PINS \
     { GP14, GP15, GP26, GP27 }
 #define MATRIX_COL_PINS \
-    { GP3, GP4, GP5, GP6, GP7, GP8 }
+    { GP3, GP4, GP5, GP6, GP7, GP8, GP9 }
 
 #define ENCODERS_PAD_A \
     { GP12 }
@@ -58,15 +62,13 @@
 #define DEBOUNCE 5
 
 // The 3 wires of the TRS/TRRS cable need to connect GND, VCC, and D0/D1/D2/D3 (aka PD0/PD1/PD2/PD3) between the two Pro Micros.
-// Note that the pin used here is actually set by SOFT_SERIAL_PIN
-#define SOFT_SERIAL_PIN D2
 
 // Allows to use either side as the master. Look at the documentation for info:
 // https://docs.qmk.fm/#/config_options?id=setting-handedness
 #define EE_HANDS
 
 // Fix for Elite C rev3
-#define SPLIT_USB_DETECT
+// #define SPLIT_USB_DETECT
 // #define NO_USB_STARTUP_CHECK
 
 // Speed up slave half startup
