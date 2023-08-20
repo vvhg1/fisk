@@ -38,9 +38,9 @@
 
 // wiring-----------------------------------------------------------------------
 #define MATRIX_ROW_PINS \
-    { GP14, GP15, GP26, GP27 }
+    { GP27, GP26, GP15, GP14 }
 #define MATRIX_COL_PINS \
-    { GP3, GP4, GP5, GP6, GP7, GP8, GP9 }
+    { GP9, GP8, GP7, GP6, GP5, GP4, GP3 }
 
 #define ENCODERS_PAD_A \
     { GP12 }
@@ -59,7 +59,7 @@
 //#define MATRIX_HAS_GHOST
 
 /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
-#define DEBOUNCE 5
+#define DEBOUNCE 10
 
 // The 3 wires of the TRS/TRRS cable need to connect GND, VCC, and D0/D1/D2/D3 (aka PD0/PD1/PD2/PD3) between the two Pro Micros.
 
