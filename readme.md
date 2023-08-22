@@ -1,12 +1,13 @@
 ![image info](./images/title.png)
 
-An ergonomic 54-key hand wired split keyboard running QMK on the Elite-C microcontroller, living inside its 3D-printed case.
+An ergonomic 54-key hand wired split keyboard running QMK, living inside its 3D-printed case.
+Version 2.0, now running on a RP2040 Zero, and with USB-C connection between the halves.
 
 ![image info](./images/fisk2.png)
 
 ## Features
 
-- 54-keys, split, Elite-C microcontroller, column stagger, ring finger (5°) and pinky (12°) splay, slightly tented case (2° toward user and 3° outward), support for one rotary encoder per half, one 128x32 OLED per half, hot-pluggable RJ10 connection between halfs and a transport case
+- 54-keys, split, RP2040 Zero powered, column stagger, ring finger (5°) and pinky (12°) splay, slightly tented case (2° toward user and 3° outward), support for one rotary encoder per half, one 128x32 OLED per half, hot-pluggable USB-C (5V safe) connection between halfs and a transport case
 
 Keyboard Maintainer: [@vvhg1](https://github.com/vvhg1)  
 Build guide and 3D files are at [https://github.com/vvhg1/fisk_build_guide.git](https://github.com/vvhg1/fisk_build_guide.git)
@@ -38,7 +39,7 @@ This is my personal keymap, main features include: one rotary encoder, Colemak-d
 
 **Note:** This keymap assumes US ANSI layout on Linux(default) or Windows OS. Switching between the OS modes is done on the Func Layer (W-Key). I have not tested it on other OS and shortcuts are the Linux/Win ones, but it should not be overly complicated to adapt.
 
-**Note:** There is also a default keymap included, in case anyone wants to start with a clean slate.
+**Note:** There is also a default keymap included, in case anyone wants to start with a clean slate. (not yet updated to v2.0)
 
 ### Nav Layer Word and Line Selection
 
@@ -119,14 +120,14 @@ I made a few changes:
 
 ##### Operators
 
-|        |     |     |
-| ------ | --- | --- | --- | --- |
-|        | IE  | ==  |
-|        | IN  | !=  |
-|        | IL  | >=  |
-| Leader | IS  | <=  |
-|        | IO  |     |     |     |
-|        | IA  | &&  |
+|        |     |      |
+| ------ | --- | ---- |
+|        | IE  | ==   |
+|        | IN  | !=   |
+|        | IL  | >=   |
+| Leader | IS  | <=   |
+|        | IO  | \|\| |
+|        | IA  | &&   |
 
 <!-- ##### Brackets
 |        |              |                    |            |
