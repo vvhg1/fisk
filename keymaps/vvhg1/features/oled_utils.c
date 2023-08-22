@@ -35,30 +35,8 @@ bool is_keyboard_left(void) {
 #else
     return false;
 #endif
-    // #ifdef EE_HANDS
-    //     return eeprom_read_byte(EECONFIG_HANDEDNESS);
-    // #endif
 }
 
-//! this is the complete code from ai03, Website: [ai03 Keyboard Designs](https://kb.ai03.me/)
-// __attribute__((weak))
-// bool is_keyboard_left(void) {
-//   #ifdef SPLIT_HAND_PIN
-//     // Test pin SPLIT_HAND_PIN for High/Low, if low it's right hand
-//     setPinInput(SPLIT_HAND_PIN);
-//     return readPin(SPLIT_HAND_PIN);
-//   #else
-//     #ifdef EE_HANDS
-//       return eeprom_read_byte(EECONFIG_HANDEDNESS);
-//     #else
-//       #ifdef MASTER_RIGHT
-//         return !is_keyboard_master();
-//       #else
-//         return is_keyboard_master();
-//       #endif
-//     #endif
-//   #endif
-// }
 #ifndef CONSOLE_ENABLE
 void render_fisk_logo(int line, bool newline) {
     static const char PROGMEM fisk_logo1[] = {0x97, 0x98, 0x99, 0x9A, 0x9B, 0x9C, 0x9D, 0x9E, 0x9F, 0x00};

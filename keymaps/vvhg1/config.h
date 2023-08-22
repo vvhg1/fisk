@@ -19,7 +19,7 @@
 #define IS_LEFT
 
 #ifdef CUSTOM_LEADER_ENABLE
-#    define LEADER_DISPLAY_STR
+#define LEADER_DISPLAY_STR
 #endif
 
 #ifdef CASEMODES_ENABLE
@@ -27,13 +27,13 @@
 #endif
 
 #ifdef OLED_ENABLE
-#    define OLED_BRIGHTNESS 128
+#define OLED_BRIGHTNESS 128
 // #define OLED_DISPLAY_128X32
-#    define OLED_TIMEOUT 7000
-#    define SPLIT_OLED_ENABLE
-#    define SPLIT_MODS_ENABLE
-#    define SPLIT_LAYER_STATE_ENABLE
-#    define SPLIT_TRANSPORT_MIRROR
+#define OLED_TIMEOUT 7000
+#define SPLIT_OLED_ENABLE
+#define SPLIT_MODS_ENABLE
+#define SPLIT_LAYER_STATE_ENABLE
+#define SPLIT_TRANSPORT_MIRROR
 #endif
 // #define NO_USB_STARTUP_CHECK
 
@@ -42,16 +42,17 @@
 // EC11K encoders have a different resolution than other EC11 encoders.
 // When using the default resolution of 4, if you notice your encoder skipping
 // every other tick, lower the resolution to 2.
-#    define ENCODER_RESOLUTION 2
+#define ENCODER_RESOLUTION 4
 #endif
 
 #ifndef IS_LEFT
-#    define OLED_FONT_H "keyboards/handwired/fisk/fonts/glcdfont_fisk_right.c"
+#define OLED_FONT_H "keyboards/handwired/fisk/fonts/glcdfont_fisk_right.c"
 #else
-#    define OLED_FONT_H "keyboards/handwired/fisk/fonts/glcdfont_fisk_left.c"
+#define OLED_FONT_H "keyboards/handwired/fisk/fonts/glcdfont_fisk_left.c"
 #endif
+
 
 #define NO_ACTION_TAPPING
 #ifdef CUSTOM_ONE_SHOT_ENABLE
-#    define NO_ACTION_ONESHOT
+#define NO_ACTION_ONESHOT
 #endif
