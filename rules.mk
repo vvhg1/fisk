@@ -1,9 +1,8 @@
-# MCU name
-MCU = atmega32u4
+# This version is for rp2040 zero
 
 # Bootloader selection
-BOOTLOADER = atmel-dfu
-
+BOOTLOADER = rp2040
+SERIAL_DRIVER = vendor
 # Build Options
 
 BOOTMAGIC_ENABLE = yes      # Enable Bootmagic Lite (adds 40 b)

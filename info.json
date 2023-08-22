@@ -1,13 +1,15 @@
 {
-"keyboard_name": "fisk",
-"url": "https://github.com/vvhg1/fisk",
-"manufacturer": "vvhg1",
-"maintainer": "vvhg1",
-"usb": {
-    "vid": "0x6767",
-    "pid": "0x0054",
-    "device_version": "0.0.1"
-},
+    "keyboard_name": "fisk",
+    "url": "https://github.com/vvhg1/fisk",
+    "manufacturer": "vvhg1",
+    "maintainer": "vvhg1",
+    "processor": "RP2040",
+    "bootloader": "rp2040",
+    "usb": {
+        "vid": "0x6767",
+        "pid": "0x0054",
+        "device_version": "0.0.1"
+    },
     "layouts": {
         "LAYOUT": {
             "layout": [{"label":"F", "x":4, "y":0},

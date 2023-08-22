@@ -16,6 +16,16 @@
 
 #pragma once
 
+#define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
+/* Serial connection between halfs */
+#define SERIAL_USART_FULL_DUPLEX
+#define SERIAL_USART_TX_PIN GP0
+#define SERIAL_USART_RX_PIN GP1
+
+/* I2C config for display */
+#define I2C_DRIVER I2CD1
+#define I2C1_SCL_PIN GP11
+#define I2C1_SDA_PIN GP10
 
 /* key matrix size */
 /* Rows are doubled up-------------------------------------------------------------- */
@@ -24,14 +34,15 @@
 
 // wiring-----------------------------------------------------------------------
 #define MATRIX_ROW_PINS \
-    { B4, E6, D7, D4 }
+    { GP27, GP26, GP15, GP14 }
 #define MATRIX_COL_PINS \
-    { B6, B2, B3, B1, F7, F6, F5 }
+    { GP9, GP8, GP7, GP6, GP5, GP4, GP3 }
 
+// encoder
 #define ENCODERS_PAD_A \
-    { C6 }
+    { GP12 }
 #define ENCODERS_PAD_B \
-    { B5 }
+    { GP13 }
 // second encoder
 /*#define ENCODERS_PAD_A_RIGHT \
     { B5 }
@@ -45,19 +56,13 @@
 //#define MATRIX_HAS_GHOST
 
 /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
-#define DEBOUNCE 5
+#define DEBOUNCE 10
 
 // The 3 wires of the TRS/TRRS cable need to connect GND, VCC, and D0/D1/D2/D3 (aka PD0/PD1/PD2/PD3) between the two Pro Micros.
-// Note that the pin used here is actually set by SOFT_SERIAL_PIN
-#define SOFT_SERIAL_PIN D2
 
 // Allows to use either side as the master. Look at the documentation for info:
 // https://docs.qmk.fm/#/config_options?id=setting-handedness
 #define EE_HANDS
-
-// Fix for Elite C rev3
-#define SPLIT_USB_DETECT
-// #define NO_USB_STARTUP_CHECK
 
 // Speed up slave half startup
 #define SPLIT_USB_TIMEOUT 1000

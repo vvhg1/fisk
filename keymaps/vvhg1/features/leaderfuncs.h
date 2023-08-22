@@ -14,8 +14,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
-
+// #pragma once
+#include "customkeycodes.h"
 #include QMK_KEYBOARD_H
 // Leader functions
 void *windows_stuff(uint16_t keycode); // here WS is Start menu, WM is context menu WQ  close tab

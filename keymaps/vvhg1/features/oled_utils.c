@@ -30,30 +30,13 @@
 #endif
 
 bool is_keyboard_left(void) {
-#ifdef EE_HANDS
-    return eeprom_read_byte(EECONFIG_HANDEDNESS);
+#ifdef IS_LEFT
+    return true;
+#else
+    return false;
 #endif
 }
 
-//! this is the complete code from ai03, Website: [ai03 Keyboard Designs](https://kb.ai03.me/)
-// __attribute__((weak))
-// bool is_keyboard_left(void) {
-//   #ifdef SPLIT_HAND_PIN
-//     // Test pin SPLIT_HAND_PIN for High/Low, if low it's right hand
-//     setPinInput(SPLIT_HAND_PIN);
-//     return readPin(SPLIT_HAND_PIN);
-//   #else
-//     #ifdef EE_HANDS
-//       return eeprom_read_byte(EECONFIG_HANDEDNESS);
-//     #else
-//       #ifdef MASTER_RIGHT
-//         return !is_keyboard_master();
-//       #else
-//         return is_keyboard_master();
-//       #endif
-//     #endif
-//   #endif
-// }
 #ifndef CONSOLE_ENABLE
 void render_fisk_logo(int line, bool newline) {
     static const char PROGMEM fisk_logo1[] = {0x97, 0x98, 0x99, 0x9A, 0x9B, 0x9C, 0x9D, 0x9E, 0x9F, 0x00};
@@ -85,12 +68,12 @@ void render_fisk_logo(int line, bool newline) {
 void render_logo_l(void) {
     render_fisk_logo(1, true);
     render_fisk_logo(2, false);
-    oled_write_P(PSTR(" fisk v0.1\n"), false);
+    oled_write_P(PSTR(" fisk v2.0\n"), false);
     render_fisk_logo(3, true);
     render_fisk_logo(4, false);
 }
 void render_logo_r(void) {
-    oled_write_P(PSTR("      fisk v0.1\n    Powered by QMK"), false);
+    oled_write_P(PSTR("      fisk v2.0\n    Powered by QMK"), false);
 }
 #    ifdef CUSTOM_LEADER_ENABLE
 static const char mod_display1[] = {0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8A, 0x8B, 0x90, 0x91, 0x92, 0x93, 0x0D, 0x20, 0x20, 0xA0, 0xA1, 0xA2, 0xA3, 0xA4, 0xA5, 0xA6, 0xA7, 0xA8, 0xA9, 0xAA, 0xAB, 0xB0, 0xB1, 0xB2, 0xB3, 0x0D, 0x20, 0x20, 0xC0, 0xC1, 0xC2, 0xC3, 0xC4, 0xC5, 0xC6, 0xC7, 0xC8, 0xC9, 0xCA, 0xCB, 0xD0, 0xD1, 0xD2, 0xD3, 0};

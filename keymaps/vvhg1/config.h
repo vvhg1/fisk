@@ -16,7 +16,7 @@
 
 #pragma once
 // !this defines which side and which font to use
- #define IS_LEFT
+#define IS_LEFT
 
 #ifdef CUSTOM_LEADER_ENABLE
 #define LEADER_DISPLAY_STR
