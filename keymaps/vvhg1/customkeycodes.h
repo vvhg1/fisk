@@ -61,7 +61,6 @@ enum custom_keycodes {
     ML_ctl,
     ML_sc,
     mo_FUNX,
-    mo_BR,
 #ifdef SWAP_HANDS_ENABLE
     Mir_spc,
 #endif

@@ -26,21 +26,21 @@
 void process_custom_layer(const keyrecord_t *record, uint8_t targetlayer) {
     if (record->event.pressed) {
         switch (targetlayer) {
-            case _NAV:
-                one_shot_timer = timer_read();
+                // case _NAV:
+                //     one_shot_timer = timer_read();
 
-                if (IS_LAYER_ON(_NUM)) {
-                    layer_off(_NUM);
-                    came_from_NAV = true;
-                }
-                if (IS_LAYER_ON(_NAV)) {
-                    came_from_NAV = false;
-                    break;
-                } else {
-                    layer_toggle_flag = true;
-                    layer_on(_NAV);
-                }
-                break;
+                //     if (IS_LAYER_ON(_NUM)) {
+                //         layer_off(_NUM);
+                //         came_from_NAV = true;
+                //     }
+                //     if (IS_LAYER_ON(_NAV)) {
+                //         came_from_NAV = false;
+                //         break;
+                //     } else {
+                //         layer_toggle_flag = true;
+                //         layer_on(_NAV);
+                //     }
+                //     break;
 
             case _NUM:
                 one_shot_timer = timer_read();
@@ -60,7 +60,7 @@ void process_custom_layer(const keyrecord_t *record, uint8_t targetlayer) {
 
             case _FUNX:
             case _AUX:
-            case _BRACKETS:
+            case _NAV:
                 layer_on(targetlayer);
                 break;
             case mo_NUM:
@@ -69,23 +69,23 @@ void process_custom_layer(const keyrecord_t *record, uint8_t targetlayer) {
         }
     } else {
         switch (targetlayer) {
-            case _NAV:
-                if (!layer_toggle_flag || (timer_elapsed(one_shot_timer) > 250)) {
-                    if (IS_LAYER_ON(_NUM)) {
-                        layer_off(_NUM);
-                        if (came_from_NAV) {
-                            layer_on(_NAV);
-                            came_from_NAV = false;
-                        }
-                    } else if (IS_LAYER_ON(_NAV)) {
-                        layer_off(_NAV);
-                        if (came_from_NAV) {
-                            layer_on(_NUM);
-                            came_from_NAV = false;
-                        }
-                    }
-                }
-                break;
+            // case _NAV:
+            //     if (!layer_toggle_flag || (timer_elapsed(one_shot_timer) > 250)) {
+            //         if (IS_LAYER_ON(_NUM)) {
+            //             layer_off(_NUM);
+            //             if (came_from_NAV) {
+            //                 layer_on(_NAV);
+            //                 came_from_NAV = false;
+            //             }
+            //         } else if (IS_LAYER_ON(_NAV)) {
+            //             layer_off(_NAV);
+            //             if (came_from_NAV) {
+            //                 layer_on(_NUM);
+            //                 came_from_NAV = false;
+            //             }
+            //         }
+            //     }
+            //     break;
             case _NUM:
                 if (!layer_toggle_flag || (timer_elapsed(one_shot_timer) > 250)) {
                     if (IS_LAYER_ON(_NUM)) {
@@ -100,7 +100,7 @@ void process_custom_layer(const keyrecord_t *record, uint8_t targetlayer) {
 
             case _FUNX:
             case _AUX:
-            case _BRACKETS:
+            case _NAV:
                 layer_off(targetlayer);
                 break;
             case mo_NUM:
