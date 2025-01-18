@@ -31,21 +31,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Base Layer: Colemak
  *
  *          ,----------------------------------------------------.                                       ,-----------------------------------------------------.
- *          |   ESC  |    W   |    F   |    P   |    B   |  / ?  |                                       |    "   |    J   |    L   |    U   |    Y   |  C(P)  |
+ *          |   @  |    W   |    F   |    P   |    B   |  / ?  |                                       |    "   |    J   |    L   |    U   |    Y   |  C(P)  |
  * +--------+--------+--------+--------+--------+--------+-------|                                       |--------+--------+--------+--------+--------+--------+--------.
  * |   &    |    Q   |    R   |    S   |    T   |    G   |  \ |  |                                       |    !   |    M   |    N   |    E   |    I   |  ;  :  |   ' "  |
  * |--------+--------+--------+--------+--------+--------+-------+--------+--------.     ,---------------+--------+--------+--------+--------+--------+--------+--------|
  * |   #    |    A   |   X    |    C   |    D   |    V   |       |  Space |   ALT  |     |  LCTL  |RShift|        |    K   |    H   |  ,  <  |  . >   |    O   | Enter  |
  * |--------+--------+--------+--------+--------+--------+--.    |        +--------|     |--------+      |     ,--+--------+--------+--------+--------+--------+--------|
- * |  TAB   |    Z   |           |  FUNC  | ML_sc |   BRC   |    |        |  NAV   |     |  LEAD  |      |     | BSPC  | DEL   |  ENC M  |            |  - _   |    @   |
+ * |  TAB   |    Z   |           |  FUNC  | ML_sc |   BRC   |    |        |  NAV   |     |  LEAD  |      |     | BSPC  | DEL   |  ENC M  |            |  - _   |  ESC   |
  * `-----------------'           `--------------------------'    '--------+--------'     `---------------'     '-------------------------'            '-----------------'
  *
  */
     [_COLEMAK] = LAYOUT(
-              KC_ESC,   KC_W,    KC_F  ,  KC_P ,   KC_B , KC_SLSH,                                      KC_DQT,   KC_J,    KC_L ,   KC_U ,   KC_Y ,   C(KC_P),
+              KC_AT,   KC_W,    KC_F  ,  KC_P ,   KC_B , KC_SLSH,                                      KC_DQT,   KC_J,    KC_L ,   KC_U ,   KC_Y ,   C(KC_P),
     KC_AMPR , KC_Q,     KC_R,    KC_S ,   KC_T ,   KC_G,  KC_BSLS,                                      KC_EXLM,   KC_M,    KC_N,    KC_E,    KC_I,    KC_SCLN,      KC_QUOT,
-    KC_HASH,  KC_A,     KC_X,    KC_C,    KC_D,    KC_V,            KC_SPC, ML_alt,        ML_ctl, MR_sft,       KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_O,         KC_ENT,
-    KC_TAB,  KC_Z,           mo_FUNX,  ML_sc ,  KC_BSPC,                    go_NAV,        LEADER,              KC_BSPC, KC_DEL, Enc_M,                 KC_MINS,  KC_AT
+    KC_HASH,  KC_A,     KC_X,    KC_C,    KC_D,    KC_V,            KC_SPC, ML_alt,        ML_cmd, MR_sft,       KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_O,         KC_ENT,
+    KC_TAB,  KC_Z,           mo_FUNX,  ML_sc ,  mo_BRC,                    go_NAV,        LEADER,              KC_BSPC, KC_DEL, Enc_M,                 KC_MINS,  KC_ESC
 
     ),
 /*
@@ -58,15 +58,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+--------+--------+--------+--------+--------+-------+--------+--------.     ,---------------+--------+--------+--------+--------+--------+--------+--------|
  * |   #    |    A   |    X   |    C   |    V   |    B   |       |  Space |  ALT   |     |  LCTL  |RShift|        |    N   |    M   |  ,  <  |  . >   |  ;  :  | Enter  |
  * |--------+--------+--------+--------+--------+--------+--.    |        +--------|     |--------+      |     ,--+--------+--------+--------+--------+--------+--------|
- * |  TAB   |   Z    |           |  FUNC  | ML_sc |   BRC   |    |        |  NAV   |     |  LEAD  |      |     | BSPC  |  DEL  |  ENC M  |            |  - _   |    @   |
+ * |  TAB   |   Z    |           |  FUNC  | ML_sc |   BRC   |    |        |  NAV   |     |  LEAD  |      |     | BSPC  |  DEL  |  ENC M  |            |  - _   |  ESC  |
  * `-----------------'           `--------------------------'    '--------+--------'     `---------------'     '-------------------------'            '-----------------'
  *
  */
     [_QW] = LAYOUT(
-              KC_ESC,   KC_W,    KC_E  ,  KC_R ,   KC_T , KC_SLSH,                                      KC_DQT,   KC_Y,    KC_U ,   KC_I ,   KC_O,   C(KC_P),
+              KC_AT,   KC_W,    KC_E  ,  KC_R ,   KC_T , KC_SLSH,                                      KC_DQT,   KC_Y,    KC_U ,   KC_I ,   KC_O,   C(KC_P),
     KC_AMPR , KC_Q,     KC_S,    KC_D ,   KC_F ,   KC_G,  KC_BSLS,                                      KC_EXLM,   KC_H,    KC_J,    KC_K,    KC_L,    KC_P, KC_QUOT,
-    KC_HASH,  KC_A,     KC_X,    KC_C,    KC_V,    KC_B,            KC_SPC, ML_alt,         ML_ctl, MR_sft,          KC_N,   KC_M,    KC_COMM,    KC_DOT,  KC_SCLN, KC_ENT,
-    KC_TAB,  KC_Z,                mo_FUNX,  ML_sc,  KC_BSPC,                go_NAV,          LEADER,              KC_BSPC,  KC_DEL, Enc_M,                 KC_MINS,  KC_AT
+    KC_HASH,  KC_A,     KC_X,    KC_C,    KC_V,    KC_B,            KC_SPC, ML_alt,         ML_cmd, MR_sft,          KC_N,   KC_M,    KC_COMM,    KC_DOT,  KC_SCLN, KC_ENT,
+    KC_TAB,  KC_Z,                mo_FUNX,  ML_sc,  KC_BSPC,                go_NAV,          LEADER,              KC_BSPC,  KC_DEL, Enc_M,                 KC_MINS,  KC_ESC
 
     ),
 #ifdef SWAP_HANDS_ENABLE
@@ -93,23 +93,43 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 #endif
 /*
+ * BRACKETS Layer
+ *
+ *          ,----------------------------------------------------.                                       ,-----------------------------------------------------.
+ *          |        |        |        |        |        |       |                                       |        |        |        |        |        |        |
+ * +--------+--------+--------+--------+--------+--------+-------|                                       |--------+--------+--------+--------+--------+--------+--------.
+ * |        |        |        |        |        |        |       |                                       |        |        |    (   |    [   |    ]   |        |        |
+ * |--------+--------+--------+--------+--------+--------+-------+--------+--------.     ,---------------+--------+--------+--------+--------+--------+--------+--------|
+ * |        |        |        |        |        |        |       |        |        |     |        |      |        |        |    {   |    <   |    >   |    )   |        |
+ * |--------+--------+--------+--------+--------+--------+--.    |        +--------|     |--------+      |     ,--+--------+--------+--------+--------+--------+--------|
+ * |        |        |           |      |          |        |    |        |        |     |        |      |     |      |        |         |            |    }   |        |
+ * `-----------------'           `--------------------------'    '--------+--------'     `---------------'     '-------------------------'            '-----------------'
+ */
+   [_BRACKETS] = LAYOUT(
+             _______, _______, _______, _______, _______, _______,                                        _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______,                                        _______, _______, S(KC_9), KC_LBRC, KC_RBRC, _______, _______,
+    _______, _______, _______, _______, _______, _______,          _______, _______,      _______, _______,        _______, S(KC_LBRC), S(KC_COMM), S(KC_DOT), S(KC_0), _______,
+    _______, _______,            _______,  _______, _______,                _______,      _______,                _______, _______, _______,           S(KC_RBRC), _______
+
+    ),
+/*
  * Num Layer
  *
  *          ,----------------------------------------------------.                                       ,-----------------------------------------------------.
  *          |        |  `     |   ~    |    %   |    ^   |       |                                       |        |    *   |   7 &  |   8 *  |   9 (  |        |
  * +--------+--------+--------+--------+--------+--------+-------|                                       |--------+--------+--------+--------+--------+--------+--------.
- * |        |    €   |   [    |   ]    |    }   |    )   | Save  |                                       |        |   . ,  |   1 !  |   2 @  |   3 #  |   +    |   $    |
+ * |        |    €   |    ↑   |    ↓   |    →   |    )   | Save  |                                       |        |   . ,  |   1 !  |   2 @  |   3 #  |   +    |   $    |
  * |--------+--------+--------+--------+--------+--------+-------+--------+--------.     ,---------------+--------+--------+--------+--------+--------+--------+--------|
- * |    (   |    {   |    ↑   |    ↓   |    →   |        |       |        |        |     |        |      |        |   /    |   4 $  |   5 %  |   6 ^  |   =    | Enter  |
+ * |    (   |   ←    |   [    |   ]    |    }   |        |       |        |        |     |        |      |        |   /    |   4 $  |   5 %  |   6 ^  |   =    | Enter  |
  * |--------+--------+--------+--------+--------+--------+--.    |        +--------|     |--------+  0   |     ,--+--------+--------+--------+--------+--------+--------|
- * |        |   ←    |           |      |          |        |    |        |        |     |        |      |     |      |        |         |            |   -    |   ,    |
+ * |        |   {    |           |      |          |        |    |        |        |     |        |      |     |      |        |         |            |   -    |   ,    |
  * `-----------------'           `--------------------------'    '--------+--------'     `---------------'     '-------------------------'            '-----------------'
  */
     [_NUM] = LAYOUT(
              _______,  KC_GRV, S(KC_GRV), S(KC_5), S(KC_6), _______,                                      _______,   S(KC_8),   KC_7 ,   KC_8 ,   KC_9 ,   _______,
-    _______, EURO_SYM, KC_LBRC, KC_RBRC, S(KC_RBRC), S(KC_0), C(KC_S),                                     _______,    KC_DOT,      KC_1,    KC_2,    KC_3,    KC_PLUS,   S(KC_4),
-    S(KC_9), S(KC_LBRC),  KC_UP, KC_DOWN, KC_RIGHT, _______,        _______,_______,        _______, KC_0,       KC_PSLS,   KC_4,    KC_5,    KC_6,  KC_EQL,   _______,
-    _______, KC_LEFT,             _______,  _______,  _______,              _______,        _______,            _______, _______, _______,             _______,   KC_COMM
+    _______, EURO_SYM, KC_UP, KC_DOWN, KC_RIGHT, S(KC_0), C(KC_S),                                     _______,    KC_DOT,      KC_1,    KC_2,    KC_3,    KC_PLUS,   S(KC_4),
+    S(KC_9), KC_LEFT,KC_LBRC, KC_RBRC, S(KC_RBRC),   _______,        _______,_______,        _______, KC_0,       KC_PSLS,   KC_4,    KC_5,    KC_6,  KC_EQL,   _______,
+    _______, S(KC_LBRC),             _______,  _______,  _______,              _______,        _______,            _______, _______, _______,             _______,   KC_COMM
 
     ),
 /*
@@ -129,9 +149,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_NAV] = LAYOUT(
              _______, _______, C(KC_F), _______, C(KC_B),  Cmnt,                                         _______, Go_Def, KC_HOME, KC_PGDN, KC_PGUP, _______,
-    _______, _______,  Cut   ,    Copy,  Paste,    Redo, C(KC_S),                                        _______, Peek_Def, KC_LEFT, KC_DOWN, KC_UP,  KC_END, KC_QUOT,
-    C(KC_A),   Undo,   TWN   ,   TWS  ,  TWR  , TWM,          _______, _______,      _______, MR_sft,         Dbg, SelWrdL,   SelLnDn,  SelLnUp, KC_RIGHT, _______,
-    _______,  TWL   ,      _______,  _______, _______,                _______,      LGUI(KC_0),                _______, _______, _______,           SelWrdR,     KC_F2
+    _______, _______,  Cut   ,    Copy,  Paste,    Redo, Save,                                        _______, Peek_Def, KC_LEFT, KC_DOWN, KC_UP,  KC_END, KC_QUOT,
+    Selall,   Undo,   TWN   ,   TWS  ,  TWR  , TWM,          _______, _______,      _______, MR_sft,         Dbg, SelWrdL,   SelLnDn,  SelLnUp, KC_RIGHT, _______,
+    _______,  TWL   ,      _______,  _______, _______,                _______,      KC_F18,                _______, _______, _______,           SelWrdR,     KC_F2
 
     ),
 /*
@@ -149,7 +169,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
    [_MOUSE] = LAYOUT(
              _______, KC_WH_U, KC_WH_D, KC_WH_R, _______, _______,                                        _______, Go_Def, LGUI(KC_4), KC_PGDN, KC_PGUP, _______,
-    KC_BTN5, KC_WH_L, KC_MS_U, KC_MS_D, KC_MS_R, KC_BTN1, _______,                                        _______, Peek_Def, LGUI(KC_1), LGUI(KC_2), LALT(KC_ESC),  KC_END, KC_QUOT,
+    KC_BTN5, KC_WH_L, KC_MS_U, KC_MS_D, KC_MS_R, KC_BTN1, _______,                                        _______, Peek_Def, LGUI(KC_1), LGUI(KC_2), PrevWin,  KC_END, KC_QUOT,
     KC_BTN2, KC_MS_L,LGUI(KC_F2),LGUI(KC_F3),LGUI(KC_F4), LGUI(KC_F5),_______, _______,   _______, _______,      XXXXXXX,LSA(KC_LEFT),MEH(KC_LEFT),MEH(KC_RIGHT),LGUI(KC_5),LGUI(KC_3),
     KC_BTN4,LGUI(KC_F1),            _______,  _______, _______,                _______,   _______,                 _______, _______, _______,        LSA(KC_RIGHT),KC_F2
 
@@ -227,6 +247,7 @@ void matrix_init_user(void) {
 #ifdef ENCODER_ENABLE
     encoder_utils_init();
 #endif
+    is_mac = true;
 }
 #ifdef CONSOLE_ENABLE
 void keyboard_post_init_user(void) {
@@ -286,6 +307,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     switch (keycode) { //!#######################################################--switch(keycode)--#######################################################
 
+        case PrevWin:
+            if (record->event.pressed) {
+                if (is_mac) {
+                    tap_code16(LCMD(KC_TAB));
+                } else {
+                    tap_code16(LALT(KC_ESC));
+                }
+                return false;
+            }
         case TWL:
             if (record->event.pressed) {
                 if (get_mods() & MOD_MASK_SHIFT) {
@@ -386,10 +416,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
         case Lin_Win:
             if (record->event.pressed) {
-                if (is_windows) {
-                    is_windows = false;
+                if (is_mac) {
+                    is_mac = false;
                 } else {
-                    is_windows = true;
+                    is_mac = true;
                 }
             }
             return true;
@@ -432,7 +462,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
         case Peek_Def:
             if (record->event.pressed) {
-                if (is_windows) {
+                if (is_mac) {
                     tap_code16(LALT(KC_F12));
                 } else {
                     tap_code16(LCTL(LSFT(KC_F10)));
@@ -447,7 +477,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return true;
         case EURO_SYM:
             if (record->event.pressed) {
-                if (is_windows) {
+                if (is_mac) {
                     SEND_STRING(SS_LALT(SS_TAP(X_P0) SS_TAP(X_P1) SS_TAP(X_P2) SS_TAP(X_P8))); // send euro symbol
                 } else {
                     tap_code16(C(S(KC_U)));
@@ -480,13 +510,48 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             process_custom_layer(record, _AUX);
             return true;
 
+        case mo_BRC:
+            process_custom_layer(record, _BRACKETS);
+
         case go_NAV:
-            if ((get_mods() & MOD_MASK_SHIFT) || (IS_LAYER_ON(_NUM))) {
-                // go to num
-                process_custom_layer(record, _NUM);
+            // if ((get_mods() & MOD_MASK_SHIFT) || (IS_LAYER_ON(_NUM))) {
+            //     // go to num
+            //     process_custom_layer(record, _NUM);
+            // } else {
+            // momentary nav
+            // }
+            if (record->event.pressed) {
+                    if (lctl_on) {
+                        keyrecord_t new_record;
+                        new_record.event.pressed  = false;
+                        keyrecord_t *new_record_p = &new_record;
+                        lctl_on                   = false;
+                        process_custom_one_shot(ML_ctl, new_record_p);
+                        process_custom_layer(record, _NAV);
+                    } else {
+                        one_shot_timer = timer_read();
+                        process_custom_layer(record, _NAV);
+                        layer_toggle_flag = true;
+                    }
             } else {
-                // momentary nav
+                // if no other keys were pressed, activate ctrl
                 process_custom_layer(record, _NAV);
+                keyrecord_t  new_record;
+                keyrecord_t *new_record_p = &new_record;
+                new_record.event.pressed  = true;
+                if (layer_toggle_flag && timer_elapsed(one_shot_timer) < 250) {
+                    // layer_toggle_flag = false;
+                    process_custom_one_shot(ML_ctl, new_record_p);
+                    new_record.event.pressed = false;
+                    process_custom_one_shot(ML_ctl, new_record_p);
+                    return false;
+                }
+                //  else {
+                //     new_record.event.pressed = false;
+                //     lctl_on                  = false;
+                //     process_custom_one_shot(ML_ctl, new_record_p);
+                //     process_custom_layer(record, _NAV);
+                // }
             }
             return true;
 
@@ -540,34 +605,84 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         // ------------------------------------------------------------------------ cut copy paste undo redo ----------------------------------------------------------------
         case Undo:
             if (record->event.pressed) {
-                register_code16(C(KC_Z));
+                if (is_mac) {
+                    register_code16(LCMD(KC_Z));
+                } else {
+                    register_code16(C(KC_Z));
+                }
             } else {
-                unregister_code16(C(KC_Z));
+                if (is_mac) {
+                    unregister_code16(LCMD(KC_Z));
+                } else {
+                    unregister_code16(C(KC_Z));
+                }
             }
             break;
         case Cut:
             if (record->event.pressed) {
-                register_code16(C(KC_X));
+                if (is_mac) {
+                    register_code16(LCMD(KC_X));
+                } else {
+                    register_code16(C(KC_X));
+                }
             } else {
-                unregister_code16(C(KC_X));
+                if (is_mac) {
+                    unregister_code16(LCMD(KC_X));
+                } else {
+                    unregister_code16(C(KC_X));
+                }
             }
             // break;
             return false;
         case Copy:
             if (record->event.pressed) {
-                tap_code16(C(KC_C));
+                if (is_mac) {
+                    tap_code16(LCMD(KC_C));
+                } else {
+                    tap_code16(C(KC_C));
+                }
             }
             break;
         case Paste:
             if (record->event.pressed) {
-                tap_code16(C(KC_V));
+                if (is_mac) {
+                    tap_code16(LCMD(KC_V));
+                } else {
+                    tap_code16(C(KC_V));
+                }
             }
             break;
         case Redo:
             if (record->event.pressed) {
-                register_code16(C(KC_Y));
+                if (is_mac) {
+                    register_code16(LCMD(KC_Y));
+                } else {
+                    register_code16(C(KC_Y));
+                }
             } else {
-                unregister_code16(C(KC_Y));
+                 if (is_mac) {
+                    unregister_code16(LCMD(KC_Y));
+                } else {
+                    unregister_code16(C(KC_Y));
+                }
+            }
+            break;
+        case Selall:
+            if (record->event.pressed) {
+                if (is_mac) {
+                    tap_code16(LCMD(KC_A));
+                } else {
+                    tap_code16(C(KC_A));
+                }
+            }
+            break;
+        case Save:
+            if (record->event.pressed) {
+                if (is_mac) {
+                    tap_code16(LCMD(KC_S));
+                } else {
+                    tap_code16(C(KC_S));
+                }
             }
             break;
     }

@@ -27,7 +27,7 @@ uint8_t mod_state;
 uint16_t startup_timer;
 uint16_t one_shot_timer;
 
-bool is_windows;
+bool is_mac;
 bool layer_toggle_flag;
 bool prev_layer_toggle_flag;
 bool came_from_NAV;
@@ -45,6 +45,8 @@ enum custom_keycodes {
     Copy,
     Paste,
     Redo,
+    Selall,
+    Save,
     Cmnt,
     Enc_M,
     go_NAV,
@@ -59,8 +61,11 @@ enum custom_keycodes {
     MR_sft,
     ML_alt,
     ML_ctl,
+    ML_cmd,
     ML_sc,
     mo_FUNX,
+    mo_BRC,
+    PrevWin,
 #ifdef SWAP_HANDS_ENABLE
     Mir_spc,
 #endif

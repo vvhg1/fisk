@@ -25,6 +25,8 @@ bool lshift_on;
 bool is_oneshot_lshift;
 bool lctl_on;
 bool is_oneshot_lctl;
+bool lcmd_on;
+bool is_oneshot_lcmd;
 bool lalt_on;
 bool is_oneshot_lalt;
 

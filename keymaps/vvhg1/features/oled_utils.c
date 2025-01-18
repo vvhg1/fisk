@@ -102,9 +102,13 @@ void set_mod_display(const char string_part1[], const char string_part2[], const
 #    endif
 }
 void render_mod_status(uint8_t modifiers) {
-    static const char ctrl_on1[]  = {0x8C, 0x8D, 0x8E, 0x8F};
-    static const char ctrl_on2[]  = {0xAC, 0xAD, 0xAE, 0xAF};
+    static const char ctrl_on1[] = {0x8C, 0x8D, 0x8E, 0x8F};
+    // static const char ctrl_on2[]  = {0xAC, 0xAD, 0xAE, 0xAF};
+    static const char ctrl_on2[]  = {0xA0, 0xA1, 0xA2, 0xA3};
     static const char ctrl_on3[]  = {0xCC, 0xCD, 0xCE, 0xCF};
+    static const char cmd_on1[]   = {0x80, 0x81, 0x82, 0x83};
+    static const char cmd_on2[]   = {0xAC, 0xAD, 0xAE, 0xAF};
+    static const char cmd_on3[]   = {0xC0, 0xC1, 0xC2, 0xC3};
     static const char shift_on1[] = {0x98, 0x99, 0x9A, 0x9B};
     static const char shift_on2[] = {0xB8, 0xB9, 0xBA, 0xBB};
     static const char shift_on3[] = {0xD8, 0xD9, 0xDA, 0xDB};
@@ -117,8 +121,12 @@ void render_mod_status(uint8_t modifiers) {
     static const char lead_on3[] = {0xD4, 0xD5, 0xD6, 0xD7};
 #    endif
     reset_mod_display();
-    if ((modifiers & MOD_MASK_CTRL)) {
+    if ((modifiers & MOD_MASK_CTRL && modifiers & MOD_MASK_GUI)) {
+        set_mod_display(ctrl_on1, cmd_on2, ctrl_on3, 0);
+    } else if (modifiers & MOD_MASK_CTRL) {
         set_mod_display(ctrl_on1, ctrl_on2, ctrl_on3, 0);
+    } else if (modifiers & MOD_MASK_GUI) {
+        set_mod_display(cmd_on1, cmd_on2, cmd_on3, 0);
     }
     if ((modifiers & MOD_MASK_SHIFT)) {
         set_mod_display(shift_on1, shift_on2, shift_on3, 4);
@@ -441,7 +449,7 @@ void render_status(void) {
         render_case_modes();
 #endif
         oled_set_cursor(20, 0);
-        oled_write_P(is_windows ? PSTR("W") : PSTR("L"), false);
+        oled_write_P(is_mac ? PSTR("M") : PSTR("L"), false);
     } else {
         render_mod_status(get_mods());
 #ifdef ENCODER_ENABLE

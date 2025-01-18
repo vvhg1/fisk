@@ -160,7 +160,7 @@ static void remove_delimiter(void) {
         tap_code(KC_BSPC);
     }
 #else
-    if (xcase_delimiter == MR_sft) {
+    if (xcase_delimiter == OSM(MOD_LSFT)) {
         return;
     }
     tap_code(KC_BSPC);

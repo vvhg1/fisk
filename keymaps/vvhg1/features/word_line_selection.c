@@ -68,14 +68,27 @@ bool process_word_line_selection(uint16_t keycode, const keyrecord_t *record) {
             if (record->event.pressed) {
                 lineflag = true;
                 if (oldlineflag) {
-                    register_code16(C(S(KC_LEFT)));
+                    if (is_mac) {
+                        register_code16(S(A(KC_LEFT)));
+                    } else {
+                        register_code16(C(S(KC_LEFT)));
+                    }
                 } else {
-                    tap_code16(LCTL(KC_RIGHT));
-                    register_code16(C(S(KC_LEFT)));
+                    if (is_mac) {
+                        tap_code16(A(KC_RIGHT));
+                        register_code16(S(A(KC_LEFT)));
+                    } else {
+                        tap_code16(LCTL(KC_RIGHT));
+                        register_code16(C(S(KC_LEFT)));
+                    }
                 }
                 return false;
             } else {
-                unregister_code16(LSFT(KC_LEFT));
+                if (is_mac) {
+                    unregister_code16(A(KC_LEFT));
+                } else {
+                    unregister_code16(LSFT(KC_LEFT));
+                }
                 break;
             }
 
@@ -83,14 +96,27 @@ bool process_word_line_selection(uint16_t keycode, const keyrecord_t *record) {
             if (record->event.pressed) {
                 lineflag = true;
                 if (oldlineflag) {
-                    register_code16(C(S(KC_RIGHT)));
+                    if (is_mac) {
+                        register_code16(S(A(KC_RIGHT)));
+                    } else {
+                        register_code16(C(S(KC_RIGHT)));
+                    }
                 } else {
-                    tap_code16(LCTL(KC_LEFT));
-                    register_code16(C(S(KC_RIGHT)));
+                    if (is_mac) {
+                        tap_code16(A(KC_LEFT));
+                        register_code16(S(A(KC_RIGHT)));
+                    } else {
+                        tap_code16(LCTL(KC_LEFT));
+                        register_code16(C(S(KC_RIGHT)));
+                    }
                 }
                 return false;
             } else {
-                unregister_code16(LSFT(KC_RIGHT));
+                if (is_mac) {
+                    unregister_code16(A(KC_RIGHT));
+                } else {
+                    unregister_code16(LSFT(KC_RIGHT));
+                }
                 break;
             }
     }

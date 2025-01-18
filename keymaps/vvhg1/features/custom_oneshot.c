@@ -125,6 +125,28 @@ __attribute__((weak)) bool process_custom_one_shot(uint16_t keycode, const keyre
                 }
             }
             return true;
+        case ML_cmd:
+            if (is_mac) {
+                if (record->event.pressed) {
+                    if (!lcmd_on) {
+                        lcmd_on = true;
+                        register_code(KC_LCMD);
+                        one_shot_timer = timer_read();
+                    } else {
+                        lcmd_on         = false;
+                        is_oneshot_lcmd = false;
+                    }
+                } else {
+                    if (lcmd_on && (timer_elapsed(one_shot_timer) < 500)) {
+                        is_oneshot_lcmd = true;
+                    } else {
+                        is_oneshot_lcmd = false;
+                        lcmd_on         = false;
+                        unregister_code(KC_LCMD);
+                    }
+                }
+                return true;
+            }
         case ML_ctl:
             if (record->event.pressed) {
                 if (!lctl_on) {
@@ -161,9 +183,11 @@ void release_custom_one_shot(uint16_t keycode, const keyrecord_t *record) {
             // case go_NAV:
             case go_NUM:
             case ML_ctl:
+            case ML_cmd:
             case ML_sft:
             case MR_sft:
             case ML_sc:
+            case go_NAV:
 #ifdef SWAP_HANDS_ENABLE
             case Mir_spc:
 #endif
@@ -191,6 +215,13 @@ void release_custom_one_shot(uint16_t keycode, const keyrecord_t *record) {
                 }
                 if (lalt_on) {
                     lalt_on = false;
+                }
+                if (is_oneshot_lcmd) {
+                    unregister_code(KC_LCMD);
+                    is_oneshot_lcmd = false;
+                }
+                if (lcmd_on) {
+                    lcmd_on = false;
                 }
                 if (is_oneshot_lctl) {
                     unregister_code(KC_LCTL);

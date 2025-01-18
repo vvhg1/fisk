@@ -66,6 +66,9 @@ void process_custom_layer(const keyrecord_t *record, uint8_t targetlayer) {
             case mo_NUM:
                 layer_on(_NUM);
                 break;
+            case _BRACKETS:
+                layer_on(_BRACKETS);
+                break;
         }
     } else {
         switch (targetlayer) {
@@ -105,6 +108,9 @@ void process_custom_layer(const keyrecord_t *record, uint8_t targetlayer) {
                 break;
             case mo_NUM:
                 layer_off(_NUM);
+                break;
+            case _BRACKETS:
+                layer_off(_BRACKETS);
                 break;
         }
     }

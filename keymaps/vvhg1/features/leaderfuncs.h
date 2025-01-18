@@ -18,7 +18,8 @@
 #include "customkeycodes.h"
 #include QMK_KEYBOARD_H
 // Leader functions
-void *windows_stuff(uint16_t keycode); // here WS is Start menu, WM is context menu WQ  close tab
+void *camel_case_or_open_download(uint16_t keycode); // dr camel case / dl open download
+void *windows_stuff(uint16_t keycode);               // here WS is Start menu, WM is context menu WQ  close tab
 void *vscode_stuff(uint16_t keycode);
 void *vscode_stuff_no(uint16_t keycode);       // here vn select editor right/ vi left
 void *vscode_stuff_m(uint16_t keycode);        // vmn moves editor to right group / vmi to left
